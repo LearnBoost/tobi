@@ -3,10 +3,11 @@
  * Module dependencies.
  */
 
-var chrono = require('chrono');
+var chrono = require('chrono')
+  , should = require('should');
 
 module.exports = {
-  'test .version': function(assert){
-    assert.match(chrono.version, /^\d+\.\d+\.\d+$/);
+  'test .version': function(){
+    chrono.version.should.match(/^\d+\.\d+\.\d+$/);
   }
 };

@@ -20,5 +20,9 @@ module.exports = {
     var html = '<ul><li>one</li><li>two</li></ul>'
       , browser = chrono.createBrowser(html);
     browser.should.have.property('source', html);
+  },
+  
+  'test request': function(){
+    var browser = chrono.createBrowser();
   }
 };

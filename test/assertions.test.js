@@ -30,7 +30,7 @@ app.get('/user/:id', function(req, res){
 });
 
 app.get('/list', function(req, res){
-  res.send('<ul><li>one</li><li>two</li><li>three</li></ul>');
+  res.send('<ul><li>one</li><li>two</li><li><em>three<em></li></ul>');
 });
 
 // Tests
@@ -63,10 +63,20 @@ exports['test .text()'] = function(done){
 exports['test .many()'] = function(done){
   browser.get('/list', function($){
     $('ul').should.have.many('li');
+    $('ul').should.not.have.many('rawr');
+    $('ul').should.not.have.many('em');
     
     err(function(){
       $('ul').should.have.many('p');
     }, "expected [jQuery 'ul'] to have many 'p' tags, but has none");
+
+    err(function(){
+      $('ul').should.have.many('em');
+    }, "expected [jQuery 'ul'] to have many 'em' tags, but has one");
+
+    err(function(){
+      $('ul').should.not.have.many('li');
+    }, "expected [jQuery 'ul'] to not have many 'li' tags, but has 3");
     
     done();
   });

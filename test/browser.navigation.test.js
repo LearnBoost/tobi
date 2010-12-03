@@ -29,7 +29,7 @@ app.get('/two', function(req, res){
 });
 
 app.get('/three', function(req, res){
-  res.send('Wahoo! Page Three');
+  res.send('<p>Wahoo! Page Three</p>');
 });
 
 module.exports = {
@@ -77,7 +77,7 @@ module.exports = {
         browser.should.have.property('path', '/two');
         browser.click('Page Three', function(){
           browser.should.have.property('path', '/three');
-          browser.source.should.equal('Wahoo! Page Three');
+          browser.source.should.equal('<p>Wahoo! Page Three</p>');
           done();
         })
       });

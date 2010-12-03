@@ -51,7 +51,7 @@ app.get('/three', function(req, res){
 });
 
 app.get('/form', function(req, res){
-  res.send('<form id="user">'
+  res.send('<form id="user" action="/form">'
     + '<input type="text" name="user[name]" />'
     + '<input type="text" name="user[email]" disabled="disabled" />'
     + '<input type="checkbox" name="user[agreement]" id="user-agreement" />'
@@ -240,7 +240,6 @@ module.exports = {
       $('[name=user[name]]').val('tjholowaychuk');
       $('[name=user[email]]').val('tj@vision-media.ca');
       $('[type=submit]').click(function(){
-        console.log('done');
         done();
       });
     });

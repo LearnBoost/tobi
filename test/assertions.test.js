@@ -64,19 +64,36 @@ exports['test .many()'] = function(done){
   browser.get('/list', function($){
     $('ul').should.have.many('li');
     $('ul').should.not.have.many('rawr');
-    $('ul').should.not.have.many('em');
+    //$('ul').should.not.have.many('em');
+    
+    // err(function(){
+    //   $('ul').should.have.many('p');
+    // }, "expected [jQuery 'ul'] to have many 'p' tags, but has none");
+    // 
+    // err(function(){
+    //   $('ul').should.have.many('em');
+    // }, "expected [jQuery 'ul'] to have many 'em' tags, but has one");
+    // 
+    // err(function(){
+    //   $('ul').should.not.have.many('li');
+    // }, "expected [jQuery 'ul'] to not have many 'li' tags, but has 3");
+    
+    done();
+  });
+};
+
+exports['test .one()'] = function(done){
+  browser.get('/list', function($){
+    $('ul').should.not.have.one('li');
+    //$('ul > li:last-child').should.have.one('em');
     
     err(function(){
-      $('ul').should.have.many('p');
-    }, "expected [jQuery 'ul'] to have many 'p' tags, but has none");
+      $('ul').should.have.one('p');
+    }, "expected [jQuery 'ul'] to have one 'p' tag, but has none");
 
     err(function(){
-      $('ul').should.have.many('em');
-    }, "expected [jQuery 'ul'] to have many 'em' tags, but has one");
-
-    err(function(){
-      $('ul').should.not.have.many('li');
-    }, "expected [jQuery 'ul'] to not have many 'li' tags, but has 3");
+      $('ul').should.have.one('li');
+    }, "expected [jQuery 'ul'] to have one 'li' tag, but has three");
     
     done();
   });

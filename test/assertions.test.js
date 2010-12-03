@@ -43,6 +43,8 @@ app.get('/classes', function(req, res){
 
 app.get('/form', function(req, res){
   res.send('<form id="user">'
+    + '<input type="checkbox" name="user[agreement]" checked="checked" />'
+    + '<input type="checkbox" name="user[agreement2]" />'
     + '<input type="text" name="user[name]" />'
     + '<input type="text" name="user[email]" disabled="disabled" />'
     + '<input type="submit" value="Update" />'
@@ -177,6 +179,23 @@ exports['test .enabled / .disabled'] = function(done){
     err(function(){
       $('input[name="user[name]"]').should.be.disabled;
     }, "expected [jQuery 'input[name=\"user[name]\"]'] to be disabled");
+  
+    done();
+  });
+};
+
+exports['test .checked'] = function(done){
+  browser.get('/form', function($){
+    $('input[name="user[agreement]"]').should.be.checked;
+    $('input[name="user[agreement2]"]').should.not.be.checked;
+
+    err(function(){
+      $('input[name="user[agreement2]"]').should.be.checked;
+    }, "expected [jQuery 'input[name=\"user[agreement2]\"]'] to be checked");
+
+    err(function(){
+      $('input[name="user[agreement]"]').should.not.be.checked;
+    }, "expected [jQuery 'input[name=\"user[agreement]\"]'] to be unchecked");
   
     done();
   });

@@ -19,7 +19,7 @@ app.get('/user/:id', function(req, res){
 module.exports = {
   'test ': function(){
     browser.get('/', function(){
-      console.log('asdf');
+      
     });
   }
 };

@@ -42,7 +42,8 @@ module.exports = {
   
   'test .request(method, path)': function(done){
     var browser = tobi.createBrowser(app);
-    browser.request('GET', '/', function(){
+    browser.request('GET', '/', function($){
+      $.should.equal(browser.jQuery);
       browser.should.have.property('path', '/');
       browser.history.should.eql(['/']);
       browser.request('GET', '/user/0', function(){

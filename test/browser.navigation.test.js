@@ -249,7 +249,7 @@ module.exports = {
       $('[name=user[email]]').val('tj@vision-media.ca');
       $('[type=submit]').click(function(res){
         res.body.headers.should.have.property('content-type', 'application/x-www-form-urlencoded');
-        res.body.body.should.eql({ user: { name: 'tjholowaychuk' }});
+        res.body.body.should.eql({ user: { name: 'tjholowaychuk', signature: '' }});
         done();
       });
     });
@@ -262,7 +262,7 @@ module.exports = {
       browser.type('user[email]', 'tj@vision-media.ca');
       browser.click('Update', function(res){
         res.body.headers.should.have.property('content-type', 'application/x-www-form-urlencoded');
-        res.body.body.should.eql({ user: { name: 'tjholowaychuk' }});
+        res.body.body.should.eql({ user: { name: 'tjholowaychuk', signature: '' }});
         done();
       });
     });
@@ -277,7 +277,13 @@ module.exports = {
       .check('user[agreement]')
       .click('Update', function(res){
         res.body.headers.should.have.property('content-type', 'application/x-www-form-urlencoded');
-        res.body.body.should.eql({ user: { name: 'tjholowaychuk', agreement: 'yes' }});
+        res.body.body.should.eql({
+          user: {
+              name: 'tjholowaychuk'
+            , agreement: 'yes'
+            , signature: ''
+          }
+        });
         done();
       });
     });
@@ -298,7 +304,7 @@ module.exports = {
           user: {
               name: 'tjholowaychuk'
             , agreement: 'yes'
-            , signature: 'TJ Holoawychuk'
+            , signature: 'TJ Holowaychuk'
           }
         });
         done();

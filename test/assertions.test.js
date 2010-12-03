@@ -34,7 +34,7 @@ app.get('/list', function(req, res){
 });
 
 app.get('/attrs', function(req, res){
-  res.send('<a href="http://learnboost.com" title="LearnBoost">LearnBoost</a>');
+  res.send('<a id="lb" href="http://learnboost.com" title="LearnBoost">LearnBoost</a>');
 });
 
 app.get('/classes', function(req, res){
@@ -219,6 +219,23 @@ exports['test .selected'] = function(done){
       $('select > option:nth-child(3)').should.not.be.selected;
     }, "expected [jQuery 'select > option:nth-child(3)'] to not be selected");
   
+    done();
+  });
+};
+
+exports['test .id()'] = function(done){
+  browser.get('/attrs', function($){
+    $('a').should.have.id('lb');
+    $('a').should.not.have.id('foo');
+
+    err(function(){
+      $('a').should.have.id('rawr');
+    }, "expected [jQuery 'a'] to have id 'rawr', but has 'lb'");
+
+    err(function(){
+      $('a').should.not.have.id('lb');
+    }, "expected [jQuery 'a'] to not have id 'lb'");
+
     done();
   });
 };

@@ -82,5 +82,19 @@ module.exports = {
         })
       });
     });
+  },
+  
+  'test .click(id, fn)': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.get('/one', function(){
+      browser.click('page-two', function(){
+        browser.should.have.property('path', '/two');
+        browser.click('page-three', function(){
+          browser.should.have.property('path', '/three');
+          browser.source.should.equal('<p>Wahoo! Page Three</p>');
+          done();
+        })
+      });
+    });
   }
 };

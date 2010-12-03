@@ -249,8 +249,14 @@ module.exports = {
       $('[name=user[name]]').val('tjholowaychuk');
       $('[name=user[email]]').val('tj@vision-media.ca');
       $('[type=submit]').click(function(res){
-        console.log(res);
-        done();
+        var json = '';
+        res.on('data', function(chunk){ json += chunk; });
+        res.on('end', function(){
+          var obj = JSON.parse(json);
+          obj.headers.should.have.property('content-type', 'application/x-www-form-urlencoded');
+          obj.body.should.eql({ user: { name: 'tjholowaychuk' }});
+          done();
+        });
       });
     });
   }

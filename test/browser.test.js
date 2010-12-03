@@ -31,7 +31,7 @@ module.exports = {
     browser.should.have.property('source', html);
   },
   
-  'test request': function(){
+  'test .createBrowser(server)': function(){
     var browser = chrono.createBrowser(app);
     browser.should.have.property('server', app);
   }

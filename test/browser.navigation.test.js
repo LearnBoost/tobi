@@ -68,11 +68,14 @@ app.post('/form', function(req, res){
 module.exports = {
   'test .request() non-html': function(done){
     var browser = tobi.createBrowser(app);
-    browser.on('error', function(err){
-      err.should.have.property('message', 'GET /json responded with application/json, expected text/html');
-      done();
+    browser.request('GET', '/json', {}, function(res){
+      var json = '';
+      res.on('data', function(chunk){ json += chunk });
+      res.on('end', function(){
+        json.should.equal('{"user":"tj"}');
+        done();
+      });
     });
-    browser.request('GET', '/json', {}, function(){});
   },
 
   'test .request() 404': function(done){
@@ -245,7 +248,8 @@ module.exports = {
     browser.get('/form', function($){
       $('[name=user[name]]').val('tjholowaychuk');
       $('[name=user[email]]').val('tj@vision-media.ca');
-      $('[type=submit]').click(function(){
+      $('[type=submit]').click(function(res){
+        console.log(res);
         done();
       });
     });

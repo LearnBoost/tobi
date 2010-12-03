@@ -140,9 +140,9 @@ module.exports = {
   'test .check(name)': function(done){
     var browser = tobi.createBrowser(app);
     browser.get('/form', function($){
-      $('[name=user[agreement]]').should.not.have.attr('checked');
-      browser.check('[name=user[agreement]]');
-      $('[name=user[agreement]]').should.have.attr('checked');
+      $('[name=user[agreement]]').should.not.have.attr('checked', 'checked');
+      browser.check('user[agreement]');
+      $('[name=user[agreement]]').should.have.attr('checked', 'checked');
       done();
     });
   }

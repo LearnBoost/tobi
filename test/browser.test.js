@@ -4,8 +4,21 @@
  */
 
 var chrono = require('chrono')
+  , express = require('express')
   , Browser = chrono.Browser
   , should = require('should');
+
+// Test app
+
+var app = express.createServer();
+
+app.get('/', function(req, res){
+  res.send('Hello World');
+});
+
+app.get('/user/:id.json', function(req, res){
+  res.send({ name: 'tj' });
+});
 
 module.exports = {
   'test Browser(str)': function(){
@@ -22,7 +35,20 @@ module.exports = {
     browser.should.have.property('source', html);
   },
   
-  'test request': function(){
-    var browser = chrono.createBrowser();
+  'test .createBrowser(server)': function(){
+    var browser = chrono.createBrowser(app);
+    browser.should.have.property('server', app);
+  },
+  
+  'test .request(method, url)': function(){
+    var browser = chrono.createBrowser(app);
+    browser.request('GET', '/', function(){
+      browser.should.have.property('path', '/');
+      browser.history.should.eql(['/']);
+      browser.request('GET', '/user/0.json', function(){
+        browser.should.have.property('path', '/user/0.json');
+        browser.history.should.eql(['/', '/user/0.json']);
+      });
+    });
   }
 };

@@ -16,6 +16,14 @@ app.get('/', function(req, res){
   res.send('<p>Hello World</p>');
 });
 
+app.get('/404', function(req, res){
+  res.send(404);
+});
+
+app.get('/500', function(req, res){
+  res.send(500);
+});
+
 app.get('/redirect', function(req, res){
   res.redirect('/one');
 });
@@ -59,6 +67,24 @@ module.exports = {
       done();
     });
     browser.request('GET', '/json');
+  },
+
+  'test .request() 404': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.on('error', function(err){
+      err.should.have.property('message', 'responded with 404 "Not Found"');
+      done();
+    });
+    browser.request('GET', '/404');
+  },
+  
+  'test .request() error': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.on('error', function(err){
+      err.should.have.property('message', 'responded with 500 "Internal Server Error"');
+      done();
+    });
+    browser.request('GET', '/500');
   },
 
   'test .request(method, path)': function(done){

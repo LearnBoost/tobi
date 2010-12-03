@@ -20,6 +20,7 @@ module.exports = {
   'test ': function(done){
     browser.get('/user/1', function($){
       $('p').prev().should.have.text('Tobi');
+      $('p').prev().should.have.text(/^To/);
       done();
     });
   }

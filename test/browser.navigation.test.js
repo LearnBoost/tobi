@@ -58,6 +58,9 @@ app.get('/form', function(req, res){
     + '<input type="text" name="user[email]" disabled="disabled" />'
     + '<input type="checkbox" name="user[agreement]" id="user-agreement" value="yes" />'
     + '<input type="submit" value="Update" />'
+    + '<fieldset>'
+    + '  <textarea id="signature" name="user[signature]"></textarea>'
+    + '</fieldset>'
     + '</form>');
 });
 
@@ -287,10 +290,17 @@ module.exports = {
           'user[name]': 'tjholowaychuk'
         , 'user[email]': 'tj@vision-media.ca'
         , 'user[agreement]': true
+        , 'signature': 'TJ Holowaychuk'
       })
       .click('Update', function(res){
         res.body.headers.should.have.property('content-type', 'application/x-www-form-urlencoded');
-        res.body.body.should.eql({ user: { name: 'tjholowaychuk', agreement: 'yes' }});
+        res.body.body.should.eql({
+          user: {
+              name: 'tjholowaychuk'
+            , agreement: 'yes'
+            , signature: 'TJ Holoawychuk'
+          }
+        });
         done();
       });
     });

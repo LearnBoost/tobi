@@ -13,11 +13,11 @@ var tobi = require('tobi')
 var app = express.createServer();
 
 app.get('/', function(req, res){
-  res.send('Hello World');
+  res.send('<p>Hello World</p>');
 });
 
-app.get('/user/:id.json', function(req, res){
-  res.send({ name: 'tj' });
+app.get('/user/:id', function(req, res){
+  res.send('<h1>Tobi</h1><p>the ferret</p>');
 });
 
 module.exports = {
@@ -45,9 +45,11 @@ module.exports = {
     browser.request('GET', '/', function(){
       browser.should.have.property('path', '/');
       browser.history.should.eql(['/']);
-      browser.request('GET', '/user/0.json', function(){
-        browser.should.have.property('path', '/user/0.json');
-        browser.history.should.eql(['/', '/user/0.json']);
+      browser.request('GET', '/user/0', function(){
+        browser.should.have.property('path', '/user/0');
+        browser.history.should.eql(['/', '/user/0']);
+        browser.should.have.property('source', '<h1>Tobi</h1><p>the ferret</p>');
+        browser.jQuery('p').text().should.equal('the ferret');
       });
     });
   },

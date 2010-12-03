@@ -165,5 +165,18 @@ module.exports = {
       $('[name=user[agreement]]').should.have.attr('checked', 'checked');
       done();
     });
+  },
+  
+  'test jQuery#click(fn)': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.get('/one', function($){
+      $('a:last-child').click(function(){
+        browser.path.should.have.property('path', '/two');
+        $('#page-three').click(function(){
+          browser.path.should.have.property('path', '/three');
+          done();
+        });
+      });
+    });
   }
 };

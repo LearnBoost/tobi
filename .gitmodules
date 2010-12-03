@@ -1,9 +1,6 @@
 [submodule "support/jsdom"]
 	path = support/jsdom
 	url = git://github.com/tmpvar/jsdom.git
-[submodule "support/htmlparser"]
-	path = support/htmlparser
-	url = https://github.com/tautologistics/node-htmlparser.git
 [submodule "support/expresso"]
 	path = support/expresso
 	url = git://github.com/visionmedia/expresso.git

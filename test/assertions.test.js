@@ -33,6 +33,10 @@ app.get('/list', function(req, res){
   res.send('<ul><li>one</li><li>two</li><li><em>three<em></li></ul>');
 });
 
+app.get('/attrs', function(req, res){
+  res.send('<a href="http://learnboost.com" title="LearnBoost">LearnBoost</a>');
+});
+
 // Tests
 
 exports['test .text()'] = function(done){
@@ -96,5 +100,34 @@ exports['test .one()'] = function(done){
     }, "expected [jQuery 'ul'] to have one 'li' tag, but has three");
     
     done();
+  });
+};
+
+exports['test .attr()'] = function(done){
+  browser.get('/attrs', function($){
+    $('a').should.have.attr('href');
+    $('a').should.have.attr('href', 'http://learnboost.com');
+    $('a').should.not.have.attr('href', 'invalid');
+    $('a').should.not.have.attr('rawr');
+
+    err(function(){
+      $('a').should.not.have.attr('href');
+    }, "expected [jQuery 'a'] to not have attribute 'href', but has 'http://learnboost.com'");
+    
+    err(function(){
+      $('a').should.not.have.attr('href', 'http://learnboost.com');
+    }, "expected [jQuery 'a'] to not have attribute 'href' with 'http://learnboost.com'");
+    
+    err(function(){
+      $('a').should.have.attr('foo');
+    }, "expected [jQuery 'a'] to have attribute 'foo'");
+
+    err(function(){
+      $('a').should.have.attr('foo', 'bar');
+    }, "expected [jQuery 'a'] to have attribute 'foo'");
+    
+    err(function(){
+      $('a').should.have.attr('href', 'http://tobi.com');
+    }, "expected [jQuery 'a'] to have attribute 'href' with 'http://tobi.com', but has 'http://learnboost.com'");
   });
 };

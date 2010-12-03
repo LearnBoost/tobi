@@ -89,11 +89,11 @@ module.exports = {
 
   'test .request(method, path)': function(done){
     var browser = tobi.createBrowser(app);
-    browser.request('GET', '/', function($){
+    browser.request('GET', '/', {}, function($){
       $.should.equal(browser.jQuery);
       browser.should.have.property('path', '/');
       browser.history.should.eql(['/']);
-      browser.request('GET', '/user/0', function(){
+      browser.request('GET', '/user/0', {}, function(){
         browser.should.have.property('path', '/user/0');
         browser.history.should.eql(['/', '/user/0']);
         browser.should.have.property('source', '<h1>Tobi</h1><p>the ferret</p>');
@@ -105,7 +105,7 @@ module.exports = {
   
   'test .request() redirect': function(done){
     var browser = tobi.createBrowser(app);
-    browser.request('GET', '/redirect', function($){
+    browser.request('GET', '/redirect', {}, function($){
       browser.should.have.property('path', '/one');
       browser.history.should.eql(['/redirect', '/one']);
       done();
@@ -114,8 +114,8 @@ module.exports = {
   
   'test .back(fn)': function(done){
     var browser = tobi.createBrowser(app);
-    browser.request('GET', '/', function($){
-      browser.request('GET', '/user/0', function(){
+    browser.request('GET', '/', {}, function($){
+      browser.request('GET', '/user/0', {}, function(){
         browser.back(function(){
           browser.should.have.property('path', '/');
           done();

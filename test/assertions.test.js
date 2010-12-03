@@ -44,7 +44,6 @@ app.get('/classes', function(req, res){
 app.get('/form', function(req, res){
   res.send('<form id="user">'
     + '<input type="text" name="user[name]" />'
-    + '<input type="text" name="user[email]" />'
     + '<input type="text" name="user[email]" disabled="disabled" />'
     + '<input type="submit" value="Update" />'
     + '</form>');
@@ -116,63 +115,69 @@ exports['test .one()'] = function(done){
   });
 };
 
-// exports['test .attr()'] = function(done){
-//   browser.get('/attrs', function($){
-//     $('a').should.have.attr('href');
-//     $('a').should.have.attr('href', 'http://learnboost.com');
-//     $('a').should.not.have.attr('href', 'invalid');
-//     $('a').should.not.have.attr('rawr');
-// 
-//     err(function(){
-//       $('a').should.not.have.attr('href');
-//     }, "expected [jQuery 'a'] to not have attribute 'href', but has 'http://learnboost.com'");
-//     
-//     err(function(){
-//       $('a').should.not.have.attr('href', 'http://learnboost.com');
-//     }, "expected [jQuery 'a'] to not have attribute 'href' with 'http://learnboost.com'");
-//     
-//     err(function(){
-//       $('a').should.have.attr('foo');
-//     }, "expected [jQuery 'a'] to have attribute 'foo'");
-// 
-//     err(function(){
-//       $('a').should.have.attr('foo', 'bar');
-//     }, "expected [jQuery 'a'] to have attribute 'foo'");
-//     
-//     err(function(){
-//       $('a').should.have.attr('href', 'http://tobi.com');
-//     }, "expected [jQuery 'a'] to have attribute 'href' with 'http://tobi.com', but has 'http://learnboost.com'");
-//   });
-// };
+exports['test .attr()'] = function(done){
+  browser.get('/attrs', function($){
+    $('a').should.have.attr('href');
+    $('a').should.have.attr('href', 'http://learnboost.com');
+    $('a').should.not.have.attr('href', 'invalid');
+    $('a').should.not.have.attr('rawr');
 
-// exports['test .class()'] = function(done){
-//   browser.get('/classes', function($){
-//     $('div').should.have.class('foo');
-//     $('div').should.have.class('bar');
-//     $('div').should.have.class('baz');
-//     $('div').should.not.have.class('rawr');
-// 
-//     err(function(){
-//       $('div').should.not.have.class('foo');
-//     }, "expected [jQuery 'a'] to not have class 'foo'");
-// 
-//     err(function(){
-//       $('a').should.have.class('rawr');
-//     }, "expected [jQuery 'a'] to have class 'rawr', but has 'foo bar baz'");
-//   });
-// };
+    err(function(){
+      $('a').should.not.have.attr('href');
+    }, "expected [jQuery 'a'] to not have attribute 'href', but has 'http://learnboost.com'");
+    
+    err(function(){
+      $('a').should.not.have.attr('href', 'http://learnboost.com');
+    }, "expected [jQuery 'a'] to not have attribute 'href' with 'http://learnboost.com'");
+    
+    err(function(){
+      $('a').should.have.attr('foo');
+    }, "expected [jQuery 'a'] to have attribute 'foo'");
 
-// exports['test .enabled / .disabled'] = function(done){
-//   browser.get('/form', function($){
-//     $('input[name="user[name]"]').should.be.enabled;
-//     $('input[name="user[email]"]').should.be.disabled;
-// 
-//     err(function(){
-//       $('input[name="user[email]"]').should.be.enabled;
-//     }, "expected [jQuery 'input[name=\"user[email]\"]'] to be enabled");
-// 
-//     err(function(){
-//       $('input[name="user[name]"]').should.be.disabled;
-//     }, "expected [jQuery 'input[name=\"user[name]\"]'] to be disabled");
-//   });
-// };
+    err(function(){
+      $('a').should.have.attr('foo', 'bar');
+    }, "expected [jQuery 'a'] to have attribute 'foo'");
+    
+    err(function(){
+      $('a').should.have.attr('href', 'http://tobi.com');
+    }, "expected [jQuery 'a'] to have attribute 'href' with 'http://tobi.com', but has 'http://learnboost.com'");
+    
+    done();
+  });
+};
+
+exports['test .class()'] = function(done){
+  browser.get('/classes', function($){
+    $('div').should.have.class('foo');
+    $('div').should.have.class('bar');
+    $('div').should.have.class('baz');
+    $('div').should.not.have.class('rawr');
+
+    err(function(){
+      $('div').should.not.have.class('foo');
+    }, "expected [jQuery 'div'] to not have class 'foo'");
+
+    err(function(){
+      $('div').should.have.class('rawr');
+    }, "expected [jQuery 'div'] to have class 'rawr', but has 'foo bar baz'");
+
+    done();
+  });
+};
+
+exports['test .enabled / .disabled'] = function(done){
+  browser.get('/form', function($){
+    $('input[name="user[name]"]').should.be.enabled;
+    $('input[name="user[email]"]').should.be.disabled;
+
+    err(function(){
+      $('input[name="user[email]"]').should.be.enabled;
+    }, "expected [jQuery 'input[name=\"user[email]\"]'] to be enabled");
+
+    err(function(){
+      $('input[name="user[name]"]').should.be.disabled;
+    }, "expected [jQuery 'input[name=\"user[name]\"]'] to be disabled");
+  
+    done();
+  });
+};

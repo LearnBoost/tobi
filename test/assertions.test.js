@@ -37,6 +37,11 @@ app.get('/attrs', function(req, res){
   res.send('<a href="http://learnboost.com" title="LearnBoost">LearnBoost</a>');
 });
 
+app.get('/classes', function(req, res){
+  res.send('<div class="foo bar baz"></div>');
+});
+
+
 // Tests
 
 exports['test .text()'] = function(done){
@@ -131,3 +136,20 @@ exports['test .one()'] = function(done){
 //     }, "expected [jQuery 'a'] to have attribute 'href' with 'http://tobi.com', but has 'http://learnboost.com'");
 //   });
 // };
+
+exports['test .class()'] = function(done){
+  browser.get('/classes', function($){
+    $('div').should.have.class('foo');
+    $('div').should.have.class('bar');
+    $('div').should.have.class('baz');
+    $('div').should.not.have.class('rawr');
+
+    err(function(){
+      $('div').should.not.have.class('foo');
+    }, "expected [jQuery 'a'] to not have class 'foo'");
+
+    err(function(){
+      $('a').should.have.class('rawr');
+    }, "expected [jQuery 'a'] to have class 'rawr', but has 'foo bar baz'");
+  });
+};

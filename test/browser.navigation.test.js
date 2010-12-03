@@ -98,7 +98,10 @@ module.exports = {
             browser.should.have.property('path', '/two');
             browser.back(function(){
               browser.should.have.property('path', '/one');
-              done();
+              browser.click('page-three', function(){
+                browser.should.have.property('path', '/three');
+                done();
+              });
             });
           });
         })

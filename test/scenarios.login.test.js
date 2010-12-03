@@ -5,30 +5,54 @@
 
 var tobi = require('tobi')
   , express = require('express')
+  , connect = require('connect')
   , should = require('should');
 
 // Test app
 
-var app = express.createServer();
+var app = express.createServer()
+  , store = new connect.session.MemoryStore({ reapInterval: -1 });
 
 app.use(express.bodyDecoder());
+app.use(express.cookieDecoder());
+app.use(express.session({ store: store }));
 
-app.get('/form', function(req, res){
-  res.send('<form id="user" action="/form">'
-    + '<input type="text" name="user[name]" />'
-    + '<input type="text" name="user[email]" disabled="disabled" />'
-    + '<input type="checkbox" name="user[agreement]" id="user-agreement" value="yes" />'
-    + '<input type="submit" value="Update" />'
-    + '<fieldset>'
-    + '  <textarea id="signature" name="user[signature]"></textarea>'
-    + '</fieldset>'
+app.get('/login', function(req, res){
+  var msgs = req.flash('info');
+  res.send(
+      msgs.length ? '<ul class="messages"><li>' + msgs[0] + '</li></ul>' : ''
+    + '<form id="user" action="/login" method="post">'
+    + '  <input type="text" name="username" />'
+    + '  <input type="password" name="password" />'
+    + '  <input type="submit" value="Login" />'
     + '</form>');
 });
 
-app.post('/form', function(req, res){
-  res.send({ headers: req.headers, body: req.body });
+app.post('/login', function(req, res){
+  var username = req.body.username
+    , password = req.body.password;
+  
+  // Fake authentication
+  if ('tj' == username && 'tobi' == password) {
+    req.flash('info', 'Successfully authenticated');
+  } else {
+    req.flash('info', 'Authentication failed');
+  }
+
+  res.redirect('back');
 });
 
-module.exports = {
+var browser = tobi.createBrowser(app);
 
+module.exports = {
+  'test /login with valid credentials': function(done){
+    browser.get('/login', function($){
+      browser.fill({
+          username: 'tj'
+        , password: 'tobi'
+      }).click('Login', function(){
+        console.log('done');
+      })
+    });
+  }
 };

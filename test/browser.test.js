@@ -3,9 +3,9 @@
  * Module dependencies.
  */
 
-var chrono = require('chrono')
+var tobi = require('tobi')
   , express = require('express')
-  , Browser = chrono.Browser
+  , Browser = tobi.Browser
   , should = require('should');
 
 // Test app
@@ -31,17 +31,17 @@ module.exports = {
   
   'test .createBrowser(str)': function(){
     var html = '<ul><li>one</li><li>two</li></ul>'
-      , browser = chrono.createBrowser(html);
+      , browser = tobi.createBrowser(html);
     browser.should.have.property('source', html);
   },
   
   'test .createBrowser(server)': function(){
-    var browser = chrono.createBrowser(app);
+    var browser = tobi.createBrowser(app);
     browser.should.have.property('server', app);
   },
   
   'test .request(method, url)': function(){
-    var browser = chrono.createBrowser(app);
+    var browser = tobi.createBrowser(app);
     browser.request('GET', '/', function(){
       browser.should.have.property('path', '/');
       browser.history.should.eql(['/']);

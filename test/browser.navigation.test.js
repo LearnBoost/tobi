@@ -232,5 +232,17 @@ module.exports = {
         });
       });
     });
+  },
+  
+  'test jQuery#click(fn) form submit button': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.get('/form', function($){
+      $('[name=user[name]]').val('tjholowaychuk');
+      $('[name=user[email]]').val('tj@vision-media.ca');
+      $('[type=submit]').click(function(){
+        console.log('done');
+        done();
+      });
+    });
   }
 };

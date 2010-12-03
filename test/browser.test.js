@@ -40,12 +40,12 @@ module.exports = {
     browser.should.have.property('server', app);
   },
   
-  'test .open(url)': function(){
+  'test .request(method, url)': function(){
     var browser = chrono.createBrowser(app);
-    browser.open('/', function(){
+    browser.request('GET', '/', function(){
       browser.should.have.property('path', '/');
       browser.history.should.eql(['/']);
-      browser.open('/user/0.json', function(){
+      browser.request('GET', '/user/0.json', function(){
         browser.should.have.property('path', '/user/0.json');
         browser.history.should.eql(['/', '/user/0.json']);
       });

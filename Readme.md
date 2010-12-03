@@ -1,5 +1,34 @@
 
-# Chrono
+# Tobi
+
+...
+
+## Todo
+
+starting with the lower level api:
+
+    browser.get('/', function($){
+      $('h1.title').should.have.text('Tobi is awesome');
+      $('p:first-child ~ h1').should.have.text('but so is raul');
+      $('a').click(function(){
+        $('h1.title').should.have.text('A new page!');
+        browser.back(function(){
+          $('h1.title').should.have.text('Tobi is awesome');
+        });
+      });
+    });
+
+building up to a jQuery/soda inspired api providing a more concise interface for simple cases, but still maintaining flexibility in the design. Maybe something like:
+
+    browser
+      .get('/')
+      .find('h1.title').assertText('Tobi is awesome')
+      .find('p:first-child ~ h1').assertText('but so is raul')
+      .find('a')
+      .click()
+      .find('h1.title').assertText('A new page!')
+      .back()
+      .find('h1.title').assertText('Tobi is awesome');
 
 ## Testing
 

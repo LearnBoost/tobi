@@ -63,28 +63,28 @@ module.exports = {
   'test .request() non-html': function(done){
     var browser = tobi.createBrowser(app);
     browser.on('error', function(err){
-      err.should.have.property('message', 'responded with application/json, expected text/html');
+      err.should.have.property('message', 'GET /json responded with application/json, expected text/html');
       done();
     });
-    browser.request('GET', '/json');
+    browser.request('GET', '/json', {}, function(){});
   },
 
   'test .request() 404': function(done){
     var browser = tobi.createBrowser(app);
     browser.on('error', function(err){
-      err.should.have.property('message', 'responded with 404 "Not Found"');
+      err.should.have.property('message', 'GET /404 responded with 404 "Not Found"');
       done();
     });
-    browser.request('GET', '/404');
+    browser.request('GET', '/404', {}, function(){});
   },
   
   'test .request() error': function(done){
     var browser = tobi.createBrowser(app);
     browser.on('error', function(err){
-      err.should.have.property('message', 'responded with 500 "Internal Server Error"');
+      err.should.have.property('message', 'GET /500 responded with 500 "Internal Server Error"');
       done();
     });
-    browser.request('GET', '/500');
+    browser.request('GET', '/500', {}, function(){});
   },
 
   'test .request(method, path)': function(done){

@@ -12,6 +12,8 @@ var tobi = require('tobi')
 
 var app = express.createServer();
 
+app.use(express.bodyDecoder());
+
 app.get('/', function(req, res){
   res.send('<p>Hello World</p>');
 });
@@ -57,6 +59,10 @@ app.get('/form', function(req, res){
     + '<input type="checkbox" name="user[agreement]" id="user-agreement" />'
     + '<input type="submit" value="Update" />'
     + '</form>');
+});
+
+app.post('/form', function(req, res){
+  res.send({ headers: req.headers, body: req.body });
 });
 
 module.exports = {

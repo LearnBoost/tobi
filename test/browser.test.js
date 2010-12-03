@@ -40,7 +40,7 @@ module.exports = {
     browser.should.have.property('server', app);
   },
   
-  'test .request(method, path)': function(){
+  'test .request(method, path)': function(done){
     var browser = tobi.createBrowser(app);
     browser.request('GET', '/', function(){
       browser.should.have.property('path', '/');
@@ -50,15 +50,17 @@ module.exports = {
         browser.history.should.eql(['/', '/user/0']);
         browser.should.have.property('source', '<h1>Tobi</h1><p>the ferret</p>');
         browser.jQuery('p').text().should.equal('the ferret');
+        done();
       });
     });
   },
   
-  'test .get(path)': function(){
+  'test .get(path)': function(done){
     var browser = tobi.createBrowser(app);
     browser.get('/', function(){
       browser.should.have.property('path', '/');
       browser.history.should.eql(['/']);
+      done();
     });
   }
 };

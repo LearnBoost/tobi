@@ -34,6 +34,15 @@ app.get('/three', function(req, res){
   res.send('<p>Wahoo! Page Three</p>');
 });
 
+app.get('/form', function(req, res){
+  res.send('<form id="user">'
+    + '<input type="text" name="user[name]" />'
+    + '<input type="text" name="user[email]" disabled="disabled" />'
+    + '<input type="checkbox" name="user[agreement]" />'
+    + '<input type="submit" value="Update" />'
+    + '</form>');
+});
+
 module.exports = {
   'test .request(method, path)': function(done){
     var browser = tobi.createBrowser(app);
@@ -125,6 +134,16 @@ module.exports = {
           });
         })
       });
+    });
+  },
+  
+  'test .check(name)': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.get('/form', function($){
+      $('[name=user[agreement]]').should.not.have.attr('checked');
+      browser.check('[name=user[agreement]]');
+      $('[name=user[agreement]]').should.have.attr('checked');
+      done();
     });
   }
 };

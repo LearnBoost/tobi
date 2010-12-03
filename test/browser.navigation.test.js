@@ -69,12 +69,8 @@ module.exports = {
   'test .request() non-html': function(done){
     var browser = tobi.createBrowser(app);
     browser.request('GET', '/json', {}, function(res){
-      var json = '';
-      res.on('data', function(chunk){ json += chunk });
-      res.on('end', function(){
-        json.should.equal('{"user":"tj"}');
-        done();
-      });
+      res.body.should.eql({ user: 'tj' });
+      done();
     });
   },
 
@@ -249,14 +245,9 @@ module.exports = {
       $('[name=user[name]]').val('tjholowaychuk');
       $('[name=user[email]]').val('tj@vision-media.ca');
       $('[type=submit]').click(function(res){
-        var json = '';
-        res.on('data', function(chunk){ json += chunk; });
-        res.on('end', function(){
-          var obj = JSON.parse(json);
-          obj.headers.should.have.property('content-type', 'application/x-www-form-urlencoded');
-          obj.body.should.eql({ user: { name: 'tjholowaychuk' }});
-          done();
-        });
+        res.body.headers.should.have.property('content-type', 'application/x-www-form-urlencoded');
+        res.body.body.should.eql({ user: { name: 'tjholowaychuk' }});
+        done();
       });
     });
   }

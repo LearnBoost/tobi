@@ -40,7 +40,7 @@ module.exports = {
     browser.should.have.property('server', app);
   },
   
-  'test .request(method, url)': function(){
+  'test .request(method, path)': function(){
     var browser = tobi.createBrowser(app);
     browser.request('GET', '/', function(){
       browser.should.have.property('path', '/');
@@ -49,6 +49,14 @@ module.exports = {
         browser.should.have.property('path', '/user/0.json');
         browser.history.should.eql(['/', '/user/0.json']);
       });
+    });
+  },
+  
+  'test .get(path)': function(){
+    var browser = tobi.createBrowser(app);
+    browser.get('/', function(){
+      browser.should.have.property('path', '/');
+      browser.history.should.eql(['/']);
     });
   }
 };

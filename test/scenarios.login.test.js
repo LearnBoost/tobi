@@ -6,16 +6,16 @@
 var tobi = require('tobi')
   , express = require('express')
   , connect = require('connect')
-  , should = require('should');
+  , should = require('should')
+  , MemoryStore = connect.session.MemoryStore;
 
 // Test app
 
-var app = express.createServer()
-  , store = new connect.session.MemoryStore({ reapInterval: -1 });
+var app = express.createServer();
 
 app.use(express.bodyDecoder());
 app.use(express.cookieDecoder());
-app.use(express.session({ store: store }));
+app.use(express.session({ store: new MemoryStore({ reapInterval: -1 }) }));
 
 app.get('/login', function(req, res){
   var msgs = req.flash('info');

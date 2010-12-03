@@ -13,13 +13,15 @@ var app = express.createServer()
   , browser = tobi.createBrowser(app);
 
 app.get('/user/:id', function(req, res){
-  res.send('<h1>Tobi</h1><p>the ferret</p>');
+  res.send('<h1 id="title">Tobi</h1><p>the ferret</p>');
 });
 
 module.exports = {
-  'test ': function(){
-    browser.get('/', function(){
-      
+  'test ': function(done){
+    browser.get('/user/1', function($){
+      $('p').prev().should.have.text('Tobi');
+      $('p').prev().should.have.text(/^To/);
+      done();
     });
   }
 };

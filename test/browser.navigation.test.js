@@ -16,6 +16,10 @@ app.get('/', function(req, res){
   res.send('<p>Hello World</p>');
 });
 
+app.get('/redirect', function(req, res){
+  res.redirect('/one');
+});
+
 app.get('/json', function(req, res){
   res.send({ user: 'tj' });
 });
@@ -70,6 +74,15 @@ module.exports = {
         browser.jQuery('p').text().should.equal('the ferret');
         done();
       });
+    });
+  },
+  
+  'test .request() redirect': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.request('GET', '/redirect', function($){
+      browser.should.have.property('path', '/one');
+      browser.history.should.eql(['/redirect', '/one']);
+      done();
     });
   },
   

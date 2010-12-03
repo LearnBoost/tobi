@@ -44,7 +44,6 @@ app.get('/classes', function(req, res){
 app.get('/form', function(req, res){
   res.send('<form id="user">'
     + '<input type="text" name="user[name]" />'
-    + '<input type="text" name="user[email]" />'
     + '<input type="text" name="user[email]" disabled="disabled" />'
     + '<input type="submit" value="Update" />'
     + '</form>');
@@ -164,17 +163,19 @@ exports['test .attr()'] = function(done){
 //   });
 // };
 
-// exports['test .enabled / .disabled'] = function(done){
-//   browser.get('/form', function($){
-//     $('input[name="user[name]"]').should.be.enabled;
-//     $('input[name="user[email]"]').should.be.disabled;
-// 
-//     err(function(){
-//       $('input[name="user[email]"]').should.be.enabled;
-//     }, "expected [jQuery 'input[name=\"user[email]\"]'] to be enabled");
-// 
-//     err(function(){
-//       $('input[name="user[name]"]').should.be.disabled;
-//     }, "expected [jQuery 'input[name=\"user[name]\"]'] to be disabled");
-//   });
-// };
+exports['test .enabled / .disabled'] = function(done){
+  browser.get('/form', function($){
+    $('input[name="user[name]"]').should.be.enabled;
+    $('input[name="user[email]"]').should.be.disabled;
+
+    err(function(){
+      $('input[name="user[email]"]').should.be.enabled;
+    }, "expected [jQuery 'input[name=\"user[email]\"]'] to be enabled");
+
+    err(function(){
+      $('input[name="user[name]"]').should.be.disabled;
+    }, "expected [jQuery 'input[name=\"user[name]\"]'] to be disabled");
+  
+    done();
+  });
+};

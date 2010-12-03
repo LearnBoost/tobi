@@ -38,7 +38,7 @@ app.get('/form', function(req, res){
   res.send('<form id="user">'
     + '<input type="text" name="user[name]" />'
     + '<input type="text" name="user[email]" disabled="disabled" />'
-    + '<input type="checkbox" name="user[agreement]" />'
+    + '<input type="checkbox" name="user[agreement]" id="user-agreement" />'
     + '<input type="submit" value="Update" />'
     + '</form>');
 });
@@ -142,6 +142,26 @@ module.exports = {
     browser.get('/form', function($){
       $('[name=user[agreement]]').should.not.have.attr('checked', 'checked');
       browser.check('user[agreement]');
+      $('[name=user[agreement]]').should.have.attr('checked', 'checked');
+      done();
+    });
+  },
+  
+  'test .check(css)': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.get('/form', function($){
+      $('[name=user[agreement]]').should.not.have.attr('checked', 'checked');
+      browser.check('[name=user[agreement]]');
+      $('[name=user[agreement]]').should.have.attr('checked', 'checked');
+      done();
+    });
+  },
+  
+  'test .check(id)': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.get('/form', function($){
+      $('[name=user[agreement]]').should.not.have.attr('checked', 'checked');
+      browser.check('user-agreement');
       $('[name=user[agreement]]').should.have.attr('checked', 'checked');
       done();
     });

@@ -33,6 +33,6 @@ module.exports = {
   
   'test request': function(){
     var browser = chrono.createBrowser(app);
-    browser.should.have.property('app', app);
+    browser.should.have.property('server', app);
   }
 };

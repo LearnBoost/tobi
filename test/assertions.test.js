@@ -200,7 +200,7 @@ exports['test .checked'] = function(done){
 
     err(function(){
       $('input[name="user[agreement]"]').should.not.be.checked;
-    }, "expected [jQuery 'input[name=\"user[agreement]\"]'] to be unchecked");
+    }, "expected [jQuery 'input[name=\"user[agreement]\"]'] to not be checked");
   
     done();
   });

@@ -116,34 +116,36 @@ exports['test .one()'] = function(done){
   });
 };
 
-// exports['test .attr()'] = function(done){
-//   browser.get('/attrs', function($){
-//     $('a').should.have.attr('href');
-//     $('a').should.have.attr('href', 'http://learnboost.com');
-//     $('a').should.not.have.attr('href', 'invalid');
-//     $('a').should.not.have.attr('rawr');
-// 
-//     err(function(){
-//       $('a').should.not.have.attr('href');
-//     }, "expected [jQuery 'a'] to not have attribute 'href', but has 'http://learnboost.com'");
-//     
-//     err(function(){
-//       $('a').should.not.have.attr('href', 'http://learnboost.com');
-//     }, "expected [jQuery 'a'] to not have attribute 'href' with 'http://learnboost.com'");
-//     
-//     err(function(){
-//       $('a').should.have.attr('foo');
-//     }, "expected [jQuery 'a'] to have attribute 'foo'");
-// 
-//     err(function(){
-//       $('a').should.have.attr('foo', 'bar');
-//     }, "expected [jQuery 'a'] to have attribute 'foo'");
-//     
-//     err(function(){
-//       $('a').should.have.attr('href', 'http://tobi.com');
-//     }, "expected [jQuery 'a'] to have attribute 'href' with 'http://tobi.com', but has 'http://learnboost.com'");
-//   });
-// };
+exports['test .attr()'] = function(done){
+  browser.get('/attrs', function($){
+    $('a').should.have.attr('href');
+    $('a').should.have.attr('href', 'http://learnboost.com');
+    $('a').should.not.have.attr('href', 'invalid');
+    $('a').should.not.have.attr('rawr');
+
+    err(function(){
+      $('a').should.not.have.attr('href');
+    }, "expected [jQuery 'a'] to not have attribute 'href', but has 'http://learnboost.com'");
+    
+    err(function(){
+      $('a').should.not.have.attr('href', 'http://learnboost.com');
+    }, "expected [jQuery 'a'] to not have attribute 'href' with 'http://learnboost.com'");
+    
+    err(function(){
+      $('a').should.have.attr('foo');
+    }, "expected [jQuery 'a'] to have attribute 'foo'");
+
+    err(function(){
+      $('a').should.have.attr('foo', 'bar');
+    }, "expected [jQuery 'a'] to have attribute 'foo'");
+    
+    err(function(){
+      $('a').should.have.attr('href', 'http://tobi.com');
+    }, "expected [jQuery 'a'] to have attribute 'href' with 'http://tobi.com', but has 'http://learnboost.com'");
+    
+    done();
+  });
+};
 
 // exports['test .class()'] = function(done){
 //   browser.get('/classes', function($){

@@ -16,6 +16,10 @@ app.get('/', function(req, res){
   res.send('Hello World');
 });
 
+app.get('/user/:id.json', function(req, res){
+  res.send({ name: 'tj' });
+});
+
 module.exports = {
   'test Browser(str)': function(){
     var html = '<ul><li>one</li><li>two</li></ul>'
@@ -34,5 +38,17 @@ module.exports = {
   'test .createBrowser(server)': function(){
     var browser = chrono.createBrowser(app);
     browser.should.have.property('server', app);
+  },
+  
+  'test .open(url)': function(){
+    var browser = chrono.createBrowser(app);
+    browser.open('/', function(){
+      browser.should.have.property('path', '/');
+      browser.history.should.eql(['/']);
+      browser.open('/user/0.json', function(){
+        browser.should.have.property('path', '/user/0.json');
+        browser.history.should.eql(['/', '/user/0.json']);
+      });
+    });
   }
 };

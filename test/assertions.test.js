@@ -48,6 +48,11 @@ app.get('/form', function(req, res){
     + '<input type="text" name="user[name]" />'
     + '<input type="text" name="user[email]" disabled="disabled" />'
     + '<input type="submit" value="Update" />'
+    + '<select>'
+    + '  <option value="one">One</option>'
+    + '  <option value="two">Two</option>'
+    + '  <option value="three" selected="selected">Two</option>'
+    + '</select>'
     + '</form>');
 });
 
@@ -196,6 +201,23 @@ exports['test .checked'] = function(done){
     err(function(){
       $('input[name="user[agreement]"]').should.not.be.checked;
     }, "expected [jQuery 'input[name=\"user[agreement]\"]'] to be unchecked");
+  
+    done();
+  });
+};
+
+exports['test .selected'] = function(done){
+  browser.get('/form', function($){
+    $('select > option:nth-child(3)').should.be.selected;
+    $('select > option:nth-child(2)').should.not.be.selected;
+
+    err(function(){
+      $('select > option:nth-child(2)').should.be.selected;
+    }, "expected [jQuery 'select > option:nth-child(2)'] to be selected");
+
+    err(function(){
+      $('select > option:nth-child(3)').should.not.be.selected;
+    }, "expected [jQuery 'select > option:nth-child(3)'] to not be selected");
   
     done();
   });

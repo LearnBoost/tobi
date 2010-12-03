@@ -310,5 +310,23 @@ module.exports = {
         done();
       });
     });
+  },
+  
+  'test jQuery#submit()': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.get('/form', function($){
+      $('[name=user[name]]').val('tjholowaychuk');
+      $('#signature').val('Wahoo');
+       $('form').submit(function(res){
+        res.body.headers.should.have.property('content-type', 'application/x-www-form-urlencoded');
+        res.body.body.should.eql({
+          user: {
+              name: 'tjholowaychuk'
+            , signature: 'Wahoo'
+          }
+        });
+        done();
+      });
+    });
   }
 };

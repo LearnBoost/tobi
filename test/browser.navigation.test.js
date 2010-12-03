@@ -117,7 +117,10 @@ module.exports = {
         browser.click('a[href="/three"]', function(){
           browser.should.have.property('path', '/three');
           browser.source.should.equal('<p>Wahoo! Page Three</p>');
-          done();
+          browser.back(2, function(){
+            browser.should.have.property('path', '/one');
+            done();
+          });
         })
       });
     });

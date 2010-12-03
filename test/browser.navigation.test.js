@@ -20,6 +20,18 @@ app.get('/user/:id', function(req, res){
   res.send('<h1>Tobi</h1><p>the ferret</p>');
 });
 
+app.get('/one', function(req, res){
+  res.send('<a id="page-two" href="/two">Page Two</a>');
+});
+
+app.get('/two', function(req, res){
+  res.send('<a id="page-three" href="/three">Page Three</a>');
+});
+
+app.get('/three', function(req, res){
+  res.send('Wahoo! Page Three');
+});
+
 module.exports = {
   'test .request(method, path)': function(done){
     var browser = tobi.createBrowser(app);
@@ -55,6 +67,20 @@ module.exports = {
       browser.should.have.property('path', '/');
       browser.history.should.eql(['/']);
       done();
+    });
+  },
+  
+  'test .click(text, fn)': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.get('/one', function(){
+      browser.click('Page Two', function(){
+        browser.should.have.property('path', '/two');
+        browser.click('Page Three', function(){
+          browser.should.have.property('path', '/three');
+          browser.source.should.equal('Wahoo! Page Three');
+          done();
+        })
+      });
     });
   }
 };

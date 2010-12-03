@@ -56,7 +56,7 @@ app.get('/form', function(req, res){
   res.send('<form id="user" action="/form">'
     + '<input type="text" name="user[name]" />'
     + '<input type="text" name="user[email]" disabled="disabled" />'
-    + '<input type="checkbox" name="user[agreement]" id="user-agreement" />'
+    + '<input type="checkbox" name="user[agreement]" id="user-agreement" value="yes" />'
     + '<input type="submit" value="Update" />'
     + '</form>');
 });
@@ -260,6 +260,21 @@ module.exports = {
       browser.click('Update', function(res){
         res.body.headers.should.have.property('content-type', 'application/x-www-form-urlencoded');
         res.body.body.should.eql({ user: { name: 'tjholowaychuk' }});
+        done();
+      });
+    });
+  },
+  
+  'test .type() chaining': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.get('/form', function($){
+      browser
+      .type('user[name]', 'tjholowaychuk')
+      .type('user[email]', 'tj@vision-media.ca')
+      .check('user[agreement]')
+      .click('Update', function(res){
+        res.body.headers.should.have.property('content-type', 'application/x-www-form-urlencoded');
+        res.body.body.should.eql({ user: { name: 'tjholowaychuk', agreement: 'yes' }});
         done();
       });
     });

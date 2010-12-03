@@ -41,6 +41,14 @@ app.get('/classes', function(req, res){
   res.send('<div class="foo bar baz"></div>');
 });
 
+app.get('/form', function(req, res){
+  res.send('<form id="user">'
+    + '<input type="text" name="user[name]" />'
+    + '<input type="text" name="user[email]" />'
+    + '<input type="text" name="user[email]" disabled="disabled" />'
+    + '<input type="submit" value="Update" />'
+    + '</form>');
+});
 
 // Tests
 
@@ -151,5 +159,20 @@ exports['test .one()'] = function(done){
 //     err(function(){
 //       $('a').should.have.class('rawr');
 //     }, "expected [jQuery 'a'] to have class 'rawr', but has 'foo bar baz'");
+//   });
+// };
+
+// exports['test .enabled / .disabled'] = function(done){
+//   browser.get('/form', function($){
+//     $('input[name="user[name]"]').should.be.enabled;
+//     $('input[name="user[email]"]').should.be.disabled;
+// 
+//     err(function(){
+//       $('input[name="user[email]"]').should.be.enabled;
+//     }, "expected [jQuery 'input[name=\"user[email]\"]'] to be enabled");
+// 
+//     err(function(){
+//       $('input[name="user[name]"]').should.be.disabled;
+//     }, "expected [jQuery 'input[name=\"user[name]\"]'] to be disabled");
 //   });
 // };

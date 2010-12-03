@@ -12,6 +12,8 @@ var tobi = require('tobi')
 
 var app = express.createServer();
 
+app.use(express.bodyDecoder());
+
 app.get('/', function(req, res){
   res.send('<p>Hello World</p>');
 });
@@ -59,41 +61,48 @@ app.get('/form', function(req, res){
     + '</form>');
 });
 
+app.post('/form', function(req, res){
+  res.send({ headers: req.headers, body: req.body });
+});
+
 module.exports = {
   'test .request() non-html': function(done){
     var browser = tobi.createBrowser(app);
-    browser.on('error', function(err){
-      err.should.have.property('message', 'responded with application/json, expected text/html');
-      done();
+    browser.request('GET', '/json', {}, function(res){
+      var json = '';
+      res.on('data', function(chunk){ json += chunk });
+      res.on('end', function(){
+        json.should.equal('{"user":"tj"}');
+        done();
+      });
     });
-    browser.request('GET', '/json');
   },
 
   'test .request() 404': function(done){
     var browser = tobi.createBrowser(app);
     browser.on('error', function(err){
-      err.should.have.property('message', 'responded with 404 "Not Found"');
+      err.should.have.property('message', 'GET /404 responded with 404 "Not Found"');
       done();
     });
-    browser.request('GET', '/404');
+    browser.request('GET', '/404', {}, function(){});
   },
   
   'test .request() error': function(done){
     var browser = tobi.createBrowser(app);
     browser.on('error', function(err){
-      err.should.have.property('message', 'responded with 500 "Internal Server Error"');
+      err.should.have.property('message', 'GET /500 responded with 500 "Internal Server Error"');
       done();
     });
-    browser.request('GET', '/500');
+    browser.request('GET', '/500', {}, function(){});
   },
 
   'test .request(method, path)': function(done){
     var browser = tobi.createBrowser(app);
-    browser.request('GET', '/', function($){
+    browser.request('GET', '/', {}, function($){
       $.should.equal(browser.jQuery);
       browser.should.have.property('path', '/');
       browser.history.should.eql(['/']);
-      browser.request('GET', '/user/0', function(){
+      browser.request('GET', '/user/0', {}, function(){
         browser.should.have.property('path', '/user/0');
         browser.history.should.eql(['/', '/user/0']);
         browser.should.have.property('source', '<h1>Tobi</h1><p>the ferret</p>');
@@ -105,7 +114,7 @@ module.exports = {
   
   'test .request() redirect': function(done){
     var browser = tobi.createBrowser(app);
-    browser.request('GET', '/redirect', function($){
+    browser.request('GET', '/redirect', {}, function($){
       browser.should.have.property('path', '/one');
       browser.history.should.eql(['/redirect', '/one']);
       done();
@@ -114,8 +123,8 @@ module.exports = {
   
   'test .back(fn)': function(done){
     var browser = tobi.createBrowser(app);
-    browser.request('GET', '/', function($){
-      browser.request('GET', '/user/0', function(){
+    browser.request('GET', '/', {}, function($){
+      browser.request('GET', '/user/0', {}, function(){
         browser.back(function(){
           browser.should.have.property('path', '/');
           done();
@@ -239,8 +248,15 @@ module.exports = {
     browser.get('/form', function($){
       $('[name=user[name]]').val('tjholowaychuk');
       $('[name=user[email]]').val('tj@vision-media.ca');
-      $('[type=submit]').click(function(){
-        done();
+      $('[type=submit]').click(function(res){
+        var json = '';
+        res.on('data', function(chunk){ json += chunk; });
+        res.on('end', function(){
+          var obj = JSON.parse(json);
+          obj.headers.should.have.property('content-type', 'application/x-www-form-urlencoded');
+          obj.body.should.eql({ user: { name: 'tjholowaychuk' }});
+          done();
+        });
       });
     });
   }

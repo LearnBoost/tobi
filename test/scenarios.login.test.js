@@ -46,7 +46,7 @@ var browser = tobi.createBrowser(app);
 
 module.exports = {
   'test /login with valid credentials': function(done){
-    browser.get('/login', function($){
+    browser.get('/login', function(){
       browser.fill({
           username: 'tj'
         , password: 'tobi'

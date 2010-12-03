@@ -16,6 +16,10 @@ app.get('/', function(req, res){
   res.send('<p>Hello World</p>');
 });
 
+app.get('/json', function(req, res){
+  res.send({ user: 'tj' });
+});
+
 app.get('/user/:id', function(req, res){
   res.send('<h1>Tobi</h1><p>the ferret</p>');
 });
@@ -44,6 +48,15 @@ app.get('/form', function(req, res){
 });
 
 module.exports = {
+  'test .request() non-html': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.on('error', function(err){
+      err.should.have.property('message', 'responded with application/json, expected text/html');
+      done();
+    });
+    browser.request('GET', '/json');
+  },
+
   'test .request(method, path)': function(done){
     var browser = tobi.createBrowser(app);
     browser.request('GET', '/', function($){

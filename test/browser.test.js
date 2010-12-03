@@ -56,6 +56,18 @@ module.exports = {
     });
   },
   
+  'test .back(fn)': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.request('GET', '/', function($){
+      browser.request('GET', '/user/0', function(){
+        browser.back(function(){
+          browser.should.have.property('path', '/');
+          done();
+        });
+      });
+    });
+  },
+  
   'test .get(path)': function(done){
     var browser = tobi.createBrowser(app);
     browser.get('/', function(){

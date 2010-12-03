@@ -146,22 +146,24 @@ exports['test .attr()'] = function(done){
   });
 };
 
-// exports['test .class()'] = function(done){
-//   browser.get('/classes', function($){
-//     $('div').should.have.class('foo');
-//     $('div').should.have.class('bar');
-//     $('div').should.have.class('baz');
-//     $('div').should.not.have.class('rawr');
-// 
-//     err(function(){
-//       $('div').should.not.have.class('foo');
-//     }, "expected [jQuery 'a'] to not have class 'foo'");
-// 
-//     err(function(){
-//       $('a').should.have.class('rawr');
-//     }, "expected [jQuery 'a'] to have class 'rawr', but has 'foo bar baz'");
-//   });
-// };
+exports['test .class()'] = function(done){
+  browser.get('/classes', function($){
+    $('div').should.have.class('foo');
+    $('div').should.have.class('bar');
+    $('div').should.have.class('baz');
+    $('div').should.not.have.class('rawr');
+
+    err(function(){
+      $('div').should.not.have.class('foo');
+    }, "expected [jQuery 'div'] to not have class 'foo'");
+
+    err(function(){
+      $('div').should.have.class('rawr');
+    }, "expected [jQuery 'div'] to have class 'rawr', but has 'foo bar baz'");
+
+    done();
+  });
+};
 
 exports['test .enabled / .disabled'] = function(done){
   browser.get('/form', function($){

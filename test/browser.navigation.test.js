@@ -278,5 +278,21 @@ module.exports = {
         done();
       });
     });
+  },
+  
+  'test .fill(obj)': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.get('/form', function($){
+      browser.fill({
+          'user[name]': 'tjholowaychuk'
+        , 'user[email]': 'tj@vision-media.ca'
+        , 'user[agreement]': true
+      })
+      .click('Update', function(res){
+        res.body.headers.should.have.property('content-type', 'application/x-www-form-urlencoded');
+        res.body.body.should.eql({ user: { name: 'tjholowaychuk', agreement: 'yes' }});
+        done();
+      });
+    });
   }
 };

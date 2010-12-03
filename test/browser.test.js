@@ -4,8 +4,17 @@
  */
 
 var chrono = require('chrono')
+  , express = require('express')
   , Browser = chrono.Browser
   , should = require('should');
+
+// Test app
+
+var app = express.createServer();
+
+app.get('/', function(req, res){
+  res.send('Hello World');
+});
 
 module.exports = {
   'test Browser(str)': function(){
@@ -23,6 +32,7 @@ module.exports = {
   },
   
   'test request': function(){
-    var browser = chrono.createBrowser();
+    var browser = chrono.createBrowser(app);
+    browser.should.have.property('app', app);
   }
 };

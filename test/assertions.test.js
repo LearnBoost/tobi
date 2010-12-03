@@ -14,7 +14,7 @@ function err(fn, msg){
   try {
     fn();
   } catch (e) {
-    should.equal(e, msg);
+    should.equal(e.message, msg);
     return;
   }
   throw new Error('no exception thrown, expected "' + msg + '"');
@@ -36,12 +36,20 @@ module.exports = {
       $('p').prev().should.have.text(/^To/);
       
       err(function(){
-        $('p').prev().should.not.have.text('Tobi');
-      }, "expected [jQuery 'p'] to not have text 'Tobi'");
+        $('h1').should.not.have.text('Tobi');
+      }, "expected [jQuery 'h1'] to not have text 'Tobi'");
 
       err(function(){
-        $('p').prev().should.have.text('Raul');
-      }, "expected [jQuery 'p'] to have text 'Raul'");
+        $('h1').should.have.text('Raul');
+      }, "expected [jQuery 'h1'] to have text 'Raul'");
+      
+      err(function(){
+        $('h1').should.have.text(/^Raul/);
+      }, "expected [jQuery 'h1'] to have text matching /^Raul/");
+      
+      err(function(){
+        $('h1').should.not.have.text(/^To/);
+      }, "expected [jQuery 'h1'] text 'Tobi' to not match /^To/");
 
       done();
     });

@@ -21,7 +21,9 @@ app.get('/user/:id', function(req, res){
 });
 
 app.get('/one', function(req, res){
-  res.send('<a id="page-two" href="/two">Page Two</a>');
+  res.send(
+      '<a id="page-two" href="/two">Page Two</a>'
+    + '<a id="page-three" href="/three">Page Three</a>');
 });
 
 app.get('/two', function(req, res){
@@ -92,7 +94,13 @@ module.exports = {
         browser.click('page-three', function(){
           browser.should.have.property('path', '/three');
           browser.source.should.equal('<p>Wahoo! Page Three</p>');
-          done();
+          browser.back(function(){
+            browser.should.have.property('path', '/two');
+            browser.back(function(){
+              browser.should.have.property('path', '/one');
+              done();
+            });
+          });
         })
       });
     });

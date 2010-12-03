@@ -65,6 +65,8 @@ module.exports = {
   
   'test .get(path)': function(done){
     var browser = tobi.createBrowser(app);
+    browser.visit.should.equal(browser.get);
+    browser.open.should.equal(browser.get);
     browser.get('/', function(){
       browser.should.have.property('path', '/');
       browser.history.should.eql(['/']);

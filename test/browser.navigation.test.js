@@ -388,5 +388,65 @@ module.exports = {
         done();
       });
     });
+  },
+  
+  'test .select() single option by value': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.get('/form', function($){
+      $('select option[value=daily]').attr('selected', 'selected');
+       browser
+       .select('user[forum_digest]', 'daily')
+       .submit('user', function(res){
+        res.body.headers.should.have.property('content-type', 'application/x-www-form-urlencoded');
+        res.body.body.should.eql({
+          user: {
+              name: ''
+            , signature: ''
+            , forum_digest: 'daily'
+          }
+        });
+        done();
+      });
+    });
+  },
+  
+  'test .select() multiple options by value': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.get('/form', function($){
+      $('select option[value=daily]').attr('selected', 'selected');
+       browser
+       .select('user[forum_digest]', ['daily', 'weekly'])
+       .submit('user', function(res){
+        res.body.headers.should.have.property('content-type', 'application/x-www-form-urlencoded');
+        res.body.body.should.eql({
+          user: {
+              name: ''
+            , signature: ''
+            , forum_digest: ['daily', 'weekly']
+          }
+        });
+        done();
+      });
+    });
+  },
+  
+  'test .select() multiple options by text': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.get('/form', function($){
+      $('select option[value=daily]').attr('selected', 'selected');
+       browser
+       .select('user[forum_digest]', ['Once per day', 'Once per week'])
+       .submit('user', function(res){
+        res.body.headers.should.have.property('content-type', 'application/x-www-form-urlencoded');
+        res.body.body.should.eql({
+          user: {
+              name: ''
+            , signature: ''
+            , forum_digest: ['daily', 'weekly']
+          }
+        });
+        done();
+      });
+    });
   }
 };

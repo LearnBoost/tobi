@@ -369,5 +369,24 @@ module.exports = {
         done();
       });
     });
+  },
+  
+  'test select multiple options': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.get('/form', function($){
+      $('select option[value=daily]').attr('selected', 'selected');
+      $('select option[value=weekly]').attr('selected', 'selected');
+       browser.submit('user', function(res){
+        res.body.headers.should.have.property('content-type', 'application/x-www-form-urlencoded');
+        res.body.body.should.eql({
+          user: {
+              name: ''
+            , signature: ''
+            , forum_digest: ['daily', 'weekly']
+          }
+        });
+        done();
+      });
+    });
   }
 };

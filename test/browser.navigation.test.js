@@ -59,6 +59,11 @@ app.get('/form', function(req, res){
     + '<input type="checkbox" name="user[agreement]" id="user-agreement" value="yes" />'
     + '<input type="submit" value="Update" />'
     + '<fieldset>'
+    + '  <select name="user[forum_digest]">'
+    + '    <option value="none">None</option>'
+    + '    <option value="daily">Once per day</option>'
+    + '    <option value="weekly">Once per week</option>'
+    + '  </select>'
     + '  <textarea id="signature" name="user[signature]"></textarea>'
     + '</fieldset>'
     + '</form>');

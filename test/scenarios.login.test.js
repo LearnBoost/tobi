@@ -32,9 +32,13 @@ app.post('/login', function(req, res){
   var username = req.body.username
     , password = req.body.password;
   
-  // Fake authentication
+  // Fake authentication / validation
   if ('tj' == username && 'tobi' == password) {
     req.flash('info', 'Successfully authenticated');
+  } else if (!username) {
+    req.flash('info', 'Username required');
+  } else if (!password) {
+    req.flash('info', 'Password required');
   } else {
     req.flash('info', 'Authentication failed');
   }
@@ -59,7 +63,7 @@ module.exports = {
     });
   },
   
-  'tset /login with invalid credentials': function(done){
+  'test /login with invalid credentials': function(done){
     browser.get('/login', function(){
       browser.fill({
           username: 'tj'
@@ -68,6 +72,18 @@ module.exports = {
         res.statusCode.should.equal(200)
         $('ul.messages').should.have.one('li');
         $('ul.messages > li').should.have.text('Authentication failed');
+        done();
+      })
+    });
+  },
+  
+  'test /login with username omitted': function(done){
+    browser.get('/login', function(){
+      browser.type('password', 'not tobi');
+      browser.submit('form', function($, res){
+        res.statusCode.should.equal(200)
+        $('ul.messages').should.have.one('li');
+        $('ul.messages > li').should.have.text('Username required');
         done();
       })
     });

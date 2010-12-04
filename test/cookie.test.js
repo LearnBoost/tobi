@@ -5,7 +5,6 @@
 
 var tobi = require('tobi')
   , Cookie = tobi.Cookie
-  , Jar = tobi.CookieJar
   , should = require('should');
 
 var str = 'connect.sid=s543qactge.wKE61E01Bs%2BKhzmxrwrnug; path=/; httpOnly; expires=Sat, 04 Dec 2010 23:27:28 GMT';

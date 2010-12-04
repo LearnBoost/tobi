@@ -1,8 +1,11 @@
 
+TESTS = test/*.test.js
+
 test:
 	@./support/expresso/bin/expresso \
 		--serial \
 		-I support \
-		-I lib
+		-I lib \
+		$(TESTS)
 
 .PHONY: test

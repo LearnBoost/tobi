@@ -8,13 +8,13 @@ var tobi = require('tobi')
   , Jar = tobi.CookieJar
   , should = require('should');
 
-function expires(seconds) {
-  return new Date(Date.now() + (seconds * 1000)).toUTCString();
+function expires(ms) {
+  return new Date(Date.now() + ms).toUTCString();
 }
 
 module.exports = {
   'test .get() expiration': function(done){
-    var str = 'sid=1234; path=/; expires=' + expires(15);
+    var str = 'sid=1234; path=/; expires=' + expires(1000);
     var cookie = new Cookie(str);
     var jar = new Jar;
     jar.add(cookie);
@@ -26,7 +26,7 @@ module.exports = {
         var cookies = jar.get({ url: 'http://foo.com/foo' });
         cookies.should.have.length(0);
         done();
-      }, 25);
+      }, 1000);
     }, 5);
   }
 };

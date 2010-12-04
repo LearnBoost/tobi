@@ -50,10 +50,9 @@ module.exports = {
       browser.fill({
           username: 'tj'
         , password: 'tobi'
-      }).click('Login', function(res){
-        console.log('done');
+      }).click('Login', function($, res){
+        res.statusCode.should.equal(200);
         console.log(browser.source);
-        console.log(res.statusCode);
         done();
       })
     });

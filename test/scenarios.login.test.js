@@ -39,7 +39,7 @@ app.post('/login', function(req, res){
     req.flash('info', 'Authentication failed');
   }
 
-  res.redirect('back');
+  res.redirect('/login');
 });
 
 var browser = tobi.createBrowser(app);
@@ -50,8 +50,11 @@ module.exports = {
       browser.fill({
           username: 'tj'
         , password: 'tobi'
-      }).click('Login', function(){
+      }).click('Login', function(res){
         console.log('done');
+        console.log(browser.source);
+        console.log(res.statusCode);
+        done();
       })
     });
   }

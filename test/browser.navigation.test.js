@@ -59,6 +59,11 @@ app.get('/form', function(req, res){
     + '<input type="checkbox" name="user[agreement]" id="user-agreement" value="yes" />'
     + '<input type="submit" value="Update" />'
     + '<fieldset>'
+    + '  <select name="user[forum_digest]">'
+    + '    <option value="none">None</option>'
+    + '    <option value="daily">Once per day</option>'
+    + '    <option value="weekly">Once per week</option>'
+    + '  </select>'
     + '  <textarea id="signature" name="user[signature]"></textarea>'
     + '</fieldset>'
     + '</form>');
@@ -341,6 +346,103 @@ module.exports = {
           user: {
               name: 'tjholowaychuk'
             , signature: 'Wahoo'
+          }
+        });
+        done();
+      });
+    });
+  },
+  
+  'test select single option': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.get('/form', function($){
+      $('select option[value=daily]').attr('selected', 'selected');
+       browser.submit('user', function(res){
+        res.body.headers.should.have.property('content-type', 'application/x-www-form-urlencoded');
+        res.body.body.should.eql({
+          user: {
+              name: ''
+            , signature: ''
+            , forum_digest: 'daily'
+          }
+        });
+        done();
+      });
+    });
+  },
+  
+  'test select multiple options': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.get('/form', function($){
+      $('select option[value=daily]').attr('selected', 'selected');
+      $('select option[value=weekly]').attr('selected', 'selected');
+       browser.submit('user', function(res){
+        res.body.headers.should.have.property('content-type', 'application/x-www-form-urlencoded');
+        res.body.body.should.eql({
+          user: {
+              name: ''
+            , signature: ''
+            , forum_digest: ['daily', 'weekly']
+          }
+        });
+        done();
+      });
+    });
+  },
+  
+  'test .select() single option by value': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.get('/form', function($){
+      $('select option[value=daily]').attr('selected', 'selected');
+       browser
+       .select('user[forum_digest]', 'daily')
+       .submit('user', function(res){
+        res.body.headers.should.have.property('content-type', 'application/x-www-form-urlencoded');
+        res.body.body.should.eql({
+          user: {
+              name: ''
+            , signature: ''
+            , forum_digest: 'daily'
+          }
+        });
+        done();
+      });
+    });
+  },
+  
+  'test .select() multiple options by value': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.get('/form', function($){
+      $('select option[value=daily]').attr('selected', 'selected');
+       browser
+       .select('user[forum_digest]', ['daily', 'weekly'])
+       .submit('user', function(res){
+        res.body.headers.should.have.property('content-type', 'application/x-www-form-urlencoded');
+        res.body.body.should.eql({
+          user: {
+              name: ''
+            , signature: ''
+            , forum_digest: ['daily', 'weekly']
+          }
+        });
+        done();
+      });
+    });
+  },
+  
+  'test .select() multiple options by text': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.get('/form', function($){
+      $('select option[value=daily]').attr('selected', 'selected');
+       browser
+       .select('user[forum_digest]', ['Once per day', 'Once per week'])
+       .submit('user', function(res){
+        res.body.headers.should.have.property('content-type', 'application/x-www-form-urlencoded');
+        res.body.body.should.eql({
+          user: {
+              name: ''
+            , signature: ''
+            , forum_digest: ['daily', 'weekly']
           }
         });
         done();

@@ -20,6 +20,11 @@ module.exports = {
     cookie.should.have.property('path', '/');
   },
   
+  'test .path default': function(){
+    var cookie = new Cookie('foo=bar', { url: 'http://foo.com/bar' });
+    cookie.should.have.property('path', '/bar');
+  },
+  
   'test .httpOnly': function(){
     cookie.should.have.property('httpOnly', true);
   },

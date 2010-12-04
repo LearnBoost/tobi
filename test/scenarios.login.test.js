@@ -57,5 +57,19 @@ module.exports = {
         done();
       })
     });
+  },
+  
+  'tset /login with invalid credentials': function(done){
+    browser.get('/login', function(){
+      browser.fill({
+          username: 'tj'
+        , password: 'not tobi'
+      }).submit('form', function($, res){
+        res.statusCode.should.equal(200)
+        $('ul.messages').should.have.one('li');
+        $('ul.messages > li').should.have.text('Authentication failed');
+        done();
+      })
+    });
   }
 };

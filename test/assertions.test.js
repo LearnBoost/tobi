@@ -69,7 +69,7 @@ exports['test .text()'] = function(done){
 
     err(function(){
       $('h1').should.have.text('Raul');
-    }, "expected [jQuery 'h1'] to have text 'Raul'");
+    }, "expected [jQuery 'h1'] to have text 'Raul', but has 'Tobi'");
     
     err(function(){
       $('h1').should.have.text(/^Raul/);

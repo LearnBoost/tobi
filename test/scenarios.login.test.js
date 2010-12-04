@@ -20,7 +20,7 @@ app.use(express.session({ store: new MemoryStore({ reapInterval: -1 }) }));
 app.get('/login', function(req, res){
   var msgs = req.flash('info');
   res.send(
-      msgs.length ? '<ul class="messages"><li>' + msgs[0] + '</li></ul>' : ''
+      (msgs.length ? '<ul class="messages"><li>' + msgs[0] + '</li></ul>' : '')
     + '<form id="user" action="/login" method="post">'
     + '  <input type="text" name="username" />'
     + '  <input type="password" name="password" />'
@@ -51,8 +51,9 @@ module.exports = {
           username: 'tj'
         , password: 'tobi'
       }).click('Login', function($, res){
-        res.statusCode.should.equal(200);
-        console.log(browser.source);
+        res.statusCode.should.equal(200)
+        $('ul.messages').should.have.one('li');
+        $('ul.messages > li').should.have.text('Successfully authenticated');
         done();
       })
     });

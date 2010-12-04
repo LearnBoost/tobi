@@ -30,5 +30,11 @@ module.exports = {
   
   'test .value': function(){
     cookie.should.have.property('value', 's543qactge.wKE61E01Bs%2BKhzmxrwrnug');
+  },
+  
+  'test .expires': function(){
+    cookie.should.have.property('expires');
+    cookie.expires.should.be.an.instanceof(Date);
+    cookie.expires.getDay().should.equal(6);
   }
 };

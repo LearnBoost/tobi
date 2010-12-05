@@ -6,6 +6,10 @@ test:
 		--serial \
 		-I support \
 		-I lib \
+		$(TEST_FLAGS) \
 		$(TESTS)
 
-.PHONY: test
+test-cov:
+	@$(MAKE) TEST_FLAGS=--cov
+
+.PHONY: test test-cov

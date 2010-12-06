@@ -13,7 +13,12 @@
  *
  * Date: Sat Feb 13 22:33:48 2010 -0500
  */
-(function( window, undefined ) {
+
+exports.create = function( window, undefined ) {
+
+window.XMLHttpRequest = function(){};
+var navigator = { userAgent: 'node' };
+var location = window.location;
 
 // Define a local copy of jQuery
 var jQuery = function( selector, context ) {
@@ -6237,4 +6242,4 @@ jQuery.each([ "Height", "Width" ], function( i, name ) {
 // Expose jQuery to the global object
 window.jQuery = window.$ = jQuery;
 
-})(window);
+};

@@ -6,6 +6,7 @@ test:
 		--serial \
 		-I support \
 		-I support/jsdom/lib \
+		-I support/htmlparser/lib \
 		-I lib \
 		$(TEST_FLAGS) \
 		$(TESTS)

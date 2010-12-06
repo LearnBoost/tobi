@@ -84,5 +84,9 @@ module.exports = {
         done();
       })
     });
+  },
+  
+  after: function(){
+    app.close();
   }
 };

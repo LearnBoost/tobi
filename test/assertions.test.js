@@ -239,3 +239,7 @@ exports['test .id()'] = function(done){
     done();
   });
 };
+
+exports.after = function(){
+  app.close();
+};

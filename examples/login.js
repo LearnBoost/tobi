@@ -36,6 +36,7 @@ browser.get('/login', function(){
       res.statusCode.should.equal(200);
       $('ul.messages').should.have.one('li', 'Already authenticated');
       console.log('... already logged in message ok');
+      app.close();
     });
   })
 });

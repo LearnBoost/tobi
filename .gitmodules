@@ -13,3 +13,6 @@
 [submodule "support/htmlparser"]
 	path = support/htmlparser
 	url = git://github.com/tautologistics/node-htmlparser.git
+[submodule "support/connect"]
+	path = support/connect
+	url = git://github.com/senchalabs/connect.git

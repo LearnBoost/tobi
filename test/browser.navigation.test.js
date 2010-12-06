@@ -296,7 +296,7 @@ module.exports = {
     });
   },
   
-  'test .fill(obj)': function(done){
+  'test .fill(obj) names': function(done){
     var browser = tobi.createBrowser(app);
     browser.get('/form', function($){
       browser.fill({
@@ -306,6 +306,33 @@ module.exports = {
         , 'user[display_signature]': 'No'
         , 'user[forum_digest]': 'daily'
         , 'signature': 'TJ Holowaychuk'
+      })
+      .click('Update', function(res){
+        res.body.headers.should.have.property('content-type', 'application/x-www-form-urlencoded');
+        res.body.body.should.eql({
+          user: {
+              name: 'tjholowaychuk'
+            , agreement: 'yes'
+            , signature: 'TJ Holowaychuk'
+            , display_signature: 'No'
+            , forum_digest: 'daily'
+          }
+        });
+        done();
+      });
+    });
+  },
+  
+  'test .fill(obj) css': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.get('/form', function($){
+      browser.fill({
+          'user[name]': 'tjholowaychuk'
+        , 'user[email]': 'tj@vision-media.ca'
+        , 'user[agreement]': true
+        , 'user[display_signature]': 'No'
+        , 'user[forum_digest]': 'daily'
+        , '#signature': 'TJ Holowaychuk'
       })
       .click('Update', function(res){
         res.body.headers.should.have.property('content-type', 'application/x-www-form-urlencoded');

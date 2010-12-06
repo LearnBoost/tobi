@@ -21,6 +21,7 @@ browser.get('/login', function($){
   $('form > input[name=username]').should.have.attr('type', 'text');
   $('form > input[name=password]').should.have.attr('type', 'password');
   $('form :submit').should.have.value('Login');
+  console.log('... form ok');
 });
 
 browser.get('/login', function(){
@@ -30,6 +31,6 @@ browser.get('/login', function(){
   }).click('Login', function($, res){
     res.statusCode.should.equal(200)
     $('ul.messages').should.have.one('li', 'Successfully authenticated');
-    console.log('Testing complete');
+    console.log('... login ok');
   })
 });

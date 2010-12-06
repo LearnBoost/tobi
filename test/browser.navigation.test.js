@@ -303,7 +303,7 @@ module.exports = {
           'user[name]': 'tjholowaychuk'
         , 'user[email]': 'tj@vision-media.ca'
         , 'user[agreement]': true
-        , 'user[display_signature]': true
+        , 'user[display_signature]': 'No'
         , 'user[forum_digest]': 'daily'
         , 'signature': 'TJ Holowaychuk'
       })
@@ -314,7 +314,7 @@ module.exports = {
               name: 'tjholowaychuk'
             , agreement: 'yes'
             , signature: 'TJ Holowaychuk'
-            , display_signature: 'Yes'
+            , display_signature: 'No'
             , forum_digest: 'daily'
           }
         });

@@ -304,6 +304,7 @@ module.exports = {
         , 'user[email]': 'tj@vision-media.ca'
         , 'user[agreement]': true
         , 'user[display_signature]': true
+        , 'user[forum_digest]': 'daily'
         , 'signature': 'TJ Holowaychuk'
       })
       .click('Update', function(res){

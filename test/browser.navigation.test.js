@@ -156,31 +156,44 @@ module.exports = {
     browser.locate('*', 'li').should.have.length(2);
     browser.locate('*', 'li:last-child').should.have.length(1);
     browser.locate('*', 'li:contains(One)').should.have.length(1);
+    //browser.locate('ul', 'li:contains(One)').should.have.length(1);
   },
   
   'test .locate(name)': function(){
     var browser = tobi.createBrowser('<form><p><input name="username" /></p><textarea name="signature"></textarea></form>');
     browser.locate('*', 'username').should.have.length(1);
     browser.locate('*', 'signature').should.have.length(1);
+    //browser.locate('form > p', 'username').should.have.length(1);
+
+    var err;
+    try {
+      browser.locate('form > p', 'signature').should.have.length(1);
+    } catch (e) {
+      err = e;
+    }
+    err.should.have.property('message', 'failed to locate "signature" in context of selector "form > p"');
   },
   
   'test .locate(value)': function(){
     var browser = tobi.createBrowser(
-        '<input type="submit", value="Save" />'
-      + '<input type="submit", value="Delete" />');
+        '<form><p><input type="submit", value="Save" />'
+      + '<input type="submit", value="Delete" /></p></form>');
     browser.locate('*', 'Save').should.have.length(1);
     browser.locate('*', 'Delete').should.have.length(1);
+    //browser.locate('form > p', 'Delete').should.have.length(1);
   },
   
   'test .locate(text)': function(){
     var browser = tobi.createBrowser(
-        '<p>Foo</p>'
+        '<div><p>Foo</p>'
       + '<p>Foo</p>'
       + '<p>Bar</p>'
-      + '<p>Baz</p>');
+      + '<p>Baz</p></div>');
     browser.locate('*', 'Foo').should.have.length(2);
     browser.locate('*', 'Bar').should.have.length(1);
     browser.locate('*', 'Baz').should.have.length(1);
+    // browser.locate('div', 'Foo').should.have.length(2);
+    // browser.locate('div', 'Baz').should.have.length(1);
   },
   
   'test .click(text, fn)': function(done){

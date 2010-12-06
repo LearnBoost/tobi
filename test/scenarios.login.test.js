@@ -70,6 +70,7 @@ module.exports = {
         , password: 'not tobi'
       }).submit('form', function($, res){
         res.should.have.status(200);
+        res.should.have.header('X-Powered-By', 'Express');
         $('ul.messages').should.have.one('li', 'Authentication failed');
         done();
       })

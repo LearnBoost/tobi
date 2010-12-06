@@ -152,6 +152,7 @@ module.exports = {
   
   'test .locate(css)': function(){
     var browser = tobi.createBrowser('<ul><li>One</li><li>Two</li></ul>');
+    browser.locate('*', 'ul > li').should.have.length(2);
     browser.locate('*', 'li').should.have.length(2);
     browser.locate('*', 'li:last-child').should.have.length(1);
     browser.locate('*', 'li:contains(One)').should.have.length(1);

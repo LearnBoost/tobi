@@ -11,11 +11,12 @@ var tobi = require('tobi')
 
 // Test app
 
-var app = express.createServer();
+var app = express.createServer()
+  , store = new MemoryStore({ reapInterval: -1 });
 
 app.use(express.bodyDecoder());
 app.use(express.cookieDecoder());
-app.use(express.session({ store: new MemoryStore({ reapInterval: -1 }) }));
+app.use(express.session({ store: store }));
 
 app.get('/login', function(req, res){
   var msgs = req.flash('info');

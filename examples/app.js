@@ -23,7 +23,10 @@ var app = module.exports = express.createServer(
 app.get('/login', function(req, res){
   var msgs = req.flash('info');
   res.send(
-      (msgs.length ? '<ul class="messages"><li>' + msgs[0] + '</li></ul>' : '')
+      (msgs.length ? '<ul class="messages"><li>' + msgs[0] + '</li></ul>'
+        : req.session.user
+          ? '<ul class="messages"><li>Already authenticated</li></ul>'
+          : '')
     + '<form id="user" action="/login" method="post">'
     + '  <input type="text" name="username" />'
     + '  <input type="password" name="password" />'
@@ -42,6 +45,7 @@ app.post('/login', function(req, res){
   // Fake authentication / validation
   if ('tj' == username && 'tobi' == password) {
     req.flash('info', 'Successfully authenticated');
+    req.session.user = { name: 'tj' };
   } else if (!username) {
     req.flash('info', 'Username required');
   } else if (!password) {

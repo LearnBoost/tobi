@@ -31,6 +31,11 @@ browser.get('/login', function(){
   }).click('Login', function($, res){
     res.statusCode.should.equal(200)
     $('ul.messages').should.have.one('li', 'Successfully authenticated');
-    console.log('... login ok');
+    console.log('... authentication ok');
+    browser.get('/login', function($, res){
+      res.statusCode.should.equal(200);
+      $('ul.messages').should.have.one('li', 'Already authenticated');
+      console.log('... already logged in message ok');
+    });
   })
 });

@@ -54,8 +54,8 @@ app.get('/three', function(req, res){
 
 app.get('/form', function(req, res){
   res.send('<form id="user" action="/form" method="post">'
-    + '<input type="text" name="user[name]" />'
-    + '<input type="text" name="user[email]" disabled="disabled" />'
+    + '<input id="user-name" type="text" name="user[name]" />'
+    + '<input id="user-email" type="text" name="user[email]" disabled="disabled" />'
     + '<input type="checkbox" name="user[agreement]" id="user-agreement" value="yes" />'
     + '<input type="submit" value="Update" />'
     + '<fieldset>'
@@ -327,11 +327,11 @@ module.exports = {
     var browser = tobi.createBrowser(app);
     browser.get('/form', function($){
       browser.fill({
-          'user[name]': 'tjholowaychuk'
-        , 'user[email]': 'tj@vision-media.ca'
-        , 'user[agreement]': true
+          'form > #user-name': 'tjholowaychuk'
+        , 'form > #user-email': 'tj@vision-media.ca'
+        , ':checkbox': true
         , 'user[display_signature]': 'No'
-        , 'user[forum_digest]': 'daily'
+        , '[name=user[forum_digest]]': 'daily'
         , '#signature': 'TJ Holowaychuk'
       })
       .click('Update', function(res){

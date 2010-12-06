@@ -303,6 +303,7 @@ module.exports = {
           'user[name]': 'tjholowaychuk'
         , 'user[email]': 'tj@vision-media.ca'
         , 'user[agreement]': true
+        , 'user[display_signature]': true
         , 'signature': 'TJ Holowaychuk'
       })
       .click('Update', function(res){
@@ -312,6 +313,7 @@ module.exports = {
               name: 'tjholowaychuk'
             , agreement: 'yes'
             , signature: 'TJ Holowaychuk'
+            , display_signature: 'Yes'
           }
         });
         done();

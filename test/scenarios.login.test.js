@@ -56,7 +56,7 @@ module.exports = {
           username: 'tj'
         , password: 'tobi'
       }).click('Login', function($, res){
-        res.statusCode.should.equal(200)
+        res.should.have.status(200);
         $('ul.messages').should.have.one('li', 'Successfully authenticated');
         done();
       })
@@ -69,7 +69,7 @@ module.exports = {
           username: 'tj'
         , password: 'not tobi'
       }).submit('form', function($, res){
-        res.statusCode.should.equal(200)
+        res.should.have.status(200);
         $('ul.messages').should.have.one('li', 'Authentication failed');
         done();
       })
@@ -80,7 +80,7 @@ module.exports = {
     browser.get('/login', function(){
       browser.type('password', 'not tobi');
       browser.submit('form', function($, res){
-        res.statusCode.should.equal(200)
+        res.should.have.status(200);
         $('ul.messages').should.have.one('li', 'Username required');
         done();
       })

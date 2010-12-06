@@ -150,6 +150,38 @@ module.exports = {
     });
   },
   
+  'test .locate(css)': function(){
+    var browser = tobi.createBrowser('<ul><li>One</li><li>Two</li></ul>');
+    browser.locate('*', 'li').should.have.length(2);
+    browser.locate('*', 'li:last-child').should.have.length(1);
+    browser.locate('*', 'li:contains(One)').should.have.length(1);
+  },
+  
+  'test .locate(name)': function(){
+    var browser = tobi.createBrowser('<form><p><input name="username" /></p><textarea name="signature"></textarea></form>');
+    browser.locate('*', 'username').should.have.length(1);
+    browser.locate('*', 'signature').should.have.length(1);
+  },
+  
+  'test .locate(value)': function(){
+    var browser = tobi.createBrowser(
+        '<input type="submit", value="Save" />'
+      + '<input type="submit", value="Delete" />');
+    browser.locate('*', 'Save').should.have.length(1);
+    browser.locate('*', 'Delete').should.have.length(1);
+  },
+  
+  'test .locate(text)': function(){
+    var browser = tobi.createBrowser(
+        '<p>Foo</p>'
+      + '<p>Foo</p>'
+      + '<p>Bar</p>'
+      + '<p>Baz</p>');
+    browser.locate('*', 'Foo').should.have.length(2);
+    browser.locate('*', 'Bar').should.have.length(1);
+    browser.locate('*', 'Baz').should.have.length(1);
+  },
+  
   'test .click(text, fn)': function(done){
     var browser = tobi.createBrowser(app);
     browser.get('/one', function(){

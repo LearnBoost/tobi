@@ -65,6 +65,8 @@ app.get('/form', function(req, res){
     + '    <option value="weekly">Once per week</option>'
     + '  </select>'
     + '  <textarea id="signature" name="user[signature]"></textarea>'
+    + '  <input type="radio" name="user[display_signature]" value="Yes" />'
+    + '  <input type="radio" name="user[display_signature]" value="No" />'
     + '</fieldset>'
     + '</form>');
 });

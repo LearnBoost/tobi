@@ -315,6 +315,7 @@ module.exports = {
             , agreement: 'yes'
             , signature: 'TJ Holowaychuk'
             , display_signature: 'Yes'
+            , forum_digest: 'daily'
           }
         });
         done();

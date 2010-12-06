@@ -334,7 +334,7 @@ module.exports = {
         , '[name=user[forum_digest]]': 'daily'
         , '#signature': 'TJ Holowaychuk'
       })
-      .click('Update', function(res){
+      .click(':submit', function(res){
         res.body.headers.should.have.property('content-type', 'application/x-www-form-urlencoded');
         res.body.body.should.eql({
           user: {

@@ -261,6 +261,16 @@ module.exports = {
       });
     });
   },
+
+  'test .uncheck(name)': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.get('/form', function($){
+      $('[name=user[subscribe]]').should.be.checked;
+      browser.uncheck('user[subscribe]');
+      $('[name=user[subscribe]]').should.not.be.checked;
+      done();
+    });
+  },
   
   'test .check(name)': function(done){
     var browser = tobi.createBrowser(app);
@@ -374,6 +384,7 @@ module.exports = {
           'user[name]': 'tjholowaychuk'
         , 'user[email]': 'tj@vision-media.ca'
         , 'user[agreement]': true
+        , 'user[subscribe]': false
         , 'user[display_signature]': 'No'
         , 'user[forum_digest]': 'daily'
         , 'signature': 'TJ Holowaychuk'
@@ -384,7 +395,6 @@ module.exports = {
           user: {
               name: 'tjholowaychuk'
             , agreement: 'yes'
-            , subscribe: 'yes'
             , signature: 'TJ Holowaychuk'
             , display_signature: 'No'
             , forum_digest: 'daily'

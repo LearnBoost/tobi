@@ -32,25 +32,23 @@ app.post('/search/posts', function(req, res){
   res.send({ posts: true, headers: req.headers, body: req.body });
 });
 
-var browser = tobi.createBrowser(app);
-exports['test'] = function(){
-  
-}
-// module.exports = {
-//   'test global context': function(done){
-//     browser.get('/search', function($){
-//       $('form').should.have.length(2);
-//       browser
-//       .type('query', 'foo bar')
-//       .submit(':first-child', function(res){
-//         res.body.should.have.property('users', true);
-//         res.body.body.should.eql({ query: 'foo bar' });
-//         done();
-//       });
-//     });
-//   },
-// 
-//   after: function(){
-//     app.close();
-//   }
-// };
+
+module.exports = {
+  'test global context': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.get('/search', function($){
+      $('form').should.have.length(2);
+      browser
+      .type('query', 'foo bar')
+      .submit(function(res){
+        res.body.should.have.property('users', true);
+        res.body.body.should.eql({ query: 'foo bar' });
+        done();
+      });
+    });
+  },
+
+  after: function(){
+    app.close();
+  }
+};

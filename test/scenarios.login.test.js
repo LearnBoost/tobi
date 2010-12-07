@@ -52,7 +52,7 @@ var browser = tobi.createBrowser(app);
 module.exports = {
   'test /login with valid credentials': function(done){
     browser.get('/login', function(){
-      browser.fill({
+      browser.fill('form', {
           username: 'tj'
         , password: 'tobi'
       }).click('Login', function($, res){
@@ -65,7 +65,7 @@ module.exports = {
   
   'test /login with invalid credentials': function(done){
     browser.get('/login', function(){
-      browser.fill({
+      browser.fill('form', {
           username: 'tj'
         , password: 'not tobi'
       }).submit('form', function($, res){

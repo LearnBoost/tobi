@@ -356,7 +356,7 @@ module.exports = {
   'test .fill(obj) names': function(done){
     var browser = tobi.createBrowser(app);
     browser.get('/form', function($){
-      browser.fill({
+      browser.fill('user', {
           'user[name]': 'tjholowaychuk'
         , 'user[email]': 'tj@vision-media.ca'
         , 'user[agreement]': true
@@ -383,7 +383,7 @@ module.exports = {
   'test .fill(obj) css': function(done){
     var browser = tobi.createBrowser(app);
     browser.get('/form', function($){
-      browser.fill({
+      browser.fill('user', {
           'form > #user-name': 'tjholowaychuk'
         , 'form > #user-email': 'tj@vision-media.ca'
         , ':checkbox': true
@@ -447,7 +447,7 @@ module.exports = {
     var browser = tobi.createBrowser(app);
     browser.get('/search', function($){
       browser
-        .fill({ query: 'ferret hats' })
+        .fill('form', { query: 'ferret hats' })
         .click('Search', function(res){
           res.body.should.eql({ query: 'ferret hats' });
           done();

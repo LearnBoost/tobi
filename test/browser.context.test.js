@@ -36,7 +36,6 @@ app.post('/search/posts', function(req, res){
   res.send({ posts: true, headers: req.headers, body: req.body });
 });
 
-
 module.exports = {
   'test global context': function(done){
     var browser = tobi.createBrowser(app);

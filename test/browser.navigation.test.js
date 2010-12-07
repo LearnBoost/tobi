@@ -55,7 +55,6 @@ app.get('/three', function(req, res){
 app.get('/search', function(req, res){
   res.send('<form action="/search/results">'
     + '<input type="text" name="query" />'
-    + '<input type="submit" value="Search" />'
     + '</form>');
 });
 
@@ -476,7 +475,7 @@ module.exports = {
     browser.get('/search', function($){
       browser
         .fill({ query: 'ferret hats' })
-        .click('Search', function(res){
+        .submit(function(res){
           res.body.should.eql({ query: 'ferret hats' });
           done();
         });

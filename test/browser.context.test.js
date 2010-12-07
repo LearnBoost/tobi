@@ -40,14 +40,13 @@ module.exports = {
       $('form').should.have.length(2);
       browser
       .type('query', 'foo bar')
-      .submit('user-search', function(res){
+      .submit(function(res){
         res.body.users.should.be.true;
         res.body.body.should.eql({ query: 'foo bar' });
         done();
       });
     });
   },
-  
   after: function(){
     app.close();
   }

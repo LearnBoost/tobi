@@ -21,22 +21,19 @@ browser.get('/login', function($){
   $('form > input[name=username]').should.have.attr('type', 'text');
   $('form > input[name=password]').should.have.attr('type', 'password');
   $('form :submit').should.have.value('Login');
-  console.log('... form ok');
 });
 
-browser.get('/login', function(){
-  browser.fill('form', {
-      username: 'tj'
-    , password: 'tobi'
-  }).click('Login', function($, res){
-    res.statusCode.should.equal(200)
-    $('ul.messages').should.have.one('li', 'Successfully authenticated');
-    console.log('... authentication ok');
-    browser.get('/login', function($, res){
-      res.statusCode.should.equal(200);
-      $('ul.messages').should.have.one('li', 'Already authenticated');
-      console.log('... already logged in message ok');
-      app.close();
+browser.get('/login', function($){
+  $('form')
+    .fill({ username: 'tj', password: 'tobi' })
+    .submit(function($, res){
+      res.should.have.status(200);
+      $('ul.messages').should.have.one('li', 'Successfully authenticated');
+      browser.get('/login', function($, res){
+        res.should.have.status(200);
+        $('ul.messages').should.have.one('li', 'Already authenticated');
+        console.log('successful');
+        app.close();
+      });
     });
-  })
 });

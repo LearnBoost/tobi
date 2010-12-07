@@ -79,7 +79,7 @@ module.exports = {
   'test /login with username omitted': function(done){
     browser.get('/login', function(){
       browser
-      .type('password', 'not tobi');
+      .type('password', 'not tobi')
       .submit('form', function($, res){
         res.should.have.status(200);
         $('ul.messages').should.have.one('li', 'Username required');

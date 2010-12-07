@@ -18,11 +18,9 @@ app.get('/search', function(req, res){
   res.send(
       '<div><form id="user-search" method="post" action="/search/users">'
     + '  <input type="text" name="query" />'
-    + '  <input type="submit" value="Search" />'
     + '</form></div>'
     + '<div><form id="post-search" method="post" action="/search/posts">'
     + '  <input type="text" name="query" />'
-    + '  <input type="submit" value="Search" />'
     + '</form></div>');
 });
 

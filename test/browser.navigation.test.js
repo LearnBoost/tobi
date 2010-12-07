@@ -156,14 +156,14 @@ module.exports = {
     browser.locate('*', 'li').should.have.length(2);
     browser.locate('*', 'li:last-child').should.have.length(1);
     browser.locate('*', 'li:contains(One)').should.have.length(1);
-    //browser.locate('ul', 'li:contains(One)').should.have.length(1);
+    browser.locate('ul', ':contains(One)').should.have.length(1);
   },
   
   'test .locate(name)': function(){
     var browser = tobi.createBrowser('<form><p><input name="username" /></p><textarea name="signature"></textarea></form>');
     browser.locate('*', 'username').should.have.length(1);
     browser.locate('*', 'signature').should.have.length(1);
-    //browser.locate('form > p', 'username').should.have.length(1);
+    browser.locate('form > p > input', 'username').should.have.length(1);
 
     var err;
     try {
@@ -180,7 +180,7 @@ module.exports = {
       + '<input type="submit", value="Delete" /></p></form>');
     browser.locate('*', 'Save').should.have.length(1);
     browser.locate('*', 'Delete').should.have.length(1);
-    //browser.locate('form > p', 'Delete').should.have.length(1);
+    browser.locate('form input', 'Delete').should.have.length(1);
   },
   
   'test .locate(text)': function(){
@@ -192,8 +192,8 @@ module.exports = {
     browser.locate('*', 'Foo').should.have.length(2);
     browser.locate('*', 'Bar').should.have.length(1);
     browser.locate('*', 'Baz').should.have.length(1);
-    // browser.locate('div', 'Foo').should.have.length(2);
-    // browser.locate('div', 'Baz').should.have.length(1);
+    browser.locate('div p', 'Foo').should.have.length(2);
+    browser.locate('div p', 'Baz').should.have.length(1);
   },
   
   'test .click(text, fn)': function(done){

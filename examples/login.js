@@ -15,6 +15,7 @@ var app = require('./app')
 browser.get('/login', function($){
   $('form')
     .should.have.action('/login')
+    .and.have.id('user')
     .and.have.method('post')
     .and.have.many('input');
   

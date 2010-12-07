@@ -55,6 +55,7 @@ app.get('/three', function(req, res){
 app.get('/search', function(req, res){
   res.send('<form action="/search/results">'
     + '<input type="text" name="query" />'
+    + '<input type="submit" value="Search" />'
     + '</form>');
 });
 
@@ -406,7 +407,7 @@ module.exports = {
     });
   },
   
-  'test jQuery#submit()': function(done){
+  'test jQuery#submit() POST': function(done){
     var browser = tobi.createBrowser(app);
     browser.get('/form', function($){
       $('[name=user[name]]').val('tjholowaychuk');
@@ -424,7 +425,7 @@ module.exports = {
     });
   },
   
-  'test .submit()': function(done){
+  'test .submit() POST': function(done){
     var browser = tobi.createBrowser(app);
     browser.get('/form', function($){
       $('[name=user[name]]').val('tjholowaychuk');
@@ -439,6 +440,17 @@ module.exports = {
         });
         done();
       });
+    });
+  },
+  
+  'test .submit() GET': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.get('/search', function($){
+      browser
+        .fill({ query: 'ferret hats' })
+        .click('Search', function(res){
+          console.log(res);
+        });
     });
   },
   

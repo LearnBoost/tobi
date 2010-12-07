@@ -25,7 +25,7 @@ browser.get('/login', function($){
 });
 
 browser.get('/login', function(){
-  browser.fill({
+  browser.fill('form', {
       username: 'tj'
     , password: 'tobi'
   }).click('Login', function($, res){

@@ -40,11 +40,14 @@ module.exports = {
     $('select > option[value=bc]').should.be.selected;
     $('select > option[value=ab]').should.not.be.selected;
     
-    $('form').fill({
-      province: ['ab', 'bc']
-    });
+    $('form').fill({ province: ['ab', 'bc'] });
     
     $('select > option[value=bc]').should.be.selected;
+    $('select > option[value=ab]').should.be.selected;
+    
+    $('form').fill({ province: 'ab' });
+    
+    $('select > option[value=bc]').should.not.be.selected;
     $('select > option[value=ab]').should.be.selected;
   }
 };

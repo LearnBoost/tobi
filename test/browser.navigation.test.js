@@ -449,7 +449,8 @@ module.exports = {
       browser
         .fill({ query: 'ferret hats' })
         .click('Search', function(res){
-          console.log(res);
+          res.body.should.eql({ query: 'ferret hats' });
+          done();
         });
     });
   },

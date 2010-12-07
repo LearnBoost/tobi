@@ -380,7 +380,7 @@ module.exports = {
   'test .fill(obj) names': function(done){
     var browser = tobi.createBrowser(app);
     browser.get('/form', function($){
-      browser.fill('user', {
+      browser.fill({
           'user[name]': 'tjholowaychuk'
         , 'user[email]': 'tj@vision-media.ca'
         , 'user[agreement]': true
@@ -475,7 +475,7 @@ module.exports = {
     var browser = tobi.createBrowser(app);
     browser.get('/search', function($){
       browser
-        .fill('form', { query: 'ferret hats' })
+        .fill({ query: 'ferret hats' })
         .click('Search', function(res){
           res.body.should.eql({ query: 'ferret hats' });
           done();

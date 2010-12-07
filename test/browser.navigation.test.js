@@ -408,7 +408,7 @@ module.exports = {
   'test .fill(obj) css': function(done){
     var browser = tobi.createBrowser(app);
     browser.get('/form', function($){
-      browser.fill('user', {
+      browser.fill({
           'form > #user-name': 'tjholowaychuk'
         , 'form > #user-email': 'tj@vision-media.ca'
         , ':checkbox': true

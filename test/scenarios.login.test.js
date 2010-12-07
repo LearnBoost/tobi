@@ -51,29 +51,28 @@ var browser = tobi.createBrowser(app);
 
 module.exports = {
   'test /login with valid credentials': function(done){
-    browser.get('/login', function(){
-      browser.fill('form', {
-          username: 'tj'
-        , password: 'tobi'
-      }).click('Login', function($, res){
-        res.should.have.status(200);
-        $('ul.messages').should.have.one('li', 'Successfully authenticated');
-        done();
-      })
+    browser.get('/login', function($){
+      $('form')
+        .fill({ username: 'tj', password: 'tobi' })
+        .submit(function($, res){
+          res.should.have.status(200);
+          $('ul.messages').should.have.one('li', 'Successfully authenticated');
+          done();
+        });
     });
   },
   
   'test /login with invalid credentials': function(done){
-    browser.get('/login', function(){
-      browser.fill('form', {
-          username: 'tj'
-        , password: 'not tobi'
-      }).submit('form', function($, res){
-        res.should.have.status(200);
-        res.should.have.header('X-Powered-By', 'Express');
-        $('ul.messages').should.have.one('li', 'Authentication failed');
-        done();
-      })
+    browser.get('/login', function($){
+      $('form')
+        .fill({ username: 'tj', password: 'foobar' })
+        .find(':submit')
+        .click(function($, res){
+          res.should.have.status(200);
+          res.should.have.header('X-Powered-By', 'Express');
+          $('ul.messages').should.have.one('li', 'Authentication failed');
+          done();
+        });
     });
   },
   

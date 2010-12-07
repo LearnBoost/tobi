@@ -68,6 +68,7 @@ app.get('/form', function(req, res){
     + '<input id="user-name" type="text" name="user[name]" />'
     + '<input id="user-email" type="text" name="user[email]" disabled="disabled" />'
     + '<input type="checkbox" name="user[agreement]" id="user-agreement" value="yes" />'
+    + '<input type="checkbox" name="user[subscribe]" checked="checked" value="yes" />'
     + '<input type="submit" value="Update" />'
     + '<fieldset>'
     + '  <select name="user[forum_digest]">'
@@ -313,7 +314,13 @@ module.exports = {
       $('[name=user[email]]').val('tj@vision-media.ca');
       $('[type=submit]').click(function(res){
         res.body.headers.should.have.property('content-type', 'application/x-www-form-urlencoded');
-        res.body.body.should.eql({ user: { name: 'tjholowaychuk', signature: '' }});
+        res.body.body.should.eql({
+          user: {
+              name: 'tjholowaychuk'
+            , subscribe: 'yes'
+            , signature: ''
+          }
+        });
         done();
       });
     });
@@ -326,7 +333,13 @@ module.exports = {
       browser.type('user[email]', 'tj@vision-media.ca');
       browser.click('Update', function(res){
         res.body.headers.should.have.property('content-type', 'application/x-www-form-urlencoded');
-        res.body.body.should.eql({ user: { name: 'tjholowaychuk', signature: '' }});
+        res.body.body.should.eql({
+          user: {
+              name: 'tjholowaychuk'
+            , subscribe: 'yes'
+            , signature: ''
+          }
+        });
         done();
       });
     });
@@ -345,6 +358,7 @@ module.exports = {
           user: {
               name: 'tjholowaychuk'
             , agreement: 'yes'
+            , subscribe: 'yes'
             , signature: ''
           }
         });
@@ -370,6 +384,7 @@ module.exports = {
           user: {
               name: 'tjholowaychuk'
             , agreement: 'yes'
+            , subscribe: 'yes'
             , signature: 'TJ Holowaychuk'
             , display_signature: 'No'
             , forum_digest: 'daily'
@@ -397,6 +412,7 @@ module.exports = {
           user: {
               name: 'tjholowaychuk'
             , agreement: 'yes'
+            , subscribe: 'yes'
             , signature: 'TJ Holowaychuk'
             , display_signature: 'No'
             , forum_digest: 'daily'
@@ -417,6 +433,7 @@ module.exports = {
         res.body.body.should.eql({
           user: {
               name: 'tjholowaychuk'
+            , subscribe: 'yes'
             , signature: 'Wahoo'
           }
         });
@@ -435,6 +452,7 @@ module.exports = {
         res.body.body.should.eql({
           user: {
               name: 'tjholowaychuk'
+            , subscribe: 'yes'
             , signature: 'Wahoo'
           }
         });
@@ -465,6 +483,7 @@ module.exports = {
           user: {
               name: ''
             , signature: ''
+            , subscribe: 'yes'
             , forum_digest: 'daily'
           }
         });
@@ -484,6 +503,7 @@ module.exports = {
           user: {
               name: ''
             , signature: ''
+            , subscribe: 'yes'
             , forum_digest: ['daily', 'weekly']
           }
         });
@@ -504,6 +524,7 @@ module.exports = {
           user: {
               name: ''
             , signature: ''
+            , subscribe: 'yes'
             , forum_digest: 'daily'
           }
         });
@@ -524,6 +545,7 @@ module.exports = {
           user: {
               name: ''
             , signature: ''
+            , subscribe: 'yes'
             , forum_digest: ['daily', 'weekly']
           }
         });
@@ -544,6 +566,7 @@ module.exports = {
           user: {
               name: ''
             , signature: ''
+            , subscribe: 'yes'
             , forum_digest: ['daily', 'weekly']
           }
         });

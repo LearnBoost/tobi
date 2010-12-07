@@ -64,7 +64,7 @@ app.get('/search/results', function(req, res){
 });
 
 app.get('/form', function(req, res){
-  res.send('<form id="user" action="/form" method="post">'
+  res.send('<form id="user" method="post">'
     + '<input id="user-name" type="text" name="user[name]" />'
     + '<input id="user-email" type="text" name="user[email]" disabled="disabled" />'
     + '<input type="checkbox" name="user[agreement]" id="user-agreement" value="yes" />'

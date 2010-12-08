@@ -18,6 +18,10 @@ app.get('/', function(req, res){
   res.send('<p>Hello World</p>');
 });
 
+app.post('/', function(req, res){
+  res.send('<p>POST</p>');
+});
+
 app.get('/404', function(req, res){
   res.send(404);
 });
@@ -176,6 +180,16 @@ module.exports = {
           done();
         });
       });
+    });
+  },
+  
+  'test .post(path)': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.post('/', function($){
+      $('p').should.have.text('POST');
+      browser.should.have.property('path', '/');
+      browser.history.should.eql(['/']);
+      done();
     });
   },
   

@@ -244,6 +244,18 @@ exports['test .id()'] = function(done){
   });
 };
 
+exports['test .status()'] = function(done){
+  browser.get('/attrs', function($, res){
+    res.should.have.status(200);
+
+    err(function(){
+      res.should.have.status(404);
+    }, "expected response code of 404 'Not Found', but got 200 'OK'");
+
+    done();
+  });
+};
+
 exports.after = function(){
   app.close();
 };

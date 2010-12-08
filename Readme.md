@@ -252,9 +252,7 @@ Example test using contexts:
         browser
         .type('query', 'foo bar')
         .submit(function(res){
-          res.body.should.have.property('posts', true);
-          res.body.body.should.eql({ query: 'foo bar' });
-          done();
+
         });
       });
 

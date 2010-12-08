@@ -30,6 +30,11 @@ app.get('/redirect', function(req, res){
   res.redirect('/one');
 });
 
+app.get('/xml', function(req, res){
+  res.contentType('.xml');
+  res.send('<user><name>tj</name></user>');
+});
+
 app.get('/json', function(req, res){
   res.send({ user: 'tj' });
 });
@@ -101,8 +106,17 @@ module.exports = {
       // Nothing
     });
   },
-
+  
   'test .request() non-html': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.request('GET', '/xml', {}, function(res){
+      res.should.have.header('Content-Type', 'application/xml');
+      res.should.not.have.property('body');
+      done();
+    });
+  },
+
+  'test .request() json': function(done){
     var browser = tobi.createBrowser(app);
     browser.request('GET', '/json', {}, function(res){
       res.body.should.eql({ user: 'tj' });

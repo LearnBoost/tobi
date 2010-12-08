@@ -130,6 +130,47 @@ Clicking with jQuery (no locators):
       
     });
 
+### Browser#type(locator, str)
+
+"Type" the given _str_:
+
+    browser
+      .type('username', 'tj') 
+      .type('password', 'foobar');
+
+### Browser#fill(locator, fields)
+
+Fill the given _fields_, supporting all types of inputs. For example we might have the following form:
+
+    <form>
+      <input type="text" name="user[name]" />
+      <input type="text" name="user[email]" />
+      <input type="checkbox" name="user[agreement]" />
+      
+      <select name="digest">
+        <option value="none">Never</option>
+        <option value="daily">Daily</option>
+        <option value="weekly">Weekly</option>
+      </select>
+      
+      <select name="favorite-colors" multiple>
+        <option value="red">Red</option>
+        <option value="green">Green</option>
+        <option value="blue">Blue</option>
+      </select>
+    </form> 
+
+Which can be filled using locators:
+
+    browser
+      .fill({
+          'user[name]': 'tj'
+        , 'user[email]': 'tj@learnboost.com'
+        , 'user[agreement]': true
+        , 'user[digest]': 'Daily'
+        , 'user[favorite-colors]': ['red', 'Green']
+      })
+
 ## Assertions
 
 Tobi extends the [should.js](http://github.com/visionmedia/should.js) assertion library to provide you with DOM and response related assertion methods.

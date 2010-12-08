@@ -60,6 +60,9 @@ module.exports = {
           $('> input').should.have.length(1);
         });
 
+        $('> form').should.have.length(1);
+        $('> input').should.have.length(0);
+
         browser
         .type('query', 'foo bar')
         .submit(function(res){

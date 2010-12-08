@@ -36,6 +36,82 @@ We can then use regular css selectors to grab the form, we use tobi's `.fill()` 
 
 Tobi extends the [Should.js](http://github.com/visionmedia/should.js) assertion library to provide you with DOM and response related assertion methods.
 
+### Assertion#text(str|regexp)
+
+  Assert element text via regexp or string:
+  
+      elem.should.have.text('foo bar');
+      elem.should.have.text(/^foo/);
+      elem.should.not.have.text('rawr');
+
+### Assertion#many(selector)
+
+  Assert that one or more of the given selector is present:
+  
+      ul.should.have.many('li');
+
+### Assertion#one(selector)
+
+  Assert that one of the given selector is present:
+  
+      p.should.have.one('input');
+
+### Assertion#attr(key[, val])
+
+  Assert that the given _key_ exists, with optional _val_:
+  
+      p.should.not.have.attr('href');
+      a.should.have.attr('href');
+      a.should.have.attr('href', 'http://learnboost.com');
+
+  Shortcuts are also provided:
+  
+    - id()
+    - title()
+    - href()
+    - alt()
+    - src()
+    - rel()
+    - media()
+    - name()
+    - action()
+    - method()
+    - value()
+    - enabled
+    - disabled
+    - checked
+    - selected
+
+For example:
+
+      form.should.have.id('user-edit');
+      form.should.have.action('/login');
+      form.should.have.method('post');
+      checkbox.should.be.enabled;
+      checkbox.should.be.disabled;
+      option.should.be.selected;
+      option.should.not.be.selected;
+
+### Assertion#class(name)
+
+  Assert that the element has the given class _name_.
+
+      form.should.have.class('user-edit');
+
+### Assertion#status(code)
+
+  Assert response status code:
+  
+      res.should.have.status(200);
+      res.should.not.have.status(500);
+
+### Assertion#header(field[, val])
+
+  Assert presence of response header _field_ and optional _val_:
+  
+      res.should.have.header('Content-Length');
+      res.should.have.header('Content-Type', 'text/html');
+
 ## Testing
 
 Update submodules:

@@ -51,8 +51,8 @@ module.exports = {
     var browser = tobi.createBrowser(app);
     browser.get('/search', function(res, $){
       $('form').should.have.length(2);
-      browser.within('form#post-search', function(){
-        $('form').should.have.length(0);
+      browser.within('div:nth-child(2)', function(){
+        $('form').should.have.length(1);
         browser
         .type('query', 'foo bar')
         .submit(function(res){

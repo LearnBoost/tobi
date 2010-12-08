@@ -150,7 +150,6 @@ module.exports = {
     var browser = tobi.createBrowser(app);
     browser.request('GET', '/', {}, function(res, $){
       res.should.have.status(200);
-      $.should.equal(browser.jQuery);
       browser.should.have.property('path', '/');
       browser.history.should.eql(['/']);
       browser.request('GET', '/user/0', {}, function(){

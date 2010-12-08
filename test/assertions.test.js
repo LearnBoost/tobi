@@ -30,7 +30,7 @@ app.get('/user/:id', function(req, res){
 });
 
 app.get('/list', function(req, res){
-  res.send('<ul><li>one</li><li>two</li><li><em>three<em></li></ul>');
+  res.send('<p>Wahoo</p><ul><li>one</li><li>two</li><li><em>three<em></li></ul>');
 });
 
 app.get('/attrs', function(req, res){
@@ -117,7 +117,11 @@ exports['test .one()'] = function(done){
     err(function(){
       $('ul').should.have.one('li');
     }, "expected [jQuery 'ul'] to have one 'li' tag, but has three");
-    
+
+    err(function(){
+      $('*').should.have.one('p', 'Wahoos');
+    }, "expected [jQuery '* p'] to have text 'Wahoos', but has 'Wahoo'");
+
     done();
   });
 };

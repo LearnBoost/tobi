@@ -5,7 +5,32 @@
 
   Tobi allows you to test your web application as if it were a browser. Interactions with your app are performed via jsdom, htmlparser, and jQuery, providing a natural JavaScript API for traversing, manipulating and asserting the DOM.
 
-## Example 
+## Example
+
+In the example below, we have an http server or express app `require()`ed, and we simply create new tobi `Browser` for that app to test against. Then we `GET /login`, receiving a response to assert headers, status codes etc, and the `$` jQuery context.
+
+We can then use regular css selectors to grab the form, we use tobi's `.fill()` method to fill some inputs (supports textareas, checkboxes, radios, etc), then we proceed to 
+
+    var tobi = require('tobi')
+      , app = require('./my/app)
+      , browser = tobi.createBrowser(app);
+
+    browser.get('/login', function(res, $){
+      $('form')
+        .fill({ username: 'tj', password: 'tobi' })
+        .submit(function(res, $){
+          res.should.have.status(200);
+          res.should.have.header('Content-Length');
+          res.should.have.header('Content-Type', 'text/html; charset=utf-8');
+          $('ul.messages').should.have.one('li', 'Successfully authenticated');
+          browser.get('/login', function(res, $){
+            res.should.have.status(200);
+            $('ul.messages').should.have.one('li', 'Already authenticated');
+            // We are finished testing, close the server
+            app.close();
+          });
+        });
+    });
 
 ## Testing
 

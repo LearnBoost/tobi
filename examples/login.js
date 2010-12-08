@@ -29,6 +29,8 @@ browser.get('/login', function(res, $){
     .fill({ username: 'tj', password: 'tobi' })
     .submit(function(res, $){
       res.should.have.status(200);
+      res.should.have.header('Content-Length');
+      res.should.have.header('Content-Type', 'text/html; charset=utf-8');
       $('ul.messages').should.have.one('li', 'Successfully authenticated');
       browser.get('/login', function(res, $){
         res.should.have.status(200);

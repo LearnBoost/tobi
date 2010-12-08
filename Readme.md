@@ -32,6 +32,78 @@ We can then use regular css selectors to grab the form, we use tobi's `.fill()` 
         });
     });
 
+## Browser
+
+Tobi provides the `Browser` object, created via `tobi.createBrowser(app)`, where `app` is a node `http.Server`, so for example Connect or Express apps will work just fine. There is no need to invoke `listen()` as this is handled by Tobi.
+
+### Browser#get()
+
+Perform a `GET` request with optional `options` containing headers, etc:
+
+    browser.get('/login', function(res, $){
+      
+    });
+
+With options:
+
+    browser.get('/login', { headers: { ... }}, function(res, $){
+      
+    });
+
+Aliased as `visit`, and `open`.
+
+### Browser#post()
+
+Perform a `POST` request with optional `options` containing headers, body etc:
+
+    browser.post('/login', function(res, $){
+      
+    });
+
+With options:
+
+    browser.post('/login', { body: 'foo=bar' }, function(res, $){
+      
+    });
+
+### Browser#back()
+
+`GET` the previous page:
+
+    browser.get('/', function(){
+      // on /
+      browser.get('/foo', function(){
+        // on /foo
+        browser.back(function(){
+          // on /
+        });
+      });
+    });
+
+## Browser locators
+
+Locators are extended extend selectors, the rules are as following:
+
+  - element text
+  - element id
+  - element value
+  - css selector
+
+These rules apply to all `Browser` related methods such as `click()`, `fill()`, `type()` etc. Provided the following markup:
+
+    <form>
+      <input id="form-login" type="submit" value="Login" />
+    </form>
+
+The following locators will match the input:
+
+    .click('Login');
+    .click('form-login');
+    .click('input[type=submit]');
+    .click(':submit');
+
+### Browser#click()
+
 ## Assertions
 
 Tobi extends the [should.js](http://github.com/visionmedia/should.js) assertion library to provide you with DOM and response related assertion methods.

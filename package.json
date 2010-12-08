@@ -1,8 +1,12 @@
-{   "name": ""
-  , "description": ""
+{   "name": "tobi"
+  , "description": "expressive server-side functional testing with jQuery and jsdom"
   , "version": "0.0.1"
   , "author": "TJ Holowaychuk <tj@vision-media.ca>"
-  , "keywords": []
-  , "main": "./lib/mylib.js"
-  , "engines": { "node": ">= 0.2.0" }
+  , "keywords": ["test", "testing", "browser", "jquery", "css"]
+  , "dependencies": {
+      "jsdom": ">= 0.1.21"
+    , "htmlparser": ">= 1.7.3"
+  }
+  , "main": "./index.js"
+  , "engines": { "node": ">= 0.2.5" }
 }

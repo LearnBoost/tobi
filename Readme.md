@@ -1,7 +1,7 @@
 
 # Tobi
 
-  "Testing of browser integration" ? haha
+  Expressive server-side functional testing with jQuery and jsdom.
 
 ## Todo
 

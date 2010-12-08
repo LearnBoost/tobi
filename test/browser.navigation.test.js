@@ -34,6 +34,10 @@ app.get('/json', function(req, res){
   res.send({ user: 'tj' });
 });
 
+app.get('/invalid-json', function(req, res){
+  res.send('{"broken":', { 'Content-Type': 'application/json' });
+});
+
 app.get('/user/:id', function(req, res){
   res.send('<h1>Tobi</h1><p>the ferret</p>');
 });
@@ -87,6 +91,17 @@ app.post('/form', function(req, res){
 });
 
 module.exports = {
+  'test .request() invalid response': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.on('error', function(err){
+      err.message.should.equal('Unexpected end of input');
+      done();
+    });
+    browser.request('GET', '/invalid-json', {}, function(res){
+      // Nothing
+    });
+  },
+
   'test .request() non-html': function(done){
     var browser = tobi.createBrowser(app);
     browser.request('GET', '/json', {}, function(res){

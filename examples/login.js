@@ -12,7 +12,7 @@ var app = require('./app')
   , should = require('should')
   , browser = tobi.createBrowser(app);
 
-browser.get('/login', function($){
+browser.get('/login', function(res, $){
   $('form')
     .should.have.action('/login')
     .and.have.id('user')
@@ -24,13 +24,13 @@ browser.get('/login', function($){
   $('form :submit').should.have.value('Login');
 });
 
-browser.get('/login', function($){
+browser.get('/login', function(res, $){
   $('form')
     .fill({ username: 'tj', password: 'tobi' })
-    .submit(function($, res){
+    .submit(function(res, $){
       res.should.have.status(200);
       $('ul.messages').should.have.one('li', 'Successfully authenticated');
-      browser.get('/login', function($, res){
+      browser.get('/login', function(res, $){
         res.should.have.status(200);
         $('ul.messages').should.have.one('li', 'Already authenticated');
         console.log('successful');

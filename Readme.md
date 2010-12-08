@@ -3,32 +3,9 @@
 
   Expressive server-side functional testing with jQuery and jsdom.
 
-## Todo
+  Tobi allows you to test your web application as if it were a browser. Interactions with your app are performed via jsdom, htmlparser, and jQuery, providing a natural JavaScript API for traversing, manipulating and asserting the DOM.
 
-starting with the lower level api:
-
-    browser.get('/', function($){
-      $('h1.title').should.have.text('Tobi is awesome');
-      $('p:first-child ~ h1').should.have.text('but so is raul');
-      $('a').click(function(){
-        $('h1.title').should.have.text('A new page!');
-        browser.back(function(){
-          $('h1.title').should.have.text('Tobi is awesome');
-        });
-      });
-    });
-
-building up to a jQuery/soda inspired api providing a more concise interface for simple cases, but still maintaining flexibility in the design. Maybe something like:
-
-    browser
-      .get('/')
-      .find('h1.title').assertText('Tobi is awesome')
-      .find('p:first-child ~ h1').assertText('but so is raul')
-      .find('a')
-      .click()
-      .find('h1.title').assertText('A new page!')
-      .back()
-      .find('h1.title').assertText('Tobi is awesome');
+## Example 
 
 ## Testing
 
@@ -49,7 +26,7 @@ Copyright (c) 2010 LearnBoost &lt;dev@learnboost.com&gt;
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
 'Software'), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
+without limitation te rights to use, copy, modify, merge, publish,
 distribute, sublicense, and/or sell copies of the Software, and to
 permit persons to whom the Software is furnished to do so, subject to
 the following conditions:

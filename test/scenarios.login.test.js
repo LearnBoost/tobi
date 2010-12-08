@@ -51,10 +51,10 @@ var browser = tobi.createBrowser(app);
 
 module.exports = {
   'test /login with valid credentials': function(done){
-    browser.get('/login', function($){
+    browser.get('/login', function(res, $){
       $('form')
         .fill({ username: 'tj', password: 'tobi' })
-        .submit(function($, res){
+        .submit(function(res, $){
           res.should.have.status(200);
           $('ul.messages').should.have.one('li', 'Successfully authenticated');
           done();
@@ -63,11 +63,11 @@ module.exports = {
   },
   
   'test /login with invalid credentials': function(done){
-    browser.get('/login', function($){
+    browser.get('/login', function(res, $){
       $('form')
         .fill({ username: 'tj', password: 'foobar' })
         .find(':submit')
-        .click(function($, res){
+        .click(function(res, $){
           res.should.have.status(200);
           res.should.have.header('X-Powered-By', 'Express');
           $('ul.messages').should.have.one('li', 'Authentication failed');
@@ -80,7 +80,7 @@ module.exports = {
     browser.get('/login', function(){
       browser
       .type('password', 'not tobi')
-      .submit('form', function($, res){
+      .submit('form', function(res, $){
         res.should.have.status(200);
         $('ul.messages').should.have.one('li', 'Username required');
         done();

@@ -59,7 +59,7 @@ app.get('/form', function(req, res){
 // Tests
 
 exports['test .text()'] = function(done){
-  browser.get('/user/1', function($){
+  browser.get('/user/1', function(res, $){
     $('p').prev().should.have.text('Tobi');
     $('p').prev().should.have.text(/^To/);
     
@@ -84,7 +84,7 @@ exports['test .text()'] = function(done){
 };
 
 exports['test .many()'] = function(done){
-  browser.get('/list', function($){
+  browser.get('/list', function(res, $){
     $('ul').should.have.many('li');
     $('ul').should.not.have.many('rawr');
     //$('ul').should.not.have.many('em');
@@ -106,7 +106,7 @@ exports['test .many()'] = function(done){
 };
 
 exports['test .one()'] = function(done){
-  browser.get('/list', function($){
+  browser.get('/list', function(res, $){
     $('ul').should.not.have.one('li');
     //$('ul > li:last-child').should.have.one('em');
     
@@ -127,7 +127,7 @@ exports['test .one()'] = function(done){
 };
 
 exports['test .attr()'] = function(done){
-  browser.get('/attrs', function($){
+  browser.get('/attrs', function(res, $){
     $('a').should.have.attr('href');
     $('a').should.have.attr('href', 'http://learnboost.com');
     $('a').should.not.have.attr('href', 'invalid');
@@ -158,7 +158,7 @@ exports['test .attr()'] = function(done){
 };
 
 exports['test .class()'] = function(done){
-  browser.get('/classes', function($){
+  browser.get('/classes', function(res, $){
     $('div').should.have.class('foo');
     $('div').should.have.class('bar');
     $('div').should.have.class('baz');
@@ -177,7 +177,7 @@ exports['test .class()'] = function(done){
 };
 
 exports['test .enabled / .disabled'] = function(done){
-  browser.get('/form', function($){
+  browser.get('/form', function(res, $){
     $('input[name="user[name]"]').should.be.enabled;
     $('input[name="user[email]"]').should.be.disabled;
 
@@ -194,7 +194,7 @@ exports['test .enabled / .disabled'] = function(done){
 };
 
 exports['test .checked'] = function(done){
-  browser.get('/form', function($){
+  browser.get('/form', function(res, $){
     $('input[name="user[agreement]"]').should.be.checked;
     $('input[name="user[agreement2]"]').should.not.be.checked;
 
@@ -211,7 +211,7 @@ exports['test .checked'] = function(done){
 };
 
 exports['test .selected'] = function(done){
-  browser.get('/form', function($){
+  browser.get('/form', function(res, $){
     $('select > option:nth-child(3)').should.be.selected;
     $('select > option:nth-child(2)').should.not.be.selected;
 
@@ -228,7 +228,7 @@ exports['test .selected'] = function(done){
 };
 
 exports['test .id()'] = function(done){
-  browser.get('/attrs', function($){
+  browser.get('/attrs', function(res, $){
     $('a').should.have.id('lb');
     $('a').should.not.have.id('foo');
 
@@ -245,7 +245,7 @@ exports['test .id()'] = function(done){
 };
 
 exports['test .status()'] = function(done){
-  browser.get('/attrs', function($, res){
+  browser.get('/attrs', function(res, $){
     res.should.have.status(200);
 
     err(function(){
@@ -257,7 +257,7 @@ exports['test .status()'] = function(done){
 };
 
 exports['test .header()'] = function(done){
-  browser.get('/attrs', function($, res){
+  browser.get('/attrs', function(res, $){
     res.should.have.header('Content-Type', 'text/html; charset=utf-8');
     done();
   });

@@ -37,7 +37,7 @@ app.post('/search/posts', function(req, res){
 module.exports = {
   'test global context': function(done){
     var browser = tobi.createBrowser(app);
-    browser.get('/search', function($){
+    browser.get('/search', function(res, $){
       $('form').should.have.length(2);
       browser
       .type('query', 'foo bar')

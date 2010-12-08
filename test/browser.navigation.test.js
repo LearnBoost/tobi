@@ -148,7 +148,8 @@ module.exports = {
 
   'test .request(method, path)': function(done){
     var browser = tobi.createBrowser(app);
-    browser.request('GET', '/', {}, function($){
+    browser.request('GET', '/', {}, function(res, $){
+      res.should.have.status(200);
       $.should.equal(browser.jQuery);
       browser.should.have.property('path', '/');
       browser.history.should.eql(['/']);
@@ -164,7 +165,8 @@ module.exports = {
   
   'test .request() redirect': function(done){
     var browser = tobi.createBrowser(app);
-    browser.request('GET', '/redirect', {}, function($){
+    browser.request('GET', '/redirect', {}, function(res, $){
+      res.should.have.status(200);
       browser.should.have.property('path', '/one');
       browser.history.should.eql(['/redirect', '/one']);
       done();
@@ -173,7 +175,8 @@ module.exports = {
   
   'test .back(fn)': function(done){
     var browser = tobi.createBrowser(app);
-    browser.request('GET', '/', {}, function($){
+    browser.request('GET', '/', {}, function(res, $){
+      res.should.have.status(200);
       browser.request('GET', '/user/0', {}, function(){
         browser.back(function(){
           browser.should.have.property('path', '/');
@@ -185,7 +188,8 @@ module.exports = {
   
   'test .post(path)': function(done){
     var browser = tobi.createBrowser(app);
-    browser.post('/', function($){
+    browser.post('/', function(res, $){
+      res.should.have.status(200);
       $('p').should.have.text('POST');
       browser.should.have.property('path', '/');
       browser.history.should.eql(['/']);
@@ -306,7 +310,8 @@ module.exports = {
 
   'test .uncheck(name)': function(done){
     var browser = tobi.createBrowser(app);
-    browser.get('/form', function($){
+    browser.get('/form', function(res, $){
+      res.should.have.status(200);
       $('[name=user[subscribe]]').should.be.checked;
       browser.uncheck('user[subscribe]');
       $('[name=user[subscribe]]').should.not.be.checked;
@@ -316,7 +321,8 @@ module.exports = {
   
   'test .check(name)': function(done){
     var browser = tobi.createBrowser(app);
-    browser.get('/form', function($){
+    browser.get('/form', function(res, $){
+      res.should.have.status(200);
       $('[name=user[agreement]]').should.not.be.checked;
       browser.check('user[agreement]');
       $('[name=user[agreement]]').should.be.checked;
@@ -326,7 +332,8 @@ module.exports = {
   
   'test .check(css)': function(done){
     var browser = tobi.createBrowser(app);
-    browser.get('/form', function($){
+    browser.get('/form', function(res, $){
+      res.should.have.status(200);
       $('[name=user[agreement]]').should.not.be.checked;
       browser.check('[name=user[agreement]]');
       $('[name=user[agreement]]').should.be.checked;
@@ -336,7 +343,8 @@ module.exports = {
   
   'test .check(id)': function(done){
     var browser = tobi.createBrowser(app);
-    browser.get('/form', function($){
+    browser.get('/form', function(res, $){
+      res.should.have.status(200);
       $('[name=user[agreement]]').should.not.be.checked;
       browser.check('user-agreement');
       $('[name=user[agreement]]').should.be.checked;
@@ -346,7 +354,8 @@ module.exports = {
   
   'test jQuery#click(fn)': function(done){
     var browser = tobi.createBrowser(app);
-    browser.get('/one', function($){
+    browser.get('/one', function(res, $){
+      res.should.have.status(200);
       $('a:last-child').click(function(){
         browser.should.have.property('path', '/three');
         browser.back(function(){
@@ -361,7 +370,8 @@ module.exports = {
   
   'test jQuery#click(fn) form submit button': function(done){
     var browser = tobi.createBrowser(app);
-    browser.get('/form', function($){
+    browser.get('/form', function(res, $){
+      res.should.have.status(200);
       $('[name=user[name]]').val('tjholowaychuk');
       $('[name=user[email]]').val('tj@vision-media.ca');
       $('[type=submit]').click(function(res){
@@ -380,7 +390,8 @@ module.exports = {
   
   'test .type()': function(done){
     var browser = tobi.createBrowser(app);
-    browser.get('/form', function($){
+    browser.get('/form', function(res, $){
+      res.should.have.status(200);
       browser.type('user[name]', 'tjholowaychuk');
       browser.type('user[email]', 'tj@vision-media.ca');
       browser.click('Update', function(res){
@@ -399,7 +410,8 @@ module.exports = {
   
   'test .type() chaining': function(done){
     var browser = tobi.createBrowser(app);
-    browser.get('/form', function($){
+    browser.get('/form', function(res, $){
+      res.should.have.status(200);
       browser
       .type('user[name]', 'tjholowaychuk')
       .type('user[email]', 'tj@vision-media.ca')
@@ -421,7 +433,8 @@ module.exports = {
   
   'test .fill(obj) names': function(done){
     var browser = tobi.createBrowser(app);
-    browser.get('/form', function($){
+    browser.get('/form', function(res, $){
+      res.should.have.status(200);
       browser.fill({
           'user[name]': 'tjholowaychuk'
         , 'user[email]': 'tj@vision-media.ca'
@@ -449,7 +462,8 @@ module.exports = {
   
   'test .fill(obj) css': function(done){
     var browser = tobi.createBrowser(app);
-    browser.get('/form', function($){
+    browser.get('/form', function(res, $){
+      res.should.have.status(200);
       browser.fill({
           'form > #user-name': 'tjholowaychuk'
         , 'form > #user-email': 'tj@vision-media.ca'
@@ -477,7 +491,8 @@ module.exports = {
   
   'test jQuery#submit() POST': function(done){
     var browser = tobi.createBrowser(app);
-    browser.get('/form', function($){
+    browser.get('/form', function(res, $){
+      res.should.have.status(200);
       $('[name=user[name]]').val('tjholowaychuk');
       $('#signature').val('Wahoo');
        $('form').submit(function(res){
@@ -496,7 +511,8 @@ module.exports = {
   
   'test .submit() POST': function(done){
     var browser = tobi.createBrowser(app);
-    browser.get('/form', function($){
+    browser.get('/form', function(res, $){
+      res.should.have.status(200);
       $('[name=user[name]]').val('tjholowaychuk');
       $('#signature').val('Wahoo');
        browser.submit('user', function(res){
@@ -515,7 +531,8 @@ module.exports = {
   
   'test .submit() GET': function(done){
     var browser = tobi.createBrowser(app);
-    browser.get('/search', function($){
+    browser.get('/search', function(res, $){
+      res.should.have.status(200);
       browser
         .fill({ query: 'ferret hats' })
         .submit(function(res){
@@ -527,7 +544,8 @@ module.exports = {
   
   'test select single option': function(done){
     var browser = tobi.createBrowser(app);
-    browser.get('/form', function($){
+    browser.get('/form', function(res, $){
+      res.should.have.status(200);
       $('select option[value=daily]').attr('selected', 'selected');
        browser.submit('user', function(res){
         res.body.headers.should.have.property('content-type', 'application/x-www-form-urlencoded');
@@ -546,7 +564,8 @@ module.exports = {
   
   'test select multiple options': function(done){
     var browser = tobi.createBrowser(app);
-    browser.get('/form', function($){
+    browser.get('/form', function(res, $){
+      res.should.have.status(200);
       $('select option[value=daily]').attr('selected', 'selected');
       $('select option[value=weekly]').attr('selected', 'selected');
        browser.submit('user', function(res){
@@ -566,7 +585,8 @@ module.exports = {
   
   'test .select() single option by value': function(done){
     var browser = tobi.createBrowser(app);
-    browser.get('/form', function($){
+    browser.get('/form', function(res, $){
+      res.should.have.status(200);
       $('select option[value=daily]').attr('selected', 'selected');
        browser
        .select('user[forum_digest]', 'daily')
@@ -587,7 +607,8 @@ module.exports = {
   
   'test .select() multiple options by value': function(done){
     var browser = tobi.createBrowser(app);
-    browser.get('/form', function($){
+    browser.get('/form', function(res, $){
+      res.should.have.status(200);
       $('select option[value=daily]').attr('selected', 'selected');
        browser
        .select('user[forum_digest]', ['daily', 'weekly'])
@@ -608,7 +629,8 @@ module.exports = {
   
   'test .select() multiple options by text': function(done){
     var browser = tobi.createBrowser(app);
-    browser.get('/form', function($){
+    browser.get('/form', function(res, $){
+      res.should.have.status(200);
       $('select option[value=daily]').attr('selected', 'selected');
        browser
        .select('user[forum_digest]', ['Once per day', 'Once per week'])

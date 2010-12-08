@@ -184,6 +184,14 @@ module.exports = {
       });
     });
   },
+
+  'test .head(path)': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.head('/form', function(res){
+      browser.source.should.be.empty;
+      done();
+    });
+  },
   
   'test .post(path)': function(done){
     var browser = tobi.createBrowser(app);

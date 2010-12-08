@@ -256,6 +256,13 @@ exports['test .status()'] = function(done){
   });
 };
 
+exports['test .header()'] = function(done){
+  browser.get('/attrs', function($, res){
+    res.should.have.header('Content-Type', 'text/html; charset=utf-8');
+    done();
+  });
+};
+
 exports.after = function(){
   app.close();
 };

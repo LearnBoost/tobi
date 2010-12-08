@@ -1,9 +1,9 @@
 
 # Tobi
 
-  Expressive server-side functional testing with jQuery and jsdom.
+  Expressive server-side functional testing with jQuery and [jsdom](https://github.com/tmpvar/jsdom).
 
-  Tobi allows you to test your web application as if it were a browser. Interactions with your app are performed via jsdom, htmlparser, and jQuery, providing a natural JavaScript API for traversing, manipulating and asserting the DOM.
+  Tobi allows you to test your web application as if it were a browser. Interactions with your app are performed via jsdom, htmlparser, and jQuery, in combination with Tobi's Cookie Jar, provides a natural JavaScript API for traversing, manipulating and asserting the DOM, and session based browsing.
 
 ## Example
 

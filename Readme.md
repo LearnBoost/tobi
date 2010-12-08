@@ -34,7 +34,7 @@ We can then use regular css selectors to grab the form, we use tobi's `.fill()` 
 
 ## Assertions
 
-Tobi extends the [Should.js](http://github.com/visionmedia/should.js) assertion library to provide you with DOM and response related assertion methods.
+Tobi extends the [should.js](http://github.com/visionmedia/should.js) assertion library to provide you with DOM and response related assertion methods.
 
 ### Assertion#text(str|regexp)
 

@@ -202,6 +202,56 @@ Which can be filled using locators:
         
       });
 
+### Browser#{context,within}(selector, fn)
+
+Alter the browser context for the duration of the given callback `fn`. For example if you have several forms on a page, an wish to focus on one:
+
+    <div><form id="user-search" method="post" action="/search/users">
+      <input type="text" name="query" />
+    </form></div>
+
+    <div><form id="post-search" method="post" action="/search/posts">
+      <input type="text" name="query" />
+    </form></div>
+
+Example test using contexts:
+
+    browser.get('/search', function(res, $){
+
+      // Global context has 2 forms
+      $('form').should.have.length(2);
+
+      // Focus on the second div
+      browser.within('div:nth-child(2)', function(){
+
+        // We now have one form, and no direct input children
+        $('> form').should.have.length(1);
+        $('> input').should.have.length(0);
+
+        // Focus on the form, we now have a single direct input child
+        browser.within('form', function(){
+          $('> form').should.have.length(0);
+          $('> input').should.have.length(1);
+        });
+
+        // Back to our div focus, we have one form again
+        $('> form').should.have.length(1);
+        $('> input').should.have.length(0);
+
+        // Methods such as .type() etc work with contexts
+        browser
+        .type('query', 'foo bar')
+        .submit(function(res){
+          res.body.should.have.property('posts', true);
+          res.body.body.should.eql({ query: 'foo bar' });
+          done();
+        });
+      });
+
+      // Back to global context
+      $('form').should.have.length(2);
+    });
+
 ## Assertions
 
 Tobi extends the [should.js](http://github.com/visionmedia/should.js) assertion library to provide you with DOM and response related assertion methods.

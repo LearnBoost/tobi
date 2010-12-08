@@ -202,6 +202,16 @@ Which can be filled using locators:
         
       });
 
+With jQuery:
+
+    $('form')
+      .fill({
+          'user[name]': 'tj'
+        , 'user[favorite-colors]': 'red'
+      }).submit(function(){
+        
+      });
+
 ### Browser#{context,within}(selector, fn)
 
 Alter the browser context for the duration of the given callback `fn`. For example if you have several forms on a page, an wish to focus on one:

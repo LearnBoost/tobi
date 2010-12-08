@@ -52,7 +52,14 @@ module.exports = {
     browser.get('/search', function(res, $){
       $('form').should.have.length(2);
       browser.within('div:nth-child(2)', function(){
-        $('form').should.have.length(1);
+        $('> form').should.have.length(1);
+        $('> input').should.have.length(0);
+
+        browser.within('form', function(){
+          $('> form').should.have.length(0);
+          $('> input').should.have.length(1);
+        });
+
         browser
         .type('query', 'foo bar')
         .submit(function(res){

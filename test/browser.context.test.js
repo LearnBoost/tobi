@@ -24,8 +24,6 @@ app.get('/search', function(req, res){
     + '</form></div>');
 });
 
-// TODO: remove / fix without submit
-
 app.post('/search/users', function(req, res){
   res.send({ users: true, headers: req.headers, body: req.body });
 });
@@ -46,6 +44,24 @@ module.exports = {
         res.body.body.should.eql({ query: 'foo bar' });
         done();
       });
+    });
+  },
+  
+  'test custom context': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.get('/search', function(res, $){
+      $('form').should.have.length(2);
+      browser.within('form#post-search', function(){
+        $('form').should.have.length(0);
+        browser
+        .type('query', 'foo bar')
+        .submit(function(res){
+          res.body.should.have.property('posts', true);
+          res.body.body.should.eql({ query: 'foo bar' });
+          done();
+        });
+      });
+      $('form').should.have.length(2);
     });
   },
 

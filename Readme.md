@@ -198,7 +198,9 @@ Which can be filled using locators:
         , 'user[agreement]': true
         , 'user[digest]': 'Daily'
         , 'user[favorite-colors]': ['red', 'Green']
-      })
+      }).submit(function(){
+        
+      });
 
 ## Assertions
 

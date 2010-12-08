@@ -130,6 +130,18 @@ Clicking with jQuery (no locators):
       
     });
 
+### Browser#submit(locator|fn, fn)
+
+Submit the first form in context:
+
+    browser.submit(function(res, $){
+      
+    });
+
+    browser.submit(function(){
+      
+    });
+
 ### Browser#type(locator, str)
 
 "Type" the given _str_:
@@ -137,6 +149,23 @@ Clicking with jQuery (no locators):
     browser
       .type('username', 'tj') 
       .type('password', 'foobar');
+
+
+### Browser#{check,uncheck}(locator)
+
+Check or uncheck the given _locator_:
+
+    browser
+      .check('agreement')
+      .uncheck('agreement');
+
+### Browser#select(locator, options)
+
+Select the given option or options:
+
+    browser
+      .select('colors', 'Red')
+      .select('colors', ['Red', 'Green']);
 
 ### Browser#fill(locator, fields)
 

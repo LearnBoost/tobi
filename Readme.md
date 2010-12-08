@@ -102,7 +102,33 @@ The following locators will match the input:
     .click('input[type=submit]');
     .click(':submit');
 
-### Browser#click()
+### Browser#click(locator[, fn])
+
+Tobi allows you to `click()` `a` elements, and `input[type=submit]` elements in order to submit a form, or request a url.
+
+Submitting a form:
+
+    browser.click('Login', function(res, $){
+      
+    });
+
+Submitting with jQuery (no locators):
+
+    $('form :submit').click(function(res, $){
+      
+    });
+
+Clicking a link:
+
+    browser.click('Register Account', function(res, $){
+      
+    });
+
+Clicking with jQuery (no locators):
+
+    $('a.register', function(res, $){
+      
+    });
 
 ## Assertions
 

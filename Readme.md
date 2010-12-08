@@ -9,7 +9,7 @@
 
 In the example below, we have an http server or express app `require()`ed, and we simply create new tobi `Browser` for that app to test against. Then we `GET /login`, receiving a response to assert headers, status codes etc, and the `$` jQuery context.
 
-We can then use regular css selectors to grab the form, we use tobi's `.fill()` method to fill some inputs (supports textareas, checkboxes, radios, etc), then we proceed to 
+We can then use regular css selectors to grab the form, we use tobi's `.fill()` method to fill some inputs (supports textareas, checkboxes, radios, etc), then we proceed to submitting the form, again receiving a response and the jQuery context.
 
     var tobi = require('tobi')
       , app = require('./my/app)

@@ -56,3 +56,7 @@ app.post('/login', function(req, res){
 
   res.redirect('/login');
 });
+
+// Only listen on $ node app.js
+
+if (!module.parent) app.listen(3000);

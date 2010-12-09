@@ -57,6 +57,82 @@ app.post('/login', function(req, res){
   res.redirect('/login');
 });
 
+var wizard = [
+  {
+    show: function(req, res){
+      res.send('<h1>Account</h1>'
+        + '<form method="post" action="/wizard/page/0">'
+        + 'Username: <input type="text" name="name" />'
+        + 'Email: <input type="text" name="email" />'
+        + '<input type="submit" value="Continue" />'
+        + '</form>');
+    },
+    
+    post: function(req, res){
+      req.session.wizard = req.body;
+      res.redirect('/wizard/page/1');
+    }
+  },
+  
+  {
+    show: function(req, res){
+      res.send('<h1>Details</h1>'
+        + '<form method="post" action="/wizard/page/1">'
+        + '<select name="city">'
+        + '  <option value="edmonton">Edmonton</optoin>'
+        + '  <option value="victoria">Victoria</optoin>'
+        + '  <option value="naniamo">Naniamo</optoin>'
+        + '  <option value="other">Other</optoin>'
+        + '</select>'
+        + '<input type="submit" value="Continue" />'
+        + '</form>');
+    },
+    
+    post: function(req, res){
+      req.session.wizard.city = req.body.city;
+      res.redirect('/wizard/page/2');
+    }
+  },
+  
+  {
+    show: function(req, res){
+      var data = req.session.wizard;
+      res.send('<h1>Review</h1>'
+        + '<form method="post" action="/wizard/page/2">'
+        + '  <ul>'
+        + '    <li>Name: ' + data.name + '</li>'
+        + '    <li>Email: ' + data.email + '</li>'
+        + '    <li>City: ' + data.city + '</li>'
+        + '  </ul>'
+        + '<input type="submit" value="Complete" />'
+        + '</form>');
+    },
+    
+    post: function(req, res){
+      var data = req.session.wizard;
+      res.send('<h1>Registration Complete</h1>'
+        + '<p>Registration was completed with the following info:</p>'
+        + '<ul>'
+        + '  <li>Name: ' + data.name + '</li>'
+        + '  <li>Email: ' + data.email + '</li>'
+        + '  <li>City: ' + data.city + '</li>'
+        + '</ul>');
+    }
+  }
+];
+
+app.get('/wizard', function(req, res){
+  res.redirect('/wizard/page/0');
+});
+
+app.get('/wizard/page/:page', function(req, res){
+  wizard[req.params.page].show(req, res);
+});
+
+app.post('/wizard/page/:page', function(req, res){
+  wizard[req.params.page].post(req, res);
+});
+
 // Only listen on $ node app.js
 
 if (!module.parent) app.listen(3000);

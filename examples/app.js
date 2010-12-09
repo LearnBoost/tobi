@@ -62,9 +62,9 @@ var wizard = [
     show: function(req, res){
       res.send('<h1>Account</h1>'
         + '<form method="post" action="/wizard/page/0">'
-        + 'Username: <input type="text" name="name" />'
-        + 'Email: <input type="text" name="email" />'
-        + '<input type="submit" value="Continue" />'
+        + '  Username: <input type="text" name="name" />'
+        + '  Email: <input type="text" name="email" />'
+        + '  <input type="submit" value="Continue" />'
         + '</form>');
     },
     
@@ -78,13 +78,13 @@ var wizard = [
     show: function(req, res){
       res.send('<h1>Details</h1>'
         + '<form method="post" action="/wizard/page/1">'
-        + '<select name="city">'
-        + '  <option value="edmonton">Edmonton</optoin>'
-        + '  <option value="victoria">Victoria</optoin>'
-        + '  <option value="naniamo">Naniamo</optoin>'
-        + '  <option value="other">Other</optoin>'
-        + '</select>'
-        + '<input type="submit" value="Continue" />'
+        + '  <select name="city">'
+        + '    <option value="edmonton">Edmonton</option>'
+        + '    <option value="victoria">Victoria</option>'
+        + '    <option value="naniamo">Naniamo</option>'
+        + '    <option value="other">Other</option>'
+        + '  </select>'
+        + '  <input type="submit" value="Continue" />'
         + '</form>');
     },
     
@@ -104,7 +104,7 @@ var wizard = [
         + '    <li>Email: ' + data.email + '</li>'
         + '    <li>City: ' + data.city + '</li>'
         + '  </ul>'
-        + '<input type="submit" value="Complete" />'
+        + '  <input type="submit" value="Complete" />'
         + '</form>');
     },
     

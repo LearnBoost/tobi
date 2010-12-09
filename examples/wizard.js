@@ -38,6 +38,7 @@ browser.get('/wizard', function(res, $){
             $('ul li:nth-child(1)').should.have.text('Name: tj');
             $('ul li:nth-child(2)').should.have.text('Email: tj@learnboost.com');
             $('ul li:nth-child(3)').should.have.text('City: Victoria');
+            app.close();
           });
         });
     });

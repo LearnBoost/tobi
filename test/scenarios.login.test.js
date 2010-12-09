@@ -85,7 +85,7 @@ module.exports = {
         res.should.have.status(200);
         $('ul.messages').should.have.one('li', 'Username required');
         done();
-      })
+      });
     });
   },
   

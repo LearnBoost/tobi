@@ -89,8 +89,6 @@ var wizard = [
     },
     
     post: function(req, res){
-      console.log(req.headers);
-      console.log(req.body);
       req.session.wizard.city = req.body.city;
       res.redirect('/wizard/page/2');
     }

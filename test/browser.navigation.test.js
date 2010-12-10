@@ -386,6 +386,7 @@ module.exports = {
               name: 'tjholowaychuk'
             , subscribe: 'yes'
             , signature: ''
+            , forum_digest: 'none'
           }
         });
         done();
@@ -406,6 +407,7 @@ module.exports = {
               name: 'tjholowaychuk'
             , subscribe: 'yes'
             , signature: ''
+            , forum_digest: 'none'
           }
         });
         done();
@@ -429,6 +431,7 @@ module.exports = {
             , agreement: 'yes'
             , subscribe: 'yes'
             , signature: ''
+            , forum_digest: 'none'
           }
         });
         done();
@@ -507,6 +510,7 @@ module.exports = {
               name: 'tjholowaychuk'
             , subscribe: 'yes'
             , signature: 'Wahoo'
+            , forum_digest: 'none'
           }
         });
         done();
@@ -527,6 +531,7 @@ module.exports = {
               name: 'tjholowaychuk'
             , subscribe: 'yes'
             , signature: 'Wahoo'
+            , forum_digest: 'none'
           }
         });
         done();
@@ -647,6 +652,24 @@ module.exports = {
             , signature: ''
             , subscribe: 'yes'
             , forum_digest: ['daily', 'weekly']
+          }
+        });
+        done();
+      });
+    });
+  },
+  
+  'test .select() default select option value': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.get('/form', function(res, $){
+       browser
+       .submit('user', function(res){
+        res.body.body.should.eql({
+          user: {
+              name: ''
+            , signature: ''
+            , subscribe: 'yes'
+            , forum_digest: 'none'
           }
         });
         done();

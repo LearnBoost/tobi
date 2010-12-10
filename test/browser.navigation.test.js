@@ -75,6 +75,10 @@ app.get('/search/results', function(req, res){
   res.send(req.query);
 });
 
+app.get('/script', function(req, res, next){
+  res.send('<script>document.getElementById("para").innerHTML = "<em>new</em>";</script><p id="para">old</p>');
+});
+
 app.get('/form', function(req, res){
   res.send('<form id="user" method="post">'
     + '<input id="user-name" type="text" name="user[name]" />'
@@ -100,6 +104,24 @@ app.post('/form', function(req, res){
 });
 
 module.exports = {
+  'test external option disabled': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.get('/script', function(res, $){
+      res.should.have.status(200);
+      $('p').should.have.text('old');
+      done();
+    });
+  },
+  
+  'test external option enabled': function(done){
+    var browser = tobi.createBrowser(app, { external: true });
+    browser.get('/script', function(res, $){
+      res.should.have.status(200);
+      $('p').should.have.text('new');
+      done();
+    });
+  },
+
   'test .request() invalid response': function(done){
     var browser = tobi.createBrowser(app);
     browser.on('error', function(err){

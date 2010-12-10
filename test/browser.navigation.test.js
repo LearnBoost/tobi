@@ -130,20 +130,18 @@ module.exports = {
 
   'test .request() 404': function(done){
     var browser = tobi.createBrowser(app);
-    browser.on('error', function(err){
-      err.should.have.property('message', 'GET /404 responded with 404 "Not Found"');
+    browser.request('GET', '/404', {}, function(res){
+      res.should.have.status(404);
       done();
     });
-    browser.request('GET', '/404', {}, function(){});
   },
   
   'test .request() error': function(done){
     var browser = tobi.createBrowser(app);
-    browser.on('error', function(err){
-      err.should.have.property('message', 'GET /500 responded with 500 "Internal Server Error"');
+    browser.request('GET', '/500', {}, function(res){
+      res.should.have.status(500);
       done();
     });
-    browser.request('GET', '/500', {}, function(){});
   },
 
   'test .request(method, path)': function(done){

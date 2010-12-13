@@ -36,6 +36,12 @@ We can then use regular css selectors to grab the form, we use tobi's `.fill()` 
 
 Tobi provides the `Browser` object, created via `tobi.createBrowser(app)`, where `app` is a node `http.Server`, so for example Connect or Express apps will work just fine. There is no need to invoke `listen()` as this is handled by Tobi.
 
+### Evaluate External Resources
+
+To evaluate script tags simply pass the `{ external: true }` option:
+
+    var browser = tobi.createBrowser(app, { external: true });
+
 ### Browser#get()
 
 Perform a `GET` request with optional `options` containing headers, etc:

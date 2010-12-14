@@ -356,6 +356,12 @@ and execute:
 
     $ make test
 
+## WWTD
+
+What Would Tobi Do:
+
+![Tobi](http://sphotos.ak.fbcdn.net/hphotos-ak-snc3/hs234.snc3/22173_446973930292_559060292_10921426_7238463_n.jpg)
+
 ## License 
 
 (The MIT License)

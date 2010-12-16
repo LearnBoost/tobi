@@ -46,14 +46,14 @@ module.exports = {
     });
   },
   
-  'test remote scripts': function(done){
-    var browser = tobi.createBrowser(app, { external: true });
-    browser.get('/remote', function(res, $){
-      res.should.have.status(200);
-      $('p').should.have.text('new');
-      done();
-    });
-  },
+  // 'test remote scripts': function(done){
+  //   var browser = tobi.createBrowser(app, { external: true });
+  //   browser.get('/remote', function(res, $){
+  //     res.should.have.status(200);
+  //     $('p').should.have.text('new');
+  //     done();
+  //   });
+  // },
   
   after: function(){
     app.close();

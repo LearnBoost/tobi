@@ -218,6 +218,14 @@ With jQuery:
         
       });
 
+### Browser#text(locator)
+
+Return text at the given locator. For example if we have the form option somewhere in our markup:
+
+    <option value="once">Once per day</option>
+
+We can invoke `browser.text('once')` returning "Once per day".
+
 ### Browser#{context,within}(selector, fn)
 
 Alter the browser context for the duration of the given callback `fn`. For example if you have several forms on a page, an wish to focus on one:

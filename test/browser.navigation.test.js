@@ -677,6 +677,17 @@ module.exports = {
     });
   },
   
+  'test .text()': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.get('/form', function(res, $){
+      var txt = browser.text('user[forum_digest]');
+      txt.replace(/\s+/g, ' ').trim().should.equal('None Once per day Once per week');
+      var txt = browser.text('daily');
+      txt.should.equal('Once per day');
+      done(); 
+    });
+  },
+  
   after: function(){
     app.close();
   }

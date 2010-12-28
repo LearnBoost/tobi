@@ -95,6 +95,26 @@ app.get('/form', function(req, res){
     + '</form>');
 });
 
+app.get('/form-nested', function(req, res){
+  res.send('<form id="user" method="post" action="/form">'
+    + '<input id="user-name" type="text" name="user[name]" />'
+    + '<input id="user-email" type="text" name="user[email]" disabled="disabled" />'
+    + '<input type="checkbox" name="user[agreement]" id="user-agreement" value="yes" />'
+    + '<input type="checkbox" name="user[subscribe]" checked="checked" value="yes" />'
+    + '<fieldset>'
+    + '  <select name="user[forum_digest]">'
+    + '    <option value="none">None</option>'
+    + '    <option value="daily">Once per day</option>'
+    + '    <option value="weekly">Once per week</option>'
+    + '  </select>'
+    + '  <textarea id="signature" name="user[signature]"></textarea>'
+    + '  <input type="radio" name="user[display_signature]" value="Yes" />'
+    + '  <input type="radio" name="user[display_signature]" value="No" />'
+    + '  <input type="submit" value="Update" />'
+    + '</fieldset>'
+    + '</form>');
+});
+
 app.post('/form', function(req, res){
   res.send({ headers: req.headers, body: req.body });
 });
@@ -516,6 +536,29 @@ module.exports = {
         done();
       });
     });
+  },
+
+  'test jQuery#submit() POST with a submit input not being a direct descendent':
+    function(done){
+      var browser = tobi.createBrowser(app);
+      browser.get('/form-nested', function(res, $){
+        res.should.have.status(200);
+        $('[name=user[name]]').val('tjholowaychuk');
+        $('#signature').val('Wahoo');
+        $('form').submit(function(res){
+          res.body.headers.should.have.property('content-type',
+            'application/x-www-form-urlencoded');
+          res.body.body.should.eql({
+            user: {
+                name: 'tjholowaychuk'
+              , subscribe: 'yes'
+              , signature: 'Wahoo'
+              , forum_digest: 'none'
+            }
+          });
+          done();
+        });
+      });
   },
   
   'test .submit() POST': function(done){

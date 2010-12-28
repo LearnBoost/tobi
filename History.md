@@ -1,4 +1,11 @@
 
+0.0.4 / 2010-12-28 
+==================
+
+  * Fixed; defer the request until the server listen callback fires
+  * Added failing test for deferred listen
+  * Changed; removed useless port++
+
 0.0.3 / 2010-12-28 
 ==================
 

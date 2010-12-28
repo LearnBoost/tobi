@@ -142,8 +142,9 @@ module.exports = {
 
   'test .request() json': function(done){
     var browser = tobi.createBrowser(app);
-    browser.request('GET', '/json', {}, function(res){
+    browser.request('GET', '/json', {}, function(res, obj){
       res.body.should.eql({ user: 'tj' });
+      obj.should.eql({ user: 'tj' });
       done();
     });
   },

@@ -119,6 +119,22 @@ app.post('/form', function(req, res){
   res.send({ headers: req.headers, body: req.body });
 });
 
+// Deferred app
+
+var appDeferred = express.createServer()
+  , oldListen = appDeferred.listen;
+
+appDeferred.listen = function(){
+  var args = arguments;
+  setTimeout(function(){
+    oldListen.apply(appDeferred, args);
+  }, 100);
+};
+
+appDeferred.get('/', function(req, res){
+  res.send(200);
+});
+
 module.exports = {
   'test .request() invalid response': function(done){
     var browser = tobi.createBrowser(app);
@@ -187,6 +203,16 @@ module.exports = {
       res.should.have.status(200);
       browser.should.have.property('path', '/one');
       browser.history.should.eql(['/redirect', '/one']);
+      done();
+    });
+  },
+
+  // [!] if this test doesn't pass, an uncaught ECONNREFUSED will be shown
+  'test .request() on deferred listen()': function(done){
+    var browser = tobi.createBrowser(appDeferred);
+    browser.request('GET', '/', {}, function(res){
+      res.should.have.status(200);
+      appDeferred.close();
       done();
     });
   },

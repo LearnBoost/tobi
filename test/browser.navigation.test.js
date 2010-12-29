@@ -209,11 +209,22 @@ module.exports = {
 
   // [!] if this test doesn't pass, an uncaught ECONNREFUSED will be shown
   'test .request() on deferred listen()': function(done){
-    var browser = tobi.createBrowser(appDeferred);
-    browser.request('GET', '/', {}, function(res){
-      res.should.have.status(200);
+    var browser = tobi.createBrowser(appDeferred)
+      , total = 2;
+
+    function next() {
       appDeferred.close();
       done();
+    }
+
+    browser.request('GET', '/', {}, function(res){
+      res.should.have.status(200);
+      --total || next();
+    });
+
+    browser.request('GET', '/', {}, function(res){
+      res.should.have.status(200);
+      --total || next();
     });
   },
   

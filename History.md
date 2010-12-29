@@ -1,4 +1,9 @@
 
+0.0.6 / 2010-12-28 
+==================
+
+  * Fixed problem with listen() firing on the same tick
+
 0.0.5 / 2010-12-28 
 ==================
 

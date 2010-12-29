@@ -1,4 +1,10 @@
 
+0.0.5 / 2010-12-28 
+==================
+
+  * Fixed; deferring all requests until the server listens
+  * Added failing test
+
 0.0.4 / 2010-12-28 
 ==================
 

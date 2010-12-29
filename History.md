@@ -1,4 +1,10 @@
 
+0.0.7 / 2010-12-29 
+==================
+
+  * Added specificity prevalance when getting and filtered duplication when adding (cookie jar)
+  * Added failing test of a cookie jar behavior that better resembles browers'.
+
 0.0.6 / 2010-12-28 
 ==================
 

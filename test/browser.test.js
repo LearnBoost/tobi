@@ -24,6 +24,12 @@ module.exports = {
       , browser = tobi.createBrowser(html);
     browser.should.have.property('source', html);
   },
+
+  'test .createBrowser(str) with <html> but no <body>': function(){
+    var html = '<html><p>loki</p></html>'
+      , browser = tobi.createBrowser(html);
+    browser.should.have.property('source', html);
+  },
   
   'test .createBrowser(server)': function(){
     var browser = tobi.createBrowser(app);

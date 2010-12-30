@@ -286,6 +286,10 @@ Tobi extends the [should.js](http://github.com/visionmedia/should.js) assertion 
       elem.should.have.text(/^foo/);
       elem.should.not.have.text('rawr');
 
+  When asserting a descendant's text amongst a heap of elements, we can utilize the `.include` modifier:
+
+      $('*').should.include.text('My Site');
+
 ### Assertion#many(selector)
 
   Assert that one or more of the given selector is present:

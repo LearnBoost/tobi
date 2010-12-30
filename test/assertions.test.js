@@ -63,6 +63,17 @@ exports['test .text()'] = function(done){
     $('p').prev().should.have.text('Tobi');
     $('p').prev().should.have.text(/^To/);
     
+    $('*').should.not.have.text('Tobi');
+    $('*').should.include.text('Tobi');
+    
+    err(function(){
+      $('*').should.not.include.text('Tobi');
+    }, "expected [jQuery '*'] to not include text 'Tobi', but has 'Tobithe ferretTobithe ferret'");
+
+    err(function(){
+      $('*').should.include.text('Shuppa');
+    }, "expected [jQuery '*'] to include 'Shuppa' within 'Tobithe ferretTobithe ferret'");
+    
     err(function(){
       $('h1').should.not.have.text('Tobi');
     }, "expected [jQuery 'h1'] to not have text 'Tobi'");

@@ -1,4 +1,10 @@
 
+0.1.0 / 2011-01-07 
+==================
+
+  * Added `createBrowser(port, host)` support
+  * Added `.include` modifier support to the `.text()` assertion method
+
 0.0.8 / 2010-12-29 
 ==================
 

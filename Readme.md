@@ -34,7 +34,11 @@ We can then use regular css selectors to grab the form, we use tobi's `.fill()` 
 
 ## Browser
 
-Tobi provides the `Browser` object, created via `tobi.createBrowser(app)`, where `app` is a node `http.Server`, so for example Connect or Express apps will work just fine. There is no need to invoke `listen()` as this is handled by Tobi.
+Tobi provides the `Browser` object, created via `tobi.createBrowser(app)`, where `app` is a node `http.Server`, so for example Connect or Express apps will work just fine. There is no need to invoke `listen()` as this is handled by Tobi, and requests will be deferred until the server is listening.
+
+Alternatively you may pass a `port` and `host` to `createBrowser()`, for example:
+
+    var browser = tobi.createBrowser(80, 'lb.dev'); 
 
 ### Evaluate External Resources
 

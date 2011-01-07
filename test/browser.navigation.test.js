@@ -155,6 +155,18 @@ module.exports = {
       done();
     });
   },
+  
+  'test .createBrowser(port, host)': function(done){
+    var server = express.createServer();
+    server.get('/', function(req, res){ res.send({ hello: 'tobi' }); });
+    server.listen(9999);
+    var browser = tobi.createBrowser(9999, '127.0.0.1');
+    browser.request('GET', '/', {}, function(res, obj){
+      res.should.have.status(200);
+      obj.should.eql({ hello: 'tobi' });
+      done();
+    });
+  },
 
   'test .request() json': function(done){
     var browser = tobi.createBrowser(app);

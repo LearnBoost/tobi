@@ -8,6 +8,7 @@ test:
 		--serial \
 		--timeout 5000 \
 		-I support \
+		-I support/connect/lib \
 		-I support/jsdom/lib \
 		-I support/htmlparser/lib \
 		-I lib \

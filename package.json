@@ -7,6 +7,7 @@
       "jsdom": ">= 0.1.21"
     , "htmlparser": ">= 1.7.3"
     , "should": ">= 0.0.4"
+    , "qs": ">= 0.0.6"
   }
   , "main": "./index.js"
   , "engines": { "node": ">= 0.2.5" }

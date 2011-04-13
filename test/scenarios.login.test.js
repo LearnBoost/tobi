@@ -14,8 +14,8 @@ var tobi = require('tobi')
 var app = express.createServer()
   , store = new MemoryStore({ reapInterval: -1 });
 
-app.use(express.bodyDecoder());
-app.use(express.cookieDecoder());
+app.use(express.bodyParser());
+app.use(express.cookieParser());
 app.use(express.session({ store: store }));
 
 app.get('/login', function(req, res){

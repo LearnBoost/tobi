@@ -12,7 +12,7 @@ var tobi = require('tobi')
 
 var app = express.createServer();
 
-app.use(express.bodyDecoder());
+app.use(express.bodyParser());
 
 app.get('/remote/script.js', function(req, res){
   res.header('Content-Type', 'application/javascript');

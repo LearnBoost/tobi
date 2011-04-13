@@ -1,4 +1,13 @@
 
+0.2.0 / 2011-04-13 
+==================
+
+  * node 0.4.x
+  * Fixed cookie support due to array
+  * Fixed `session()` usage in tests
+  * Fixed querystring related issues for 0.4.x
+  * Fixed redirect `Location` support
+
 0.1.1 / 2011-01-13 
 ==================
 

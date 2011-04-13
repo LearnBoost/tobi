@@ -10,5 +10,5 @@
     , "qs": ">= 0.1.0"
   }
   , "main": "./index.js"
-  , "engines": { "node": ">= 0.2.5" }
+  , "engines": { "node": "0.4.x" }
 }

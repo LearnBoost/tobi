@@ -6,17 +6,15 @@
 var tobi = require('tobi')
   , express = require('express')
   , connect = require('connect')
-  , should = require('should')
-  , MemoryStore = connect.session.MemoryStore;
+  , should = require('should');
 
 // Test app
 
-var app = express.createServer()
-  , store = new MemoryStore({ reapInterval: -1 });
+var app = express.createServer();
 
 app.use(express.bodyParser());
 app.use(express.cookieParser());
-app.use(express.session({ store: store }));
+app.use(express.session({ secret: 'something' }));
 
 app.get('/login', function(req, res){
   var msgs = req.flash('info');

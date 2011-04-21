@@ -11,4 +11,8 @@
   }
   , "main": "./index.js"
   , "engines": { "node": "0.4.x" }
+  , "repository": {
+      "type": "git"
+    , "url": "git://github.com/LearnBoost/tobi.git"
+  }
 }

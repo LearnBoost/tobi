@@ -22,6 +22,10 @@ app.post('/', function(req, res){
   res.send('<p>POST</p>');
 });
 
+app.put('/', function(req, res){
+  res.send('<p>PUT</p>');
+});
+
 app.get('/404', function(req, res){
   res.send(404);
 });
@@ -269,6 +273,17 @@ module.exports = {
     browser.post('/', function(res, $){
       res.should.have.status(200);
       $('p').should.have.text('POST');
+      browser.should.have.property('path', '/');
+      browser.history.should.eql(['/']);
+      done();
+    });
+  },
+  
+  'test .put(path)': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.put('/', function(res, $){
+      res.should.have.status(200);
+      $('p').should.have.text('PUT');
       browser.should.have.property('path', '/');
       browser.history.should.eql(['/']);
       done();

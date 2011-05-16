@@ -9,6 +9,14 @@
     , "should": ">= 0.0.4"
     , "qs": ">= 0.1.0"
   }
+  , "devDependencies": {
+      "express": "2.3.x"
+    , "expresso": ">= 0.0.1"
+    , "htmlparser": ">= 0.0.1"
+    , "jsdom": ">= 0.0.1"
+    , "qs": ">= 0.0.1"
+    , "should": ">= 0.0.1"
+  }
   , "main": "./index.js"
   , "engines": { "node": "0.4.x" }
 }

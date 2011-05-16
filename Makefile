@@ -4,13 +4,10 @@ TESTS = test/*.test.js
 SRC = $(shell find lib -type f)
 
 test:
-	@./support/expresso/bin/expresso \
+	@./node_modules/expresso/bin/expresso \
 		--serial \
 		--timeout 5000 \
-		-I support \
-		-I support/connect/lib \
-		-I support/jsdom/lib \
-		-I support/htmlparser/lib \
+		-I node_modules \
 		-I lib \
 		$(TEST_FLAGS) \
 		$(TESTS)

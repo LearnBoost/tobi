@@ -364,9 +364,9 @@ For example:
 
 ## Testing
 
-Update submodules:
+Install the deps:
 
-    $ git submodule update --init
+    $ npm install
 
 and execute:
 

@@ -26,6 +26,10 @@ app.put('/', function(req, res){
   res.send('<p>PUT</p>');
 });
 
+app.del('/', function(req, res){
+  res.send('<p>DELETE</p>');
+});
+
 app.get('/404', function(req, res){
   res.send(404);
 });
@@ -284,6 +288,17 @@ module.exports = {
     browser.put('/', function(res, $){
       res.should.have.status(200);
       $('p').should.have.text('PUT');
+      browser.should.have.property('path', '/');
+      browser.history.should.eql(['/']);
+      done();
+    });
+  },
+  
+  'test .delete(path)': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.delete('/', function(res, $){
+      res.should.have.status(200);
+      $('p').should.have.text('DELETE');
       browser.should.have.property('path', '/');
       browser.history.should.eql(['/']);
       done();

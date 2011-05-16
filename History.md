@@ -1,4 +1,12 @@
 
+0.2.1 / 2011-05-16 
+==================
+
+  * Added `Browser#delete()`. Closes #31
+  * Added `Browser#put()`
+  * Added devDependencies to package.json
+  * Fixed `make test`
+
 0.2.0 / 2011-04-13 
 ==================
 

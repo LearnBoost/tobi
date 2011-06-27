@@ -229,6 +229,17 @@ module.exports = {
       done();
     });
   },
+  
+  'test .request() redirect when followRedirects is false': function(done) {
+    var browser = tobi.createBrowser(app);
+    browser.followRedirects = false;
+    browser.request('GET', '/redirect', {}, function(res, $){
+      res.should.have.status(302);
+      browser.should.have.property('path', '/redirect');
+      browser.history.should.eql(['/redirect']);
+      done();
+    });
+  },
 
   // [!] if this test doesn't pass, an uncaught ECONNREFUSED will be shown
   'test .request() on deferred listen()': function(done){

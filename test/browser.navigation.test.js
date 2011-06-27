@@ -89,7 +89,7 @@ app.get('/form', function(req, res){
     + '<input id="user-email" type="text" name="user[email]" disabled="disabled" />'
     + '<input type="checkbox" name="user[agreement]" id="user-agreement" value="yes" />'
     + '<input type="checkbox" name="user[subscribe]" checked="checked" value="yes" />'
-    + '<input type="submit" value="Update" />'
+    + '<input type="submit" name="update" value="Update" />'
     + '<fieldset>'
     + '  <select name="user[forum_digest]">'
     + '    <option value="none">None</option>'
@@ -501,6 +501,7 @@ module.exports = {
             , subscribe: 'yes'
             , signature: ''
             , forum_digest: 'none'
+            , update: 'Update'
           }
         });
         done();
@@ -522,6 +523,7 @@ module.exports = {
             , subscribe: 'yes'
             , signature: ''
             , forum_digest: 'none'
+            , update: 'Update'
           }
         });
         done();
@@ -546,6 +548,7 @@ module.exports = {
             , subscribe: 'yes'
             , signature: ''
             , forum_digest: 'none'
+            , update: 'Update'
           }
         });
         done();
@@ -575,6 +578,7 @@ module.exports = {
             , signature: 'TJ Holowaychuk'
             , display_signature: 'No'
             , forum_digest: 'daily'
+            , update: 'Update'
           }
         });
         done();
@@ -604,6 +608,7 @@ module.exports = {
             , signature: 'TJ Holowaychuk'
             , display_signature: 'No'
             , forum_digest: 'daily'
+            , update: 'Update'
           }
         });
         done();

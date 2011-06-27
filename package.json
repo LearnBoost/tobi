@@ -16,6 +16,7 @@
     , "jsdom": ">= 0.0.1"
     , "qs": ">= 0.0.1"
     , "should": ">= 0.0.1"
+    , "connect": ">= 0.0.1"
   }
   , "main": "./index.js"
   , "engines": { "node": "0.4.x" }

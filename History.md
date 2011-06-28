@@ -1,4 +1,13 @@
 
+0.2.2 / 2011-06-28 
+==================
+
+  * Added submit input values on submission [mhemesath]
+  * Added default content-type for POST [bantic]
+  * Added dev dependency for connect [bantic]
+  * Added an option followRedirects to Browser [bantic]
+  * Added HTTP 204 support. [bantic]
+
 0.2.1 / 2011-05-16 
 ==================
 

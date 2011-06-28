@@ -512,8 +512,8 @@ module.exports = {
             , subscribe: 'yes'
             , signature: ''
             , forum_digest: 'none'
-            , update: 'Update'
-          }
+          },
+          update: 'Update'
         });
         done();
       });
@@ -534,8 +534,8 @@ module.exports = {
             , subscribe: 'yes'
             , signature: ''
             , forum_digest: 'none'
-            , update: 'Update'
-          }
+          },
+          update: 'Update'
         });
         done();
       });
@@ -559,8 +559,8 @@ module.exports = {
             , subscribe: 'yes'
             , signature: ''
             , forum_digest: 'none'
-            , update: 'Update'
-          }
+          },
+          update: 'Update'
         });
         done();
       });
@@ -589,8 +589,8 @@ module.exports = {
             , signature: 'TJ Holowaychuk'
             , display_signature: 'No'
             , forum_digest: 'daily'
-            , update: 'Update'
-          }
+          },
+          update: 'Update'
         });
         done();
       });
@@ -619,8 +619,8 @@ module.exports = {
             , signature: 'TJ Holowaychuk'
             , display_signature: 'No'
             , forum_digest: 'daily'
-            , update: 'Update'
-          }
+          },
+          update: 'Update'
         });
         done();
       });
@@ -641,7 +641,8 @@ module.exports = {
             , subscribe: 'yes'
             , signature: 'Wahoo'
             , forum_digest: 'none'
-          }
+          },
+          update: 'Update'
         });
         done();
       });
@@ -685,7 +686,8 @@ module.exports = {
             , subscribe: 'yes'
             , signature: 'Wahoo'
             , forum_digest: 'none'
-          }
+          },
+          update: 'Update'
         });
         done();
       });
@@ -718,7 +720,8 @@ module.exports = {
             , signature: ''
             , subscribe: 'yes'
             , forum_digest: 'daily'
-          }
+          },
+          update: 'Update'
         });
         done();
       });
@@ -739,7 +742,8 @@ module.exports = {
             , signature: ''
             , subscribe: 'yes'
             , forum_digest: ['daily', 'weekly']
-          }
+          },
+          update: 'Update'
         });
         done();
       });
@@ -761,7 +765,8 @@ module.exports = {
             , signature: ''
             , subscribe: 'yes'
             , forum_digest: 'daily'
-          }
+          },
+          update: 'Update'
         });
         done();
       });
@@ -783,7 +788,8 @@ module.exports = {
             , signature: ''
             , subscribe: 'yes'
             , forum_digest: ['daily', 'weekly']
-          }
+          },
+          update: 'Update'
         });
         done();
       });
@@ -805,7 +811,8 @@ module.exports = {
             , signature: ''
             , subscribe: 'yes'
             , forum_digest: ['daily', 'weekly']
-          }
+          },
+          update: 'Update'
         });
         done();
       });
@@ -823,7 +830,8 @@ module.exports = {
             , signature: ''
             , subscribe: 'yes'
             , forum_digest: 'none'
-          }
+          },
+          update: 'Update'
         });
         done();
       });

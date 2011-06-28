@@ -294,6 +294,17 @@ module.exports = {
     });
   },
   
+  'test .post(path) with passed body': function(done) {
+    var browser = tobi.createBrowser(app);
+    browser.post('/form', {body: "foo=bar"}, function(res, $){
+      res.should.have.status(200);
+      res.body.body.should.eql({foo:"bar"});
+      browser.should.have.property('path', '/form');
+      browser.history.should.eql(['/form']);
+      done();
+    });
+  },
+  
   'test .put(path)': function(done){
     var browser = tobi.createBrowser(app);
     browser.put('/', function(res, $){

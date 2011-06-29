@@ -293,11 +293,22 @@ module.exports = {
     });
   },
   
-  'test .post(path) with passed body': function(done) {
+  'test .post(path) with passed body string': function(done) {
     var browser = tobi.createBrowser(app);
-    browser.post('/form', {body: "foo=bar"}, function(res, $){
+    browser.post('/form', {body: 'foo=bar'}, function(res, $){
       res.should.have.status(200);
-      res.body.body.should.eql({foo:"bar"});
+      res.body.body.should.eql({foo:'bar'});
+      browser.should.have.property('path', '/form');
+      browser.history.should.eql(['/form']);
+      done();
+    });
+  },
+  
+  'test .post(path) with passed body object': function(done) {
+    var browser = tobi.createBrowser(app);
+    browser.post('/form', {body: {foo:'bar'}}, function(res, $){
+      res.should.have.status(200);
+      res.body.body.should.eql({foo:'bar'});
       browser.should.have.property('path', '/form');
       browser.history.should.eql(['/form']);
       done();

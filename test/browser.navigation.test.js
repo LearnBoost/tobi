@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -91,7 +90,7 @@ app.get('/form', function(req, res){
     + '<input type="checkbox" name="user[subscribe]" checked="checked" value="yes" />'
     + '<input type="submit" name="update" value="Update" />'
     + '<fieldset>'
-    + '  <select name="user[forum_digest]">'
+    + '  <select name="user[forum_digest]" size="2" multiple>'
     + '    <option value="none">None</option>'
     + '    <option value="daily">Once per day</option>'
     + '    <option value="weekly">Once per week</option>'

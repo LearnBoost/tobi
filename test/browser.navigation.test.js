@@ -271,6 +271,20 @@ module.exports = {
     });
   },
 
+  'test .request() redirect to a full uri with different hostname': function(done){
+    var browser = tobi.createBrowser(80, 'bit.ly')
+    Browser.browsers.should.not.have.property('bit.ly');
+    Browser.browsers.should.not.have.property('node.js');
+    browser.request('GET', 'http://bit.ly/mQETJ8', {}, function (res, $) {
+      res.should.have.status(200);
+      Browser.browsers.should.have.property('bit.ly');
+      Browser.browsers.should.have.property('nodejs.org');
+      var nodeBrowser = Browser.browsers['nodejs.org'];
+      nodeBrowser.jQuery('img[alt="node.js"]').length.should.equal(1);
+      done();
+    });
+  },
+
   // [!] if this test doesn't pass, an uncaught ECONNREFUSED will be shown
   'test .request() on deferred listen()': function(done){
     var browser = tobi.createBrowser(appDeferred)

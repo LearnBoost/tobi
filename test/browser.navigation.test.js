@@ -300,6 +300,16 @@ module.exports = {
     });
   },
 
+  'test .request redirecting from a full non-https uri to a https uri': function(done){
+    var browser = tobi.createBrowser(80, 'bit.ly')
+    browser.request('GET', 'http://bit.ly/jrs5ME', {}, function (res, $) {
+      res.should.have.status(200);
+      var githubBrowser = Browser.browsers['github.com'];
+      githubBrowser.jQuery('#slider .breadcrumb a').should.have.text('tobi');
+      done();
+    });
+  },
+
   // [!] if this test doesn't pass, an uncaught ECONNREFUSED will be shown
   'test .request() on deferred listen()': function(done){
     var browser = tobi.createBrowser(appDeferred)

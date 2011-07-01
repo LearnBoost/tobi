@@ -218,6 +218,22 @@ module.exports = {
       });
     });
   },
+
+  'test .request(method, url)': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.request('GET', 'http://127.0.0.1:' + app.__port, {}, function(res, $){
+      res.should.have.status(200);
+      browser.should.have.property('path', '/');
+      browser.history.should.eql(['/']);
+      browser.request('GET', 'http://127.0.0.1:' + app.__port + '/user/0', {}, function(){
+        browser.should.have.property('path', '/user/0');
+        browser.history.should.eql(['/', '/user/0']);
+        browser.should.have.property('source', '<h1>Tobi</h1><p>the ferret</p>');
+        browser.jQuery('p').text().should.equal('the ferret');
+        done();
+      });
+    });
+  },
   
   'test .request() redirect': function(done){
     var browser = tobi.createBrowser(app);

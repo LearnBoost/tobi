@@ -249,6 +249,21 @@ module.exports = {
       done();
     });
   },
+
+  'test .request(method, foreignHttpsUrl)': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.request('GET', 'https://www.github.com/', {}, function(res, $){
+      res.should.have.status(200);
+      browser.should.not.have.property('path');
+      browser.history.should.be.empty;
+
+      var googBrowser = Browser.browsers['github.com']
+      googBrowser.should.have.property('path', '/');
+      googBrowser.history.should.eql(['/']);
+      googBrowser.jQuery('img[alt="github"]').should.not.be.empty;
+      done();
+    });
+  },
   
   'test .request() redirect': function(done){
     var browser = tobi.createBrowser(app);

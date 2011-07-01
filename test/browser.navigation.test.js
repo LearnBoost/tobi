@@ -917,6 +917,20 @@ module.exports = {
       done(); 
     });
   },
+
+  'test setting user-agent': function(done){
+    var browser = tobi.createBrowser(80,'whatsmyuseragent.com');
+    browser.get('/', function(res,$){
+      res.should.have.status(200);
+      $('#MainBox p strong:first').should.have.text('Your User Agent:');
+      browser.userAgent = ' Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30';
+      browser.get('/', function(res,$){
+        res.should.have.status(200);
+        $('#MainBox p strong:first').should.have.text('Your User Agent: Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30');
+        done();
+      });
+    });
+  },
   
   after: function(){
     app.close();

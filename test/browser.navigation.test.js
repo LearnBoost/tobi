@@ -218,6 +218,52 @@ module.exports = {
       });
     });
   },
+
+  'test .request(method, url)': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.request('GET', 'http://127.0.0.1:' + app.__port, {}, function(res, $){
+      res.should.have.status(200);
+      browser.should.have.property('path', '/');
+      browser.history.should.eql(['/']);
+      browser.request('GET', 'http://127.0.0.1:' + app.__port + '/user/0', {}, function(){
+        browser.should.have.property('path', '/user/0');
+        browser.history.should.eql(['/', '/user/0']);
+        browser.should.have.property('source', '<h1>Tobi</h1><p>the ferret</p>');
+        browser.jQuery('p').text().should.equal('the ferret');
+        done();
+      });
+    });
+  },
+
+  'test .request(method, foreignUrl)': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.request('GET', 'http://www.google.com/', {}, function(res, $){
+      res.should.have.status(200);
+      browser.should.not.have.property('path');
+      browser.history.should.be.empty;
+
+      var googBrowser = Browser.browsers['www.google.com']
+      googBrowser.should.have.property('path', '/');
+      googBrowser.history.should.eql(['/']);
+      googBrowser.jQuery('img[alt="Google"]').length.should.equal(1);
+      done();
+    });
+  },
+
+  'test .request(method, foreignHttpsUrl)': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.request('GET', 'https://www.github.com/', {}, function(res, $){
+      res.should.have.status(200);
+      browser.should.not.have.property('path');
+      browser.history.should.be.empty;
+
+      var googBrowser = Browser.browsers['github.com']
+      googBrowser.should.have.property('path', '/');
+      googBrowser.history.should.eql(['/']);
+      googBrowser.jQuery('img[alt="github"]').should.not.be.empty;
+      done();
+    });
+  },
   
   'test .request() redirect': function(done){
     var browser = tobi.createBrowser(app);
@@ -236,6 +282,30 @@ module.exports = {
       res.should.have.status(302);
       browser.should.have.property('path', '/redirect');
       browser.history.should.eql(['/redirect']);
+      done();
+    });
+  },
+
+  'test .request() redirect to a full uri with different hostname': function(done){
+    var browser = tobi.createBrowser(80, 'bit.ly')
+    Browser.browsers.should.not.have.property('bit.ly');
+    Browser.browsers.should.not.have.property('node.js');
+    browser.request('GET', 'http://bit.ly/mQETJ8', {}, function (res, $) {
+      res.should.have.status(200);
+      Browser.browsers.should.have.property('bit.ly');
+      Browser.browsers.should.have.property('nodejs.org');
+      var nodeBrowser = Browser.browsers['nodejs.org'];
+      nodeBrowser.jQuery('img[alt="node.js"]').length.should.equal(1);
+      done();
+    });
+  },
+
+  'test .request redirecting from a full non-https uri to a https uri': function(done){
+    var browser = tobi.createBrowser(80, 'bit.ly')
+    browser.request('GET', 'http://bit.ly/jrs5ME', {}, function (res, $) {
+      res.should.have.status(200);
+      var githubBrowser = Browser.browsers['github.com'];
+      githubBrowser.jQuery('#slider .breadcrumb a').should.have.text('tobi');
       done();
     });
   },
@@ -845,6 +915,20 @@ module.exports = {
       var txt = browser.text('daily');
       txt.should.equal('Once per day');
       done(); 
+    });
+  },
+
+  'test setting user-agent': function(done){
+    var browser = tobi.createBrowser(80,'whatsmyuseragent.com');
+    browser.get('http://whatsmyuseragent.com', function(res,$){
+      res.should.have.status(200);
+      $('h4:first').should.have.text('');
+      browser.userAgent = 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30';
+      browser.get('/', function(res,$){
+        res.should.have.status(200);
+        $('h4:first').should.have.text('Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30');
+        done();
+      });
     });
   },
   

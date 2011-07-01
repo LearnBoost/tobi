@@ -1,4 +1,13 @@
 
+0.3.0 / 2011-07-01 
+==================
+
+  * Added ability to set User-Agent on the browser via `Browser#userAgent` [bnoguchi]
+  * Fixed redirection from one host to another [bnoguchi]
+  * Fixed http -> https redirects [bnoguchi]
+  * Fixed support for uppercased form methods [bnoguchi]
+  * Updated internals to use new node http agent [bnoguchi]
+
 0.2.2 / 2011-06-28 
 ==================
 

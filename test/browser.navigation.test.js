@@ -511,31 +511,31 @@ module.exports = {
     var browser = tobi.createBrowser(app);
     browser.get('/form', function(res, $){
       res.should.have.status(200);
-      $('[name=user[subscribe]]').should.be.checked;
+      $('[name="user[subscribe]"]').should.be.checked;
       browser.uncheck('user[subscribe]');
-      $('[name=user[subscribe]]').should.not.be.checked;
+      $('[name="user[subscribe]"]').should.not.be.checked;
       done();
     });
   },
-  
+
   'test .check(name)': function(done){
     var browser = tobi.createBrowser(app);
     browser.get('/form', function(res, $){
       res.should.have.status(200);
-      $('[name=user[agreement]]').should.not.be.checked;
+      $('[name="user[agreement]"]').should.not.be.checked;
       browser.check('user[agreement]');
-      $('[name=user[agreement]]').should.be.checked;
+      $('[name="user[agreement]"]').should.be.checked;
       done();
     });
   },
-  
+
   'test .check(css)': function(done){
     var browser = tobi.createBrowser(app);
     browser.get('/form', function(res, $){
       res.should.have.status(200);
-      $('[name=user[agreement]]').should.not.be.checked;
-      browser.check('[name=user[agreement]]');
-      $('[name=user[agreement]]').should.be.checked;
+      $('[name="user[agreement]"]').should.not.be.checked;
+      browser.check('[name="user[agreement]"]');
+      $('[name="user[agreement]"]').should.be.checked;
       done();
     });
   },
@@ -544,9 +544,9 @@ module.exports = {
     var browser = tobi.createBrowser(app);
     browser.get('/form', function(res, $){
       res.should.have.status(200);
-      $('[name=user[agreement]]').should.not.be.checked;
+      $('[name="user[agreement]"]').should.not.be.checked;
       browser.check('user-agreement');
-      $('[name=user[agreement]]').should.be.checked;
+      $('[name="user[agreement]"]').should.be.checked;
       done();
     });
   },
@@ -571,8 +571,8 @@ module.exports = {
     var browser = tobi.createBrowser(app);
     browser.get('/form', function(res, $){
       res.should.have.status(200);
-      $('[name=user[name]]').val('tjholowaychuk');
-      $('[name=user[email]]').val('tj@vision-media.ca');
+      $('[name="user[name]"]').val('tjholowaychuk');
+      $('[name="user[email]"]').val('tj@vision-media.ca');
       $('[type=submit]').click(function(res){
         res.body.headers.should.have.property('content-type', 'application/x-www-form-urlencoded');
         res.body.body.should.eql({
@@ -675,7 +675,7 @@ module.exports = {
         , 'form > #user-email': 'tj@vision-media.ca'
         , ':checkbox': true
         , 'user[display_signature]': 'No'
-        , '[name=user[forum_digest]]': 'daily'
+        , '[name="user[forum_digest]"]': 'daily'
         , '#signature': 'TJ Holowaychuk'
       })
       .click(':submit', function(res){
@@ -700,7 +700,7 @@ module.exports = {
     var browser = tobi.createBrowser(app);
     browser.get('/form', function(res, $){
       res.should.have.status(200);
-      $('[name=user[name]]').val('tjholowaychuk');
+      $('[name="user[name]"]').val('tjholowaychuk');
       $('#signature').val('Wahoo');
        $('form').submit(function(res){
         res.body.headers.should.have.property('content-type', 'application/x-www-form-urlencoded');
@@ -723,7 +723,7 @@ module.exports = {
       var browser = tobi.createBrowser(app);
       browser.get('/form-nested', function(res, $){
         res.should.have.status(200);
-        $('[name=user[name]]').val('tjholowaychuk');
+        $('[name="user[name]"]').val('tjholowaychuk');
         $('#signature').val('Wahoo');
         $('form').submit(function(res){
           res.body.headers.should.have.property('content-type',
@@ -745,7 +745,7 @@ module.exports = {
     var browser = tobi.createBrowser(app);
     browser.get('/form', function(res, $){
       res.should.have.status(200);
-      $('[name=user[name]]').val('tjholowaychuk');
+      $('[name="user[name]"]').val('tjholowaychuk');
       $('#signature').val('Wahoo');
        browser.submit('user', function(res){
         res.body.headers.should.have.property('content-type', 'application/x-www-form-urlencoded');

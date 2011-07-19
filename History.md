@@ -1,4 +1,10 @@
 
+0.3.1 / 2011-07-19 
+==================
+
+  * Fixed body on non-2xx response. Closes #56
+  * Update jQuery to 1.6.2. Closes #43
+
 0.3.0 / 2011-07-01 
 ==================
 

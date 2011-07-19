@@ -34,7 +34,7 @@ app.get('/404', function(req, res){
 });
 
 app.get('/500', function(req, res){
-  res.send(500);
+  res.send('<p>OH NO!</p>', 500);
 });
 
 app.get('/redirect', function(req, res){
@@ -197,8 +197,9 @@ module.exports = {
   
   'test .request() error': function(done){
     var browser = tobi.createBrowser(app);
-    browser.request('GET', '/500', {}, function(res){
+    browser.request('GET', '/500', {}, function(res, $){
       res.should.have.status(500);
+      $('p').text().should.equal('OH NO!');
       done();
     });
   },

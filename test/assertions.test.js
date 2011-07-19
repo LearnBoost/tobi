@@ -56,6 +56,10 @@ app.get('/form', function(req, res){
     + '</form>');
 });
 
+app.get('/404', function(req, res){
+  res.send('<p>page not found</p>', 404);
+});
+
 // Tests
 
 exports['test .text()'] = function(done){
@@ -267,12 +271,33 @@ exports['test .status()'] = function(done){
   });
 };
 
+exports['test .status(404)'] = function(done){
+  browser.get('/404', function(res, $){
+    res.should.have.status(404);
+	$('p').text("page not found");
+    done();
+  });
+};
+
+
 exports['test .header()'] = function(done){
   browser.get('/attrs', function(res, $){
     res.should.have.header('Content-Type', 'text/html; charset=utf-8');
     done();
   });
 };
+exports['test .status()'] = function(done){
+  browser.get('/attrs', function(res, $){
+    res.should.have.status(200);
+
+    err(function(){
+      res.should.have.status(404);
+    }, "expected response code of 404 'Not Found', but got 200 'OK'");
+
+    done();
+  });
+};
+
 
 exports.after = function(){
   app.close();

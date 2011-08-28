@@ -114,7 +114,7 @@ The following locators will match the input:
 
 ### Browser#click(locator[, fn])
 
-Tobi allows you to `click()` `a` elements, and `input[type=submit]` elements in order to submit a form, or request a url.
+Tobi allows you to `click()` `a` elements, `button[type=submit]` elements, and `input[type=submit]` elements in order to submit a form, or request a url.
 
 Submitting a form:
 

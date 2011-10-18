@@ -183,7 +183,11 @@ module.exports = {
     browser.request('GET', '/json', {}, function(res, obj){
       res.body.should.eql({ user: 'tj' });
       obj.should.eql({ user: 'tj' });
-      done();
+
+      browser.get('/json', function(res, obj){
+        obj.should.eql({ user: 'tj' });
+        done();
+      });
     });
   },
 

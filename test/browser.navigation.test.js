@@ -50,6 +50,18 @@ app.get('/json', function(req, res){
   res.send({ user: 'tj' });
 });
 
+app.get('/users.json', function(req, res){
+  res.send([
+      { name: 'tobi' }
+    , { name: 'loki' }
+    , { name: 'jane' }
+  ]);
+});
+
+app.get('/users', function(req, res){
+  res.send('<html><body><a href="/users.json">Users JSON</a></body></html>');
+});
+
 app.get('/invalid-json', function(req, res){
   res.send('{"broken":', { 'Content-Type': 'application/json' });
 });
@@ -924,14 +936,28 @@ module.exports = {
   },
 
   'test setting user-agent': function(done){
-    var browser = tobi.createBrowser(80,'whatsmyuseragent.com');
-    browser.get('http://whatsmyuseragent.com', function(res,$){
+    var browser = tobi.createBrowser(80, 'whatsmyuseragent.com');
+    browser.get('http://whatsmyuseragent.com', function(res, $){
       res.should.have.status(200);
       $('h4:first').should.have.text('');
       browser.userAgent = 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30';
       browser.get('/', function(res,$){
         res.should.have.status(200);
         $('h4:first').should.have.text('Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30');
+        done();
+      });
+    });
+  },
+  
+  'test JSON link': function(done){
+    var browser = tobi.createBrowser(app);
+    browser.get('/users', function(res, $){
+      $('a').click(function(res, obj){
+        obj.should.eql([
+            { name: 'tobi' }
+          , { name: 'loki' }
+          , { name: 'jane' }
+        ]);
         done();
       });
     });

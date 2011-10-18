@@ -367,13 +367,24 @@ For example:
 You can also use tobi to test non-html end-points.
 
     // JSON
-    browser.request('GET', '/json', {}, function(res, obj){
-      res.body.should.eql({ user: 'tj' });
+    browser.get('/json', function(res, obj){
       obj.should.eql({ user: 'tj' });
       done();
     });
-  
-    // XML  
+
+    // Test JSON response from a link click
+    browser.get('/users', function(res, $){
+      $('a').click(function(res, obj){
+        obj.should.eql([
+            { name: 'tobi' }
+          , { name: 'loki' }
+          , { name: 'jane' }
+        ]);
+        done();
+      });
+    });
+
+    // XML
     browser.request('GET', '/xml', {}, function(res){
       res.should.have.header('Content-Type', 'application/xml');
       res.should.not.have.property('body');

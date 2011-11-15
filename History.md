@@ -1,4 +1,11 @@
 
+0.3.2 / 2011-11-15 
+==================
+
+  * Added: allow for `button[type=submit]` elements to be clicked
+  * node >= 0.4.x < 0.7.0. Closes #70
+  * Fixed tests for 0.6.x
+
 0.3.1 / 2011-07-19 
 ==================
 

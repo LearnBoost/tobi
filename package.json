@@ -19,7 +19,7 @@
     , "connect": ">= 0.0.1"
   }
   , "main": "./index.js"
-  , "engines": { "node": "0.4.x" }
+  , "engines": { "node": ">= 0.4.x < 0.7.0" }
   , "repository": {
       "type": "git"
     , "url": "git://github.com/LearnBoost/tobi.git"

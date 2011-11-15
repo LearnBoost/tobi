@@ -3,7 +3,7 @@
  * Module dependencies.
  */
 
-var tobi = require('tobi')
+var tobi = require('../')
   , express = require('express')
   , Browser = tobi.Browser
   , should = require('should');

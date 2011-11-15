@@ -7,8 +7,6 @@ test:
 	@./node_modules/expresso/bin/expresso \
 		--serial \
 		--timeout 5000 \
-		-I node_modules \
-		-I lib \
 		$(TEST_FLAGS) \
 		$(TESTS)
 

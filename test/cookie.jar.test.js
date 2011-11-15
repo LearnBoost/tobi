@@ -3,7 +3,7 @@
  * Module dependencies.
  */
 
-var tobi = require('tobi')
+var tobi = require('../')
   , Cookie = tobi.Cookie
   , Jar = tobi.CookieJar
   , should = require('should');

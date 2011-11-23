@@ -4,9 +4,9 @@ SRC = $(shell find lib -type f)
 test:
 	@./node_modules/.bin/mocha \
 		--timeout 4s \
-		--slow 1s \
+		--slow 1000 \
 		--growl \
-		--reporter spec \
+		--reporter list \
 		--ui exports
 
 docs: index.html

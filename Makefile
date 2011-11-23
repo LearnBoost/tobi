@@ -1,12 +1,13 @@
 
 SRC = $(shell find lib -type f)
+REPORTER = list
 
 test:
 	@./node_modules/.bin/mocha \
 		--timeout 4s \
 		--slow 1000 \
 		--growl \
-		--reporter list \
+		--reporter $(REPORTER) \
 		--ui exports
 
 docs: index.html

@@ -1,17 +1,13 @@
 
-TESTS = test/*.test.js
-
 SRC = $(shell find lib -type f)
 
 test:
-	@./node_modules/expresso/bin/expresso \
-		--serial \
-		--timeout 5000 \
-		$(TEST_FLAGS) \
-		$(TESTS)
-
-test-cov:
-	@$(MAKE) TEST_FLAGS=--cov
+	@./node_modules/.bin/mocha \
+		--timeout 4s \
+		--slow 1s \
+		--growl \
+		--reporter spec \
+		--ui exports
 
 docs: index.html
 
@@ -23,4 +19,4 @@ index.html: $(SRC)
 		--private \
 		$^ > $@
 
-.PHONY: test test-cov docs
+.PHONY: test docs

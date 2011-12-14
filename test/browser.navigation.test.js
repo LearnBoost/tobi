@@ -278,7 +278,7 @@ module.exports = {
       var googBrowser = Browser.browsers['github.com']
       googBrowser.should.have.property('path', '/');
       googBrowser.history.should.eql(['/']);
-      googBrowser.jQuery('img[alt="github"]').should.not.be.empty;
+      googBrowser.jQuery('img[alt="GitHub"]').should.not.be.empty;
       done();
     });
   },
@@ -313,7 +313,7 @@ module.exports = {
       Browser.browsers.should.have.property('bit.ly');
       Browser.browsers.should.have.property('nodejs.org');
       var nodeBrowser = Browser.browsers['nodejs.org'];
-      nodeBrowser.jQuery('img[alt="node.js"]').length.should.equal(1);
+      nodeBrowser.jQuery('img[alt="node.js"]').length.should.equal(2);
       done();
     });
   },

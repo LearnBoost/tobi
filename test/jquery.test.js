@@ -19,7 +19,7 @@ module.exports = {
       + '<input type="radio" name="signature" value="hide" />'
       + '<input type="checkbox" name="agreement" value="ageed" />'
       + '<input type="checkbox" name="email" value="yes" checked="checked" />'
-      + '<select name="province">'
+      + '<select name="province" multiple="true">'
       + '  <option value="bc">British Columbia</option>'
       + '  <option value="ab">Alberta</option>'
       + '</select>'

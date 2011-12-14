@@ -42,6 +42,10 @@ app.get('/redirect', function(req, res){
   res.redirect('/one');
 });
 
+app.get('/redirect/external', function(req, res){
+  res.redirect('http://bit.ly/mQETJ8');
+});
+
 app.get('/xml', function(req, res){
   res.contentType('.xml');
   res.send('<user><name>tj</name></user>');
@@ -315,6 +319,25 @@ module.exports = {
       var nodeBrowser = Browser.browsers['nodejs.org'];
       nodeBrowser.jQuery('img[alt="node.js"]').length.should.equal(2);
       done();
+    });
+  },
+
+  'test .request() redirect to a full uri and back again to app': function(done) {
+    Browser.browsers = {}
+    // Use externalHost to pretend to be nodejs.org
+    // The app redirects us out to bit.ly which redirects us back
+    var browser = tobi.createBrowser(app, {externalHost: 'nodejs.org'});
+    browser.followRedirects = false;
+    browser.request('GET', '/redirect/external', {}, function(res, $){
+      res.should.have.status(301);
+      Browser.browsers.should.have.property('bit.ly');
+      Browser.browsers.should.have.property('undefined');
+      browser.request('GET', res.headers['location'], {}, function(res, $){
+        res.should.have.status(200);
+        Browser.browsers.should.not.have.property('nodejs.org');
+        $('p').should.have.text('Hello World');
+        done();
+      });
     });
   },
 

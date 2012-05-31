@@ -64,15 +64,6 @@ exports['test .text()'] = function(done){
     $('p').prev().should.have.text(/^To/);
     
     $('*').should.not.have.text('Tobi');
-    $('*').should.include.text('Tobi');
-    
-    err(function(){
-      $('*').should.not.include.text('Tobi');
-    }, "expected [jQuery '*'] to not include text 'Tobi' within 'Tobithe ferretTobithe ferret'");
-
-    err(function(){
-      $('*').should.include.text('Shuppa');
-    }, "expected [jQuery '*'] to include text 'Shuppa' within 'Tobithe ferretTobithe ferret'");
     
     err(function(){
       $('h1').should.not.have.text('Tobi');

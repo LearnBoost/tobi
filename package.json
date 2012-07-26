@@ -10,7 +10,7 @@
     , "qs": ">= 0.1.0"
   }
   , "devDependencies": {
-      "express": "2.3.x"
+      "express": "~2.5"
     , "mocha": "*"
     , "htmlparser": ">= 0.0.1"
     , "jsdom": ">= 0.0.1"

@@ -362,6 +362,36 @@ For example:
       res.should.have.header('Content-Length');
       res.should.have.header('Content-Type', 'text/html');
 
+## Testing non-html responses
+
+You can also use tobi to test non-html end-points.
+
+    // JSON
+    browser.get('/json', function(res, obj){
+      obj.should.eql({ user: 'tj' });
+      done();
+    });
+
+    // Test JSON response from a link click
+    browser.get('/users', function(res, $){
+      $('a').click(function(res, obj){
+        obj.should.eql([
+            { name: 'tobi' }
+          , { name: 'loki' }
+          , { name: 'jane' }
+        ]);
+        done();
+      });
+    });
+
+    // XML
+    browser.request('GET', '/xml', {}, function(res){
+      res.should.have.header('Content-Type', 'application/xml');
+      res.should.not.have.property('body');
+      done();
+    });
+
+
 ## Testing
 
 Install the deps:

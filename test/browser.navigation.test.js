@@ -392,6 +392,17 @@ module.exports = {
     });
   },
   
+  'test .post(path) with passed body as a hash': function(done) {
+    var browser = tobi.createBrowser(app);
+    browser.post('/form', {body: {foo: "b&r", bar: "foo"}}, function(res, $){
+      res.should.have.status(200);
+      res.body.body.should.eql({foo:"b&r", bar: "foo"});
+      browser.should.have.property('path', '/form');
+      browser.history.should.eql(['/form']);
+      done();
+    });
+  },
+  
   'test .put(path)': function(done){
     var browser = tobi.createBrowser(app);
     browser.put('/', function(res, $){
